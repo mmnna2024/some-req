@@ -1,7 +1,9 @@
+<!-- Vue.js導入確認用ファイル -->
 <template>
   <p>
     {{ message }}
   </p>
+  <button class="btn btn-primary">bootstrap</button>
 </template>
 
 <script>
