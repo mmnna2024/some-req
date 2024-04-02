@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  root 'hello_vue#index'
   get 'hello_vue/index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  
+  #letter_openerを使用するためのルーティング
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end

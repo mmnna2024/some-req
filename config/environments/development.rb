@@ -1,6 +1,11 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  #本番環境では'host:'にアプリケーションのホストを設定
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  #deviceではアカウントを作成するとユーザー宛にメールを送信する。開発環境で確認するために以下を設定
+  config.action_mailer.delivery_method = :letter_opener_web
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
