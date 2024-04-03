@@ -7,6 +7,15 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
+  def create
+    @category = Category.new(category_params)
+    if @category.save
+      redirect_to categories_path
+    else
+      render :new
+    end
+  end
+
   def update
   end
 
@@ -14,12 +23,18 @@ class CategoriesController < ApplicationController
     checked_ids = params[:category_ids]
     Category.where(id: checked_ids).update_all(display: true)
     Category.where.not(id: checked_ids).update_all(display: false)
-    redirect_to categories_url
+    redirect_to categories_path
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to categories_url
+    redirect_to categories_path
+  end
+
+  private
+
+  def category_params
+    params.require(:category).permit(:name, :price, :display)
   end
 end
