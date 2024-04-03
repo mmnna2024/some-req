@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ordered_on: 2024-04-03 10:49:40
+  status: 1
+  channel: 1
+  price: 1
+  note: MyText
+  customer: one
+  shipping: one
+
+two:
+  ordered_on: 2024-04-03 10:49:40
+  status: 1
+  channel: 1
+  price: 1
+  note: MyText
+  customer: two
+  shipping: two
