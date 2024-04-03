@@ -1,2 +1,37 @@
-<h1>Categories#new</h1>
-<p>Find me in app/views/categories/new.html.erb</p>
+<h1>メニュー追加</h1>
+
+<%= form_with(model: @category, local: true) do |form| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% @category.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <div class="col-5">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="col-5">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.number_field :price, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+  <%= form.label :display, class: "form-check-label" %>
+  <%= form.check_box :display,{}, true, false %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit :'追加する' %>
+  </div>
+
+<% end %>
