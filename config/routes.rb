@@ -6,6 +6,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :orders do
+    collection do
+      get :unchecked_index
+      get :checked_index
+    end
+  end
+
   devise_for :admins
   root 'hello_vue#index'
   get 'hello_vue/index'
