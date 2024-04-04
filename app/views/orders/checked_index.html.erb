@@ -3,35 +3,35 @@
 <table class="table">
   <thead class="table-light">
     <tr>
-      <th scope="col">ステータス</th>
-      <th scope="col">受付日時</th>
-      <th scope="col">依頼品内容</th>
-      <th scope="col">見積料金</th>
-      <th scope="col">送料</th>
-      <th scope="col">氏名</th>
-      <th scope="col">電話番号</th>
-      <th scope="col">住所</th>
-      <th colspan="3" scope="col"></th>
+    <th scope="col"><nobr>ステータス</nobr></th>
+    <th scope="col"><nobr>受付日時</nobr></th>
+    <th scope="col"><nobr>依頼品内容</nobr></th>
+    <th scope="col"><nobr>見積料金</nobr></th>
+    <th scope="col"><nobr>送料</nobr></th>
+    <th scope="col"><nobr>氏名</nobr></th>
+    <th scope="col"><nobr>電話番号</nobr></th>
+    <th scope="col"><nobr>住所</nobr></th>
+    <th colspan="3" scope="col"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @checked_orders.each do |order| %>
       <tr class="checked_order_list">
-        <td><%= order.status %></td>
-        <td><%= order.ordered_on.strftime('%Y/%m/%d %H:%M') %></td>
-        <td>
-          <% order.items.each do |item| %>
-            <%= item.category.name %>
-          <% end %>
-        </td>
-        <td><%= order.price %>円</td>
-        <td><%= order.shipping.price %>円</td>
-        <td><%= order.customer.name %></td>
-        <td><%= order.customer.phonenumber %></td>
-        <td><%= order.customer.address %></td>
-        <td><%= link_to '詳細', edit_order_path(order) %></td>
-        <td><%= link_to "削除", order, method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+      <td><nobr><%= order.status %></nobr></td>
+      <td><%= order.ordered_on.strftime('%Y/%m/%d %H:%M') %></td>
+      <td>
+        <% order.items.each do |item| %>
+          <nobr><%= item.category.name %></nobr>
+        <% end %>
+      </td>
+      <td><nobr><%= order.price %>円</nobr></td>
+      <td><nobr><%= order.shipping.price %>円</nobr></td>
+      <td><nobr><%= order.customer.name %></nobr></td>
+      <td><nobr><%= order.customer.phonenumber %></nobr></td>
+      <td><nobr><%= order.customer.address %></nobr></td>
+      <td><nobr><%= link_to '詳細', edit_order_path(order) %></nobr></td>
+      <td><nobr><%= link_to "削除", order, method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
       </tr>
     <% end %>
   </tbody>
