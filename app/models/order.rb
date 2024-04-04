@@ -15,7 +15,7 @@ class Order < ApplicationRecord
     end
   end
 
-  def self.order_price_update
+  def self.order_price_save
     total_price = 0
     self.items.each do |item|
       total_price += item.price
