@@ -1,37 +1,17 @@
 <template>
+  <div class="form-container container">
   <b-row>
     <b-col :span="12">
       <div>
         <p>ご依頼内容</p>
-          <table :data="tableData" style="width: 100%" v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
-            <table-column label= "衣類選択">
-              <select v-model="selected[v_index]"
-                @change="() => setContent(v_index)"
-                >   
-                <option disabled value="">依頼する衣類を一つずつお選びください</option>
-                <option v-for="(category, index) in categories" :key="index" :value="category" :label="category.name" />
-              </select>
-            </table-column>
-            <table-column label= "個数">
-              <input type="number" v-model="selected[v_index].count" />
-            </table-column>
-            <table-column label= "単価">
-              <a>{{ selected[v_index].price }}</a>
-            </table-column>
-            <table-column label= "小計">
-              <a>{{ selected[v_index].price * selected[v_index].count }}</a>
-            </table-column>
-          </table>
-
-
         <table class="categories-table">
           <tr>
             <th>衣類選択</th>
-            <th>個数</th>
+            <th>衣類タグ、全体写真アップロード</th>
+            <th>数量</th>
             <th>単価</th>
             <th>小計</th>
           </tr>
-
           <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
             <td>
               <select v-model="selected[v_index]"
@@ -42,6 +22,9 @@
                   {{ category.name }}
                 </option>
               </select>
+            </td>
+            <td>
+              <input type="file" id="inputGroupFile01" accept="image/png, image/jpeg">
             </td>
             <td>
               <input type="number" v-model="selected[v_index].count" />
@@ -58,8 +41,18 @@
           </tr>
         </table>
       </div>
-      <button @click="increment">+</button>
-      <button @click="decrement">-</button>
+      <button @click="increment" class="btn btn-outline-primary">+</button>
+      <button @click="decrement" class="btn btn-outline-primary">-</button>
+      <!-- <div>
+        <select v-model="selected[v_index]"
+        @change="() => setContent(v_index)"
+        >
+          <option disabled value="">地域区分を選択してください。</option>
+          <option v-for="(category, index) in categories" :key="index" :value="category">
+            {{ category.name }}
+          </option>
+        </select>
+      </div> -->
       <div>
         合計{{ totalPrice }}円
         <span v-if="totalPrice >= deliveryFreePrice" >
@@ -71,7 +64,7 @@
       </div>
       <div>
         <p>お客様情報</p>
-        <form @submit="submit">
+        <form>
           <div v-if="alert" class="alert alert-danger">{{alert}}</div>
           <div class="form-group">
             <label for="order-name">氏名</label>
@@ -95,37 +88,22 @@
             <label for="order-address">住所</label>
             <input v-model="customer.address" id="order-address" class="form-control">
           </div>
-          <!-- <div class="form-group">
+          <div class="form-group">
             <label for="order-sex">性別</label>
-            <input v-model="customer.address" id="order-address" class="form-control">
-          </div> -->
+            <select v-model="customer.sex" id="order-sex" class="form-control">
+              <option  value="0">男性</option>
+              <option  value="1">女性</option>
+            </select>
+          </div>
           <div class="form-group">
             <label for="order-age">年齢</label>
             <input v-model="customer.age" id="order-address" class="form-control">
           </div>
-
-          <!-- <div class="form-group">
-            <label for="order-area">地域区分</label>
-            <div>
-              <input v-for="(tag, index) in entry.tags" :key="index" v-model="tag.name"
-                class="form-control width-auto d-inline-block mr-2" style="width: 17%"
-                maxlength="255" >
-            </div>
-          </div> -->
-          <div class="row">
-            <div class="col">
-              <button type="submit" class="btn btn-outline-primary">{{entryId ? '更新' : '作成'}}</button>
-            </div>
-            <div class="col text-right" v-if="entryId">
-              <button type="button" class="btn btn-outline-danger" @click="destroy">削除</button>
-            </div>
-          </div>
         </form>
-
       </div>
     </b-col>
   </b-row>
-
+</div>
 
 </template>
 

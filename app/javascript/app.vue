@@ -3,7 +3,8 @@
   <p>
     {{ message }}
   </p>
-  <button class="btn btn-primary">bootstrap</button>
+  <!-- エラーが出るのでコメントアウト -->
+  <!-- <button class="btn btn-primary">bootstrap</button> -->
 </template>
 
 <script>

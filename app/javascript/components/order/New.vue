@@ -16,13 +16,13 @@ const Pages = [
 
 function nextPage() {
   if (currentPageIndex.value < Pages.length - 1) {
-  currentPageIndex.value = (currentPageIndex.value + 1) % Pages.length
+    currentPageIndex.value = (currentPageIndex.value + 1) % Pages.length
   }
 }
 
 function previousPage() {
   if (currentPageIndex.value > 0) {
-  currentPageIndex.value = (currentPageIndex.value - 1) % Pages.length
+    currentPageIndex.value = (currentPageIndex.value - 1) % Pages.length
   }
 }
 
@@ -30,22 +30,33 @@ function previousPage() {
 </script>
 
 <template>
-  <div class="demo">
-    <component :is="Pages[currentPageIndex]" class="tab-Page" 
-    v-bind:categroies="categories"
-    ></component>
-
+  <div class="mx-auto" style="width: 800px;">
+    <keep-alive>
+      <component :is="Pages[currentPageIndex]" class="tab-Page" v-bind:categories="initialData.categories"></component>
+    </keep-alive>
     <button type="button" class="btn btn-outline-primary" @click="nextPage" v-if="currentPageIndex < Pages.length - 1">
-      Next Page
+      つぎへ
     </button>
     <button type="button" class="btn btn-outline-primary" @click="previousPage" v-if="currentPageIndex > 0">
-      Previous Page
+      もどる
     </button>
   </div>
 </template>
 
 <script>
-
+export default {
+  components: {
+    Form,
+    Important,
+    Confirm
+  },
+  props: {
+    initialData: {
+      type: Object,
+      default: () => {}
+    }
+  },
+}
 </script>
 
 <style scoped>
