@@ -1,0 +1,38 @@
+<h2>受注済み一覧</h2>
+<%= link_to '仮受注一覧へ', unchecked_index_orders_path %>
+<table class="table">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">ステータス</th>
+      <th scope="col">受付日時</th>
+      <th scope="col">依頼品内容</th>
+      <th scope="col">見積料金</th>
+      <th scope="col">送料</th>
+      <th scope="col">氏名</th>
+      <th scope="col">電話番号</th>
+      <th scope="col">住所</th>
+      <th colspan="3" scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @checked_orders.each do |order| %>
+      <tr class="checked_order_list">
+        <td><%= order.status %></td>
+        <td><%= order.ordered_on.strftime('%Y/%m/%d %H:%M') %></td>
+        <td>
+          <% order.items.each do |item| %>
+            <%= item.category.name %>
+          <% end %>
+        </td>
+        <td><%= order.price %>円</td>
+        <td><%= order.shipping.price %>円</td>
+        <td><%= order.customer.name %></td>
+        <td><%= order.customer.phonenumber %></td>
+        <td><%= order.customer.address %></td>
+        <td><%= link_to '詳細', edit_order_path(order) %></td>
+        <td><%= link_to "削除", order, method: :delete, data: {confirm: "本当に削除しますか？"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
