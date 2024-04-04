@@ -14,11 +14,11 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new
     @customer = Customer.new
-    @categories = Category.where(display: true).map do |service|
+    @categories = Category.where(display: true).map do |category|
       {
-        id: categories.id,
-        name: categories.name,
-        price: categories.price,
+        id: category.id,
+        name: category.name,
+        price: category.price,
       }
     end
   end

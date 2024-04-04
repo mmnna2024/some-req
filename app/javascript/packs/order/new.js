@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import New from "../../components/order/new.vue";
+import New from "../../components/order/New.vue";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 

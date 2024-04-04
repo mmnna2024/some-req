@@ -1,27 +1,27 @@
 <template>
-  <el-row>
-    <el-col :span="12">
+  <b-row>
+    <b-col :span="12">
       <div>
         <p>ご依頼内容</p>
-          <el-table :data="tableData" style="width: 100%" v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
-            <el-table-column label= "衣類選択">
-              <el-select v-model="selected[v_index]"
+          <table :data="tableData" style="width: 100%" v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
+            <table-column label= "衣類選択">
+              <select v-model="selected[v_index]"
                 @change="() => setContent(v_index)"
                 >   
-                <el-option disabled value="">依頼する衣類を一つずつお選びください</el-option>
-                <el-option v-for="(category, index) in categories" :key="index" :value="category" :label="category.name" />
-              </el-select>
-            </el-table-column>
-            <el-table-column label= "個数">
-              <el-input type="number" v-model="selected[v_index].count" />
-            </el-table-column>
-            <el-table-column label= "単価">
+                <option disabled value="">依頼する衣類を一つずつお選びください</option>
+                <option v-for="(category, index) in categories" :key="index" :value="category" :label="category.name" />
+              </select>
+            </table-column>
+            <table-column label= "個数">
+              <input type="number" v-model="selected[v_index].count" />
+            </table-column>
+            <table-column label= "単価">
               <a>{{ selected[v_index].price }}</a>
-            </el-table-column>
-            <el-table-column label= "小計">
+            </table-column>
+            <table-column label= "小計">
               <a>{{ selected[v_index].price * selected[v_index].count }}</a>
-            </el-table-column>
-          </el-table>
+            </table-column>
+          </table>
 
 
         <table class="categories-table">
@@ -123,8 +123,8 @@
         </form>
 
       </div>
-    </el-col>
-  </el-row>
+    </b-col>
+  </b-row>
 
 
 </template>
@@ -157,8 +157,6 @@ export default {
           price: 0,
         },
       ],
-
-
       deliveryFreePrice: 10000,
     };
   },
@@ -198,18 +196,16 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
-.categories-table {
+  .categories-table {
   border: 1px solid gray;
   margin: 10px;
-}
+  }
 
-.categories-table th,
-.categories-table td {
+  .categories-table th,
+  .categories-table td {
   border: 1px solid gray;
-}
+  }
 </style>
-
