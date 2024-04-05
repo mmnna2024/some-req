@@ -31,8 +31,8 @@
         <td><nobr><%= order.customer.name %></nobr></td>
         <td><nobr><%= order.customer.phonenumber %></nobr></td>
         <td><nobr><%= order.customer.address %></nobr></td>
-        <td><nobr><%= link_to '詳細', edit_order_path(order) %></nobr></td>
-        <td><nobr><%= link_to "削除", order, method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
+        <td><nobr><%= link_to '詳細', edit_admin_order_path(order) %></nobr></td>
+        <td><nobr><%= link_to "削除", admin_order_path(order), method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
       </tr>
     <% end %>
   </tbody>

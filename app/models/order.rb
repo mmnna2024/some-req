@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :items, dependent: :destroy
   belongs_to :customer
-  belongs_to :shipping
+  belongs_to :shipping, optional: true
 
   enum status: [:unchecked_order, :checked_order]
 
