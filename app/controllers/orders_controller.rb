@@ -12,8 +12,6 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
-    @customer = Customer.new
     @categories = Category.where(display: true).map do |category|
       {
         id: category.id,
@@ -23,7 +21,18 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
+  def create
+    # @customer = Customer.new(customer_params)
+    # @order = Order.new
+    # # @order.customer = @customer(:id)
+    # if @customer.save && @order.save
+    #   redirect_to complete_orders_path, notice: t('.created')
+    # else
+    #   render :new
+    # end
+  end
+    
+  def complete
   end
 
   def destroy
@@ -43,4 +52,13 @@ class OrdersController < ApplicationController
       order.price = total_price
     end
   end
+
+  def customer_prams
+    params.require(:customer).permit(:name, :email, :phonenumber, :address, :sex, :age)
+  end
+
+  def order_prams
+    params.require(:order).permit(:note)
+  end
+
 end
