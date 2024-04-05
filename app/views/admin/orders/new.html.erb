@@ -1,0 +1,40 @@
+<h1>新規受注登録</h1>
+
+<%= form_with(model: @order, url: admin_orders_path, local: true) do |f| %>
+
+  <h4>依頼品情報</h4>
+    <div>
+      <%= f.label :category_ids %>
+      <%= f.collection_select :category_ids, Category.all, :id, :name, { include_blank: "選択して下さい" }, {name: 'order_form[category_ids][]', class:"category-select"} %>
+    </div>
+
+    <div>
+      <%= f.label :order_note %>
+      <%= f.text_area :order_note %>
+    </div>
+
+  <h4>お客様情報</h4>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :customer_name %>
+    </div>
+
+    <div>
+      <%= f.label :phonenumber %>
+      <%= f.telephone_field :customer_phonenumber %>
+    </div>
+
+    <div>
+      <%= f.label :address %>
+      <%= f.text_field :customer_address %>
+    </div>
+
+    <div>
+      <%= f.label :shipping_id %>
+      <%= f.collection_select :shipping_id, Shipping.all, :id, :name, include_blank: "選択して下さい" %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+<% end %>
