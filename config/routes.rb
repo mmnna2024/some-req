@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   get 'hello_vue/index'
   get 'orders/new'
 
+  resources :orders, only: [:new, :create, :edit] do
+    collection do
+      get :complete
+    end
+  end
+
   namespace :admin do
     resources :categories do
       collection do#display_updateメソッドは一括でcategoriesを更新するためcollectionでルーティングを指定している
@@ -14,6 +20,7 @@ Rails.application.routes.draw do
       collection do
         get :unchecked_index
         get :checked_index
+        get :complete
       end
     end
   end

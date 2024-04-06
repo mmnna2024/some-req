@@ -2,44 +2,42 @@
 import Form from './Form.vue'
 import Important from './Important.vue'
 import Confirm from './Confirm.vue'
-import { ref } from 'vue'
-
-
+import { ref, reactive } from 'vue'
 
 const currentPageIndex = ref(0)
+const Pages = [Form, Important, Confirm]
+const formData = reactive({
+  customer: {
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    sex: null,
+    age: null,
+  }
+});
 
-const Pages = [
-  Form,
-  Important,
-  Confirm
-]
-
-function nextPage() {
-  if (currentPageIndex.value < Pages.length - 1) {
-    currentPageIndex.value = (currentPageIndex.value + 1) % Pages.length
+function handlePageChange(data) {
+  // ページを進める処理
+  const newIndex = currentPageIndex.value + data.step;
+  if (newIndex >= 0 && newIndex < Pages.length) {
+    currentPageIndex.value = newIndex;
+  }
+  // Form.vue から受け取ったデータで formData を更新する処理
+  if (data.formData) {
+    Object.assign(formData, data.formData);
   }
 }
-
-function previousPage() {
-  if (currentPageIndex.value > 0) {
-    currentPageIndex.value = (currentPageIndex.value - 1) % Pages.length
-  }
-}
-
-
 </script>
 
 <template>
   <div class="mx-auto" style="width: 800px;">
     <keep-alive>
-      <component :is="Pages[currentPageIndex]" class="tab-Page" v-bind:categories="initialData.categories"></component>
+      <component :is="Pages[currentPageIndex]" 
+        :categories="initialData.categories" 
+        @change-page="handlePageChange" 
+        v-bind="formData" />
     </keep-alive>
-    <button type="button" class="btn btn-outline-primary" @click="nextPage" v-if="currentPageIndex < Pages.length - 1">
-      つぎへ
-    </button>
-    <button type="button" class="btn btn-outline-primary" @click="previousPage" v-if="currentPageIndex > 0">
-      もどる
-    </button>
   </div>
 </template>
 
