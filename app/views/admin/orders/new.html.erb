@@ -30,7 +30,7 @@
     </div>
 
     <div>
-      <%= f.label :shipping_id %>
+      <%= f.label :shipping %>
       <%= f.collection_select :shipping_id, Shipping.all, :id, :name, include_blank: "選択して下さい" %>
     </div>
 
