@@ -100,6 +100,7 @@
             <input v-model="customer.age" id="order-address" class="form-control">
           </div>
         </form>
+        <button @click="next" class="btn btn-outline-primary">次へ</button>
       </div>
     </b-col>
   </b-row>
@@ -108,6 +109,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     order: {
@@ -165,6 +167,14 @@ export default {
       // 選択された商品の個数が0の場合は1にする
       if (this.selected[index].count === 0) this.selected[index].count = 1;
       this.selected[index].price = price;
+    },
+    next() {
+      this.$emit('change-page', {
+        step: 1, // 1ページ進む
+        formData: {
+          customer: this.customer,
+        }
+      });
     },
   },
   computed: {
