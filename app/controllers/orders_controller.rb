@@ -22,14 +22,15 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # @customer = Customer.new(customer_params)
-    # @order = Order.new
-    # # @order.customer = @customer(:id)
-    # if @customer.save && @order.save
-    #   redirect_to complete_orders_path, notice: t('.created')
-    # else
-    #   render :new
-    # end
+    @customer = Customer.new(customer_params)
+    @order = Order.new
+    @order.customer = customer_params[:id]
+    if @customer.save
+      redirect_to complete_orders_path, notice: t('.created')
+      render json: @customer, status: :created
+    else
+      render json: { errors: 'error message' }, status: :unprocessable_entity
+    end
   end
     
   def complete
@@ -53,11 +54,11 @@ class OrdersController < ApplicationController
     end
   end
 
-  def customer_prams
+  def customer_params
     params.require(:customer).permit(:name, :email, :phonenumber, :address, :sex, :age)
   end
 
-  def order_prams
+  def order_params
     params.require(:order).permit(:note)
   end
 

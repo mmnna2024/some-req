@@ -10,7 +10,7 @@ const formData = reactive({
   customer: {
     name: '',
     email: '',
-    phone: '',
+    phonenumber: '',
     address: '',
     sex: null,
     age: null,
