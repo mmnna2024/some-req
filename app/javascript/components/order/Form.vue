@@ -81,8 +81,8 @@
             </textarea>
           </div> -->
           <div class="form-group">
-            <label for="order-phone">電話番号</label>
-            <input v-model="customer.phone" id="order-phone" class="form-control">
+            <label for="order-phonenumber">電話番号</label>
+            <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control">
           </div>
           <div class="form-group">
             <label for="order-address">住所</label>

@@ -7,7 +7,7 @@
       <h4>お客様情報</h4>
       <p>名前：{{customer.name}}</p>
       <p>メールアドレス: {{ customer.email }}</p>
-      <p>電話番号: {{ customer.phone }}</p>
+      <p>電話番号: {{ customer.phonenumber }}</p>
       <p>住所: {{ customer.address }}</p>
     </div>
     <div>
@@ -42,7 +42,7 @@ export default {
       const form = new FormData();
       form.append('customer[name]', this.customer.name);
       form.append('customer[email]', this.customer.email);
-      form.append('customer[phone]', this.customer.phone);
+      form.append('customer[phonenumber]', this.customer.phonenumber);
       form.append('customer[address]', this.customer.address);
       axios({
         method: 'post',
@@ -50,6 +50,7 @@ export default {
         data: form,
         headers: {'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
       });
+      window.location.href = '/orders/complete';
     }
   }
 }
