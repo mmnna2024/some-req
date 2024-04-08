@@ -10,11 +10,15 @@ const formData = reactive({
   customer: {
     name: '',
     email: '',
-    phone: '',
+    phonenumber: '',
     address: '',
-    sex: null,
+    sex: '',
     age: null,
-  }
+  },
+  order: {
+    note: ''
+  },
+  items: {}
 });
 
 function handlePageChange(data) {

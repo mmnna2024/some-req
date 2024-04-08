@@ -1,7 +1,8 @@
 class OrderForm
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
-  attr_accessor :category_ids, :customer_name, :customer_phonenumber, :customer_address, :shipping_id, :order_note, :status, :channel, :ordered_on
+  attr_accessor :category_ids, :customer_name, :customer_email, :customer_phonenumber, 
+                :customer_address, :customer_age, :customer_sex, :shipping_id, :order_note, :status, :channel, :ordered_on
 
   def initialize(attributes = nil, order: Order.new)
     @order = order
@@ -14,7 +15,7 @@ class OrderForm
       if @order.customer
         @order.customer.update!(name: customer_name, phonenumber: customer_phonenumber, address: customer_address)
       else
-        customer = Customer.create!(name: customer_name, phonenumber: customer_phonenumber, address: customer_address)
+        customer = Customer.create!(name: customer_name, email: customer_email, phonenumber: customer_phonenumber, address: customer_address, age: customer_age, sex: customer_sex)
         @order.customer = customer
       end
 
