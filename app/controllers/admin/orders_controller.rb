@@ -12,7 +12,8 @@ class Admin::OrdersController < ApplicationController
   end
 
   def new
-    @order_form = OrderForm.new
+    order = Order.new
+    @order_form = OrderForm.new(order: order)
   end
 
   def create
