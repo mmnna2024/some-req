@@ -14,7 +14,8 @@ const formData = reactive({
     address: '',
     sex: null,
     age: null,
-  }
+  },
+  items: {}
 });
 
 function handlePageChange(data) {
