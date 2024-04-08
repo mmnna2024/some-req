@@ -16,8 +16,15 @@
       <h4>注文内容</h4>
       <ul>
         <li v-for="(item, index) in items" :key="index">
-          id:{{ item.id }} {{ item.name }} - 数量: {{ item.count }} - 単価: {{ item.price }}
+          id:{{ item.id }} {{ item.name }} - 単価: {{ item.price }}円
         </li>
+        <li>
+          送料: {{shipping.price}}円
+        </li>
+        <li>
+          見積り合計金額: {{totalprice + shipping.price}}
+        </li>
+
       </ul>
     </div>
     <div>
@@ -38,7 +45,9 @@ export default {
   props: {
     customer: Object,
     order: Object,
-    items: Array
+    items: Array,
+    shipping: Object,
+    totalprice: {}
   },
   methods: {
     previous(){
@@ -56,7 +65,7 @@ export default {
       form.append('order_form[channel]', 'online');
       form.append('order_form[order_note]', this.order.note);
       form.append('order_form[status]', 'unchecked_order');
-      form.append('order_form[shipping_id]', '1');
+      form.append('order_form[shipping_id]', this.shipping.id);
       this.items.forEach((item) => {
         form.append('order_form[category_ids][]', item.id);
       })

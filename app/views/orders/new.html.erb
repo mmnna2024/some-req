@@ -1,5 +1,4 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<h1>オンライン注文フォーム</h1>
 <p id="notice"><%= notice %></p>
 <%= javascript_pack_tag 'order/new.js' %>
 <%= content_tag :div,
@@ -7,6 +6,7 @@
   data: {
     order: @order,
     categories: @categories,
-    customer: @customer
+    customer: @customer,
+    shippings: @shippings
   }.to_json do %>
 <% end %>

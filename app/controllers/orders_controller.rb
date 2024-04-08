@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
         price: category.price,
       }
     end
+    @shippings = Shipping.all
   end
 
   def create
