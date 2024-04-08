@@ -1,10 +1,10 @@
 <%= form_with model: order_form, url: admin_orders_path, scope: :order_form, local: true do |f| %>
 
   <h4>依頼品情報</h4>
-    <div class="my-3">
-      <%= f.label :category_ids, "衣類カテゴリー" %>
-      <%= f.collection_select :category_ids, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
-    </div>
+  <div class="my-3">
+    <%= f.label :category_ids, "衣類カテゴリー" %>
+    <%= f.collection_select :category_ids, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
+  </div>
 
     <div class="my-3">
       <%= f.label :price %>
@@ -30,6 +30,16 @@
     <div class="my-3">
       <%= f.label :customer_address, "住所" %>
       <%= f.text_field :customer_address %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_age, "年齢" %>
+      <%= f.number_field :customer_age %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_sex, "性別" %>
+      <%= f.select :customer_sex, Customer.sexes.keys, include_blank: "登録しない" %>
     </div>
 
     <div class="my-3">
