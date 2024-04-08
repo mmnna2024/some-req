@@ -88,8 +88,8 @@
           <div class="form-group">
             <label for="order-sex">性別</label>
             <select v-model="customer.sex" id="order-sex" class="form-control">
-              <option  value="0">男性</option>
-              <option  value="1">女性</option>
+              <option  value="male">男性</option>
+              <option  value="female">女性</option>
             </select>
           </div>
           <div class="form-group">
@@ -109,10 +109,6 @@
 
 export default {
   props: {
-    order: {
-      type: Object,
-      default: () => {}
-    },
     customer:{
       type: Object,
       default: () => {}
