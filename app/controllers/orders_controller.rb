@@ -1,16 +1,4 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index,:edit, :destroy]
-  
-  def unchecked_index
-    @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_with_ordered_on
-    display_orders_items_price(@unchecked_orders)
-  end
-
-  def checked_index
-    @checked_orders = Order.includes(items: :category).where(status: 1).sort_with_ordered_on
-    display_orders_items_price(@checked_orders)
-  end
-
   def new
     @categories = Category.where(display: true).map do |category|
       {

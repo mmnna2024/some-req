@@ -1,4 +1,4 @@
-<template>
+<!-- <<template>
   <div class="tab">
     <div>
       <h2>受付内容確認</h2>
@@ -59,4 +59,5 @@ export default {
     }
   }
 }
-</script>
+</script> -->
+<template></template>

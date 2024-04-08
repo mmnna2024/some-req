@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < ApplicationController
   before_action :authenticate_admin!
   def index
     @categories = Category.all
@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render :new
     end
@@ -24,13 +24,13 @@ class CategoriesController < ApplicationController
     checked_ids = params[:category_ids]
     Category.where(id: checked_ids).update_all(display: true)
     Category.where.not(id: checked_ids).update_all(display: false)
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
 
   private
