@@ -62,8 +62,10 @@ class Admin::OrdersController < ApplicationController
 
   def order_params
     params.require(:order_form).permit(
-      :customer_name, :customer_phonenumber, :customer_address, :shipping_id,
-      :order_note, :status, :channel, category_ids: []
+      :customer_name, :customer_phonenumber, :customer_address, :customer_age, :customer_sex,
+      :shipping_id,
+      :order_note, :status, :channel, 
+      category_ids: []
     )
   end
 end

@@ -13,7 +13,7 @@ class OrderForm
   def save
     ActiveRecord::Base.transaction do
       if @order.customer
-        @order.customer.update!(name: customer_name, phonenumber: customer_phonenumber, address: customer_address)
+        @order.customer.update!(name: customer_name, phonenumber: customer_phonenumber, address: customer_address, age: customer_age, sex: customer_sex)
       else
         customer = Customer.create!(name: customer_name, email: customer_email, phonenumber: customer_phonenumber, address: customer_address, age: customer_age, sex: customer_sex)
         @order.customer = customer
@@ -48,6 +48,8 @@ class OrderForm
       customer_name: @order.customer&.name,
       customer_phonenumber: @order.customer&.phonenumber,
       customer_address: @order.customer&.address,
+      customer_age: @order.customer&.age,
+      customer_sex: @order.customer&.sex,
       shipping_id: @order.shipping_id,
       order_note: @order.note,
       status: @order.status,
