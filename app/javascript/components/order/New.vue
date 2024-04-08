@@ -18,7 +18,9 @@ const formData = reactive({
   order: {
     note: ''
   },
-  items: {}
+  items: {},
+  shipping: {},
+  totalprice: {}
 });
 
 function handlePageChange(data) {
@@ -38,7 +40,8 @@ function handlePageChange(data) {
   <div class="mx-auto" style="width: 800px;">
     <keep-alive>
       <component :is="Pages[currentPageIndex]" 
-        :categories="initialData.categories" 
+        :categories="initialData.categories"
+        :shippings="initialData.shippings" 
         @change-page="handlePageChange" 
         v-bind="formData" />
     </keep-alive>
