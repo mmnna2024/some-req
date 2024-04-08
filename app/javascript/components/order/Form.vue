@@ -29,15 +29,12 @@
             <td>
               <input type="number" v-model="selected[v_index].count" />
             </td>
-
             <td>
               <a>{{ selected[v_index].price }}</a>
             </td>
-
             <td>
               <a>{{ selected[v_index].price * selected[v_index].count }}</a>
             </td>
-
           </tr>
         </table>
       </div>
@@ -81,8 +78,8 @@
             </textarea>
           </div> -->
           <div class="form-group">
-            <label for="order-phone">電話番号</label>
-            <input v-model="customer.phone" id="order-phone" class="form-control">
+            <label for="order-phonenumber">電話番号</label>
+            <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control">
           </div>
           <div class="form-group">
             <label for="order-address">住所</label>
@@ -91,8 +88,8 @@
           <div class="form-group">
             <label for="order-sex">性別</label>
             <select v-model="customer.sex" id="order-sex" class="form-control">
-              <option  value="0">男性</option>
-              <option  value="1">女性</option>
+              <option  value="male">男性</option>
+              <option  value="female">女性</option>
             </select>
           </div>
           <div class="form-group">
@@ -112,10 +109,6 @@
 
 export default {
   props: {
-    order: {
-      type: Object,
-      default: () => {}
-    },
     customer:{
       type: Object,
       default: () => {}
@@ -173,6 +166,7 @@ export default {
         step: 1, // 1ページ進む
         formData: {
           customer: this.customer,
+          items: this.selected,
         }
       });
     },
