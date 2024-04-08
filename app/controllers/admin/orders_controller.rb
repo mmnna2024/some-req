@@ -1,6 +1,6 @@
 class Admin::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index,:edit, :destroy]
-  
+  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :edit, :destroy]
+
   def unchecked_index
     @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_with_ordered_on
     display_orders_items_price(@unchecked_orders)
@@ -12,20 +12,12 @@ class Admin::OrdersController < ApplicationController
   end
 
   def new
-    @order = OrderForm.new
-
-    @categories = Category.where(display: true).map do |category|
-      {
-        id: category.id,
-        name: category.name,
-        price: category.price,
-      }
-    end
+    @order_form = OrderForm.new
   end
 
   def create
-    @order = OrderForm.new(order_params)
-    if @order.save
+    @order_form = OrderForm.new(order_params)
+    if @order_form.save
       redirect_to unchecked_index_admin_orders_path
     else
       render :new
@@ -33,6 +25,19 @@ class Admin::OrdersController < ApplicationController
   end
 
   def edit
+    order = Order.find(params[:id])
+    @order_form = OrderForm.new(order: order)
+  end
+
+  def update
+    order = Order.find(params[:id])
+    @order_form = OrderForm.new(order_params, order: order)
+
+    if @order_form.save
+      redirect_to unchecked_index_admin_orders_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -56,8 +61,8 @@ class Admin::OrdersController < ApplicationController
 
   def order_params
     params.require(:order_form).permit(
-      :ordered_on, :status, :channel, :price, :order_note, :customer_id, :shipping_id,
-      { category_ids: [] }, :customer_name, :customer_phonenumber, :customer_address
+      :customer_name, :customer_phonenumber, :customer_address, :shipping_id,
+      :order_note, :status, :channel, category_ids: []
     )
   end
 end
