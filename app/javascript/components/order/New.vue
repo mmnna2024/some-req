@@ -12,8 +12,11 @@ const formData = reactive({
     email: '',
     phonenumber: '',
     address: '',
-    sex: null,
+    sex: '',
     age: null,
+  },
+  order: {
+    note: ''
   },
   items: {}
 });
