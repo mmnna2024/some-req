@@ -1,0 +1,68 @@
+<%= form_with model: order_form, url: admin_orders_path, scope: :order_form, local: true do |f| %>
+
+  <h4>依頼品情報</h4>
+  <div class="my-3">
+    <%= f.label :category_ids, "衣類カテゴリー" %>
+    <%= f.collection_select :category_ids, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
+  </div>
+
+    <div class="my-3">
+      <%= f.label :price %>
+      <%= f.number_field :price %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :order_note, " 備考" %>
+      <%= f.text_area :order_note %>
+    </div>
+
+  <h4>お客様情報</h4>
+    <div class="my-3">
+      <%= f.label :customer_name, "名前" %>
+      <%= f.text_field :customer_name %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_phonenumber, "電話番号" %>
+      <%= f.telephone_field :customer_phonenumber %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_address, "住所" %>
+      <%= f.text_field :customer_address %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_age, "年齢" %>
+      <%= f.number_field :customer_age %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :customer_sex, "性別" %>
+      <%= f.select :customer_sex, Customer.sexes.keys, include_blank: "登録しない" %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :shipping_id, "地域区分" %>
+      <%= f.collection_select :shipping_id, Shipping.all, :id, :name, include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :channel_shop, "店頭受付" %>
+      <%= f.radio_button :channel, :shop %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :channel_phonecall, "電話受付" %>
+      <%= f.radio_button :channel, :phonecall %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :status, "受注ステータス" %>
+      <%= f.select :status, Order.statuses.keys %>
+    </div>
+
+    <div class="my-3">
+      <%= f.submit %>
+    </div>
+<% end %>
