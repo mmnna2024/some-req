@@ -1,3 +1,6 @@
+#管理者の作成
+admin = Admin.create!(email: "admin@gmail.com", password: "aaaaaa")
+
 # カテゴリの作成
 categories = [
   ["Tシャツ", 2750],
@@ -58,12 +61,10 @@ categories = Category.all
 
   rand(1..5).times do # 1から5までのランダムな回数でアイテムを作成
     item = Item.create!(
-      price: 0,
+      price: categories.sample.price,
       order: order,
       category: categories.sample,
     )
-    # order.price += item.price # 注文の合計価格を更新
-    # order.save
   end
 end
 
