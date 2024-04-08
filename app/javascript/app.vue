@@ -13,7 +13,7 @@
        <p>※画面遷移後一度更新</p>
     </div>
     <div>
-      <a href='/orders/admin/new'
+      <a href='admin/orders/new'
       class="btn btn-outline-primary" role="button">店舗新規登録</a>
     </div>
     <!-- 適当に増やしてください -->
