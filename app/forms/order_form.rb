@@ -1,12 +1,12 @@
 class OrderForm
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
-  attr_accessor :category_ids, :customer_name, :customer_phonenumber, :customer_address, :order_note, :shipping_id
+  attr_accessor :category_ids, :customer_name, :customer_phonenumber, :customer_address, :order_note, :shipping_id, :status, :channel
 
   def save
     ActiveRecord::Base.transaction do
       customer = Customer.create!(name: customer_name, phonenumber: customer_phonenumber, address: customer_address)
-      order = Order.create!(note: order_note, customer_id: customer.id, shipping_id: shipping_id, ordered_on: Time.current, status: 0)
+      order = Order.create!(note: order_note, customer_id: customer.id, shipping_id: shipping_id, ordered_on: Time.current, status: status, channel: channel)
 
       category_ids.each do |category_id|
         category = Category.find_by_id(category_id)

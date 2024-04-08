@@ -13,6 +13,14 @@ class Admin::OrdersController < ApplicationController
 
   def new
     @order = OrderForm.new
+
+    @categories = Category.where(display: true).map do |category|
+      {
+        id: category.id,
+        name: category.name,
+        price: category.price,
+      }
+    end
   end
 
   def create
