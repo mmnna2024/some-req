@@ -1,7 +1,7 @@
 class OrderForm
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
-  attr_accessor :category_ids, :customer_name, :customer_phonenumber, :customer_address, :order_note, :shipping_id, :status, :channel
+  attr_accessor :category_ids, :customer_name, :customer_phonenumber, :customer_address, :shipping_id, :order_note, :status, :channel
 
   def save
     ActiveRecord::Base.transaction do
