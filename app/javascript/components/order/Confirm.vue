@@ -13,8 +13,8 @@
     <div>
       <h4>注文内容</h4>
       <ul>
-        <li v-for="(item, index) in selected" :key="index">
-          {{ item.name }} - 数量: {{ item.count }} - 単価: {{ item.price }}
+        <li v-for="(item, index) in items" :key="index">
+          id:{{ item.id }} {{ item.name }} - 数量: {{ item.count }} - 単価: {{ item.price }}
         </li>
       </ul>
     </div>
@@ -31,7 +31,7 @@ import axios from 'axios';
 export default {
   props: {
     customer: Object,
-    selected: Array
+    items: Array
   },
   methods: {
     previous(){
@@ -44,6 +44,11 @@ export default {
       form.append('customer[email]', this.customer.email);
       form.append('customer[phonenumber]', this.customer.phonenumber);
       form.append('customer[address]', this.customer.address);
+      this.items.forEach((item) => {
+        form.append('item[category_id]', item.id);
+        form.append('item[count]', item.count);
+      })
+      debugger;
       axios({
         method: 'post',
         url: '/orders',

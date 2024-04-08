@@ -29,15 +29,12 @@
             <td>
               <input type="number" v-model="selected[v_index].count" />
             </td>
-
             <td>
               <a>{{ selected[v_index].price }}</a>
             </td>
-
             <td>
               <a>{{ selected[v_index].price * selected[v_index].count }}</a>
             </td>
-
           </tr>
         </table>
       </div>
@@ -173,6 +170,7 @@ export default {
         step: 1, // 1ページ進む
         formData: {
           customer: this.customer,
+          items: this.selected,
         }
       });
     },
