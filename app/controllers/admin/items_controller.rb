@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class Admin::ItemsController < ApplicationController
 
   private
   def self.save_price
