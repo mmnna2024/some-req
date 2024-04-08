@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :shipping, optional: true
 
   enum status: [:unchecked_order, :checked_order]
+  enum channel: [:online, :shop, :phonecall]
 
   def self.sort_with_ordered_on
     order(ordered_on: :asc)
