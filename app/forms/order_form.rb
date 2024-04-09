@@ -31,11 +31,14 @@ class OrderForm
 
       if @order.persisted?
         @order.update!(note: order_note, shipping_id: shipping_id, status: status, channel: channel)
+        total_order_price = 0
         @order.items.each_with_index do |item, index|
           category_id = category_ids[index]
           price = @items[index].price 
           item.update!(order_id: order.id, category_id: category_id, price: price)
+          total_order_price += item.price
         end
+        @order.update!(price: total_order_price)
       else
         @order = Order.create!(note: order_note, customer_id: customer.id, shipping_id: shipping_id, ordered_on: Time.current, status: status, channel: channel)
         total_order_price = 0
