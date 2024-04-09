@@ -1,6 +1,6 @@
 <h1>メニュー追加</h1>
 
-<%= form_with(model: @category, local: true) do |form| %>
+<%= form_with(model: @category, url: admin_categories_path, local: true) do |form| %>
   <% if @category.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <ul>
@@ -35,4 +35,4 @@
   </div>
 
 <% end %>
-<%= link_to '戻る', categories_path %>
+<%= link_to '戻る', admin_categories_path %>
