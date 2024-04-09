@@ -53,19 +53,24 @@ categories = Category.all
     ordered_on: random_date,
     status: [0, 1].sample,
     channel: rand(0..2),
-    price: 0, # 一時的に0、後で更新
+    price: 0,
     note: "Note #{i}",
     customer: customers.sample,
     shipping: shippings.sample,
   )
+
+  total_order_price = 0
 
   rand(1..5).times do # 1から5までのランダムな回数でアイテムを作成
     item = Item.create!(
       price: categories.sample.price,
       order: order,
       category: categories.sample,
+      order_id: order.id,
     )
+    total_order_price += item.price
   end
+  order.update!(price: total_order_price)
 end
 
 puts "Seed data created successfully!"
