@@ -2,11 +2,19 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :edit, :destroy]
 
   def unchecked_index
-    @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_with_ordered_on
+    if params[:sort_update]
+      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_latest
+    end
+
+    @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_oldest.page(params[:page]).per(10)
   end
 
   def checked_index
-    @checked_orders = Order.includes(items: :category).where(status: 1).sort_with_ordered_on
+    if params[:sort_update]
+      @checked_orders = Order.includes(items: :category).where(status: 1).sort_oldest
+    end
+
+    @checked_orders = Order.includes(items: :category).where(status: 1).sort_latest.page(params[:page]).per(10)
   end
 
   def new
@@ -54,7 +62,7 @@ class Admin::OrdersController < ApplicationController
       :customer_name, :customer_phonenumber, :customer_address, :customer_age, :customer_sex,
       :shipping_id,
       :order_note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id],
-      category_ids: [],
+                                                   category_ids: [],
     )
   end
 end
