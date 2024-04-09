@@ -47,7 +47,10 @@ export default {
     order: Object,
     items: Array,
     shipping: Object,
-    totalprice: {}
+    totalprice: {},
+    presignedUrl: '',  // Rails側で発行される署名付きリンク
+    uploadFile: {},    // アップロードする予定のファイル
+    productId: '',     // アップロードするファイルのID
   },
   methods: {
     previous(){
@@ -68,7 +71,8 @@ export default {
       form.append('order_form[shipping_id]', this.shipping.id);
       this.items.forEach((item) => {
         form.append('order_form[category_ids][]', item.id);
-      })
+      });
+      form.append('order_form[image]', this.uploadFile);
       
       try {
         const res = await axios({
