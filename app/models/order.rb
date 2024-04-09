@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   has_many :items, dependent: :destroy
   belongs_to :customer
   belongs_to :shipping, optional: true
+  accepts_nested_attributes_for :items
 
   enum status: [:unchecked_order, :checked_order]
   enum channel: [:online, :shop, :phonecall]

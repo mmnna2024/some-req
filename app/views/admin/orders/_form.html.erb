@@ -1,15 +1,15 @@
-<%= form_with model: order_form, url: admin_orders_path, scope: :order_form, local: true do |f| %>
+<%= form_with model: order_form, url: order_form.url, scope: :order_form, method: http_method, local: true do |f| %>
 
   <h4>依頼品情報</h4>
-  <div class="my-3">
-    <%= f.label :category_ids, "衣類カテゴリー" %>
-    <%= f.collection_select :category_ids, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
-  </div>
-
     <div class="my-3">
-      <%= f.label :price %>
-      <%= f.number_field :price %>
+      <%= f.label :category_ids, "衣類カテゴリー" %>
+      <%= collection_check_boxes :order_form, :category_ids, Category.all, :id, :name %>
     </div>
+
+    <%= f.fields_for :items do |item_form| %>
+      <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
+      <%= item_form.number_field :price %>
+    <% end %>
 
     <div class="my-3">
       <%= f.label :order_note, " 備考" %>

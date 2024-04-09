@@ -14,6 +14,7 @@ class Admin::OrdersController < ApplicationController
   def new
     order = Order.new
     @order_form = OrderForm.new(order: order)
+    @order_form.set_url(admin_orders_path)
   end
 
   def create
@@ -28,6 +29,7 @@ class Admin::OrdersController < ApplicationController
   def edit
     order = Order.find(params[:id])
     @order_form = OrderForm.new(order: order)
+    @order_form.set_url(admin_order_path(order))
   end
 
   def update
@@ -64,8 +66,8 @@ class Admin::OrdersController < ApplicationController
     params.require(:order_form).permit(
       :customer_name, :customer_phonenumber, :customer_address, :customer_age, :customer_sex,
       :shipping_id,
-      :order_note, :status, :channel, 
-      category_ids: []
+      :order_note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id],
+      category_ids: [],
     )
   end
 end
