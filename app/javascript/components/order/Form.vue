@@ -12,9 +12,7 @@
           </tr>
           <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
             <td>
-              <select v-model="selected[v_index]"
-                      @change="() => setContent(v_index)"
-              >
+              <select v-model="selected[v_index]" @change="() => setContent(v_index)" >
                 <option disabled value="">依頼する衣類を一つずつお選びください</option>
                 <option v-for="(category, index) in categories" :key="index" :value="category">
                   {{ category.name }}
@@ -22,7 +20,8 @@
               </select>
             </td>
             <td>
-              <input type="file" id="inputGroupFile01" accept="image/png, image/jpeg">
+              <input type="file" @change="selectedFile" id="inputGroupFile01" name="products[image]" accept="image/png, image/jpg" :value="imagefile">
+              {{ uploadFile }}
             </td>
             <td>
               <a>{{ selected[v_index].price }}</a>
@@ -105,7 +104,7 @@ export default {
     shippings: {
       type: Array,
       default: () => []
-    }
+    },
   },
   data() {
     return {
@@ -122,7 +121,9 @@ export default {
         id: NaN,
         name: "",
         price: 0,
-      }
+      },
+      uploadFile: null,
+      imagefile: null
     };
   },
   methods: {
@@ -142,6 +143,12 @@ export default {
       const price = this.categories.find(({name}) => name === this.selected[index].name).price;
       this.selected[index].price = price;
     },
+    selectedFile(e) {
+      // 選択された File の情報を保存しておく
+      e.preventDefault();
+      let files = e.target.files;
+      this.uploadFile = files[0];
+    },
     next() {
       this.$emit('change-page', {
         step: 1, // 1ページ進む
@@ -149,7 +156,8 @@ export default {
           customer: this.customer,
           items: this.selected,
           shipping: this.selected_shipping,
-          totalprice: this.totalPrice
+          totalprice: this.totalPrice,
+          uploadFile: this.uploadFile,
         }
       });
     },
@@ -174,3 +182,4 @@ export default {
   border: 1px solid gray;
   }
 </style>
+

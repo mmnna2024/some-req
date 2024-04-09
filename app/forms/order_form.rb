@@ -2,7 +2,7 @@ class OrderForm
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
   attr_accessor :category_ids, :customer_name, :customer_email, :customer_phonenumber, 
-                :customer_address, :customer_age, :customer_sex, :shipping_id, :order_note, :status, :channel, :ordered_on
+                :customer_address, :customer_age, :customer_sex, :shipping_id, :order_note, :status, :channel, :ordered_on, :image
 
   def initialize(attributes = nil, order: Order.new)
     @order = order
@@ -29,7 +29,7 @@ class OrderForm
       category_ids.each do |category_id|
         category = Category.find_by_id(category_id)
         if category
-          item = Item.create!(order_id: order.id, category_id: category.id, price: category.price)
+          item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, image: image)
         end
       end
     end

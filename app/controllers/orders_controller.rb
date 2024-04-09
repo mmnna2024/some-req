@@ -20,6 +20,7 @@ class OrdersController < ApplicationController
   end
     
   def complete
+    @items = Item.last
   end
 
   def destroy
@@ -43,7 +44,7 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order_form).permit(
       :ordered_on, :status, :channel, :price, :order_note, :customer_id, :shipping_id,
-      { category_ids: [] }, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
+      { category_ids: [] }, :image, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
     )
   end
 
