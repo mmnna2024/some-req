@@ -4,17 +4,21 @@ class Admin::OrdersController < ApplicationController
   def unchecked_index
     if params[:sort_update]
       @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_latest
+    else
+      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_oldest
     end
 
-    @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_oldest.page(params[:page]).per(10)
+    @unchecked_orders = @unchecked_orders.page(params[:page]).per(10)
   end
 
   def checked_index
     if params[:sort_update]
       @checked_orders = Order.includes(items: :category).where(status: 1).sort_oldest
+    else
+      @checked_orders = Order.includes(items: :category).where(status: 1).sort_latest
     end
 
-    @checked_orders = Order.includes(items: :category).where(status: 1).sort_latest.page(params[:page]).per(10)
+    @checked_orders = @checked_orders.page(params[:page]).per(10)
   end
 
   def new
