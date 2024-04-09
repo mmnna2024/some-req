@@ -7,9 +7,8 @@ class Order < ApplicationRecord
   enum status: [:unchecked_order, :checked_order]
   enum channel: [:online, :shop, :phonecall]
 
-  def self.sort_with_ordered_on
-    order(ordered_on: :asc)
-  end
+  scope :sort_latest, -> {order(ordered_on: :desc)}
+  scope :sort_oldest, -> {order(ordered_on: :asc)}
 
   def items_price_update
     items.each do |item|
