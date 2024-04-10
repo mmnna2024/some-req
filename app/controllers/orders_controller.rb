@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order_form).permit(
       :ordered_on, :status, :channel, :price, :order_note, :customer_id, :shipping_id,
-      { category_ids: [] }, :image, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
+      { items: [] }, :image, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
     )
   end
 

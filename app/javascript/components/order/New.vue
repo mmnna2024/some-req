@@ -18,7 +18,7 @@ const formData = reactive({
   order: {
     note: ''
   },
-  items: {},
+  items: [],
   shipping: {},
   totalprice: {}
 });
@@ -43,6 +43,7 @@ function handlePageChange(data) {
         :categories="initialData.categories"
         :shippings="initialData.shippings" 
         @change-page="handlePageChange" 
+        @files-selected="handleFilesSelected"
         v-bind="formData" />
     </keep-alive>
   </div>
@@ -61,6 +62,19 @@ export default {
       default: () => {}
     }
   },
+  data() {
+    return {
+      items: []  
+    };
+  },
+  methods: {
+    handleFilesSelected({ index, files }) {
+      if (!this.items[index].uploadFiles) {
+        this.$set(this.items[index], 'uploadFiles', []);
+      }
+      this.items[index].uploadFiles = files;
+    }
+  }
 }
 </script>
 

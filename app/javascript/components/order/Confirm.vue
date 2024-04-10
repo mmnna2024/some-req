@@ -16,7 +16,7 @@
       <h4>注文内容</h4>
       <ul>
         <li v-for="(item, index) in items" :key="index">
-          id:{{ item.id }} {{ item.name }} - 単価: {{ item.price }}円
+          名前:{{ item.name }} - 単価: {{ item.price }}円
         </li>
         <li>
           送料: {{shipping.price}}円
@@ -49,7 +49,7 @@ export default {
     shipping: Object,
     totalprice: {},
     presignedUrl: '',  // Rails側で発行される署名付きリンク
-    uploadFile: {},    // アップロードする予定のファイル
+    uploadFiles: Array,    // アップロードする予定のファイル
     productId: '',     // アップロードするファイルのID
   },
   methods: {
@@ -69,10 +69,14 @@ export default {
       form.append('order_form[order_note]', this.order.note);
       form.append('order_form[status]', 'unchecked_order');
       form.append('order_form[shipping_id]', this.shipping.id);
-      this.items.forEach((item) => {
-        form.append('order_form[category_ids][]', item.id);
+      form.append('order_form[items][]', this.items);
+      this.items.forEach((item, index) => {
+        form.append('items[${index}][category_ids]', item.id);
+        this.uploadFiles.forEach((uploadFile, index) => {
+          form.append('items[${index}][images]', this.uploadFile);
+        });
       });
-      form.append('order_form[image]', this.uploadFile);
+      
       
       try {
         const res = await axios({

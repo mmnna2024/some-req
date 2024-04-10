@@ -20,7 +20,7 @@
               </select>
             </td>
             <td>
-              <input type="file" @change="selectedFile" id="inputGroupFile01" name="products[image]" accept="image/png, image/jpg" :value="imagefile">
+              <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
             </td>
             <td>
               <a>{{ selected[v_index].price }}</a>
@@ -111,9 +111,13 @@ export default {
       alert: null,
       selected: [
         {
+          category: {
           id: NaN,
           name: "",
           price: 0,
+        },
+        uploadFiles: [],
+        imagefile: null
         },
       ],
       selected_shipping: {
@@ -121,16 +125,19 @@ export default {
         name: "",
         price: 0,
       },
-      uploadFile: null,
-      imagefile: null
+
     };
   },
   methods: {
     increment() {
       this.selected.push({
-        id: NaN,
-        name: "",
-        price: 0
+        category: {
+          id: NaN,
+          name: "",
+          price: 0,
+        },
+        uploadFiles: [],
+        imagefile: null
       });
     },
     decrement() {
@@ -139,14 +146,17 @@ export default {
     },
     setContent(index) {
       // 選択された商品の料金を取得
-      const price = this.categories.find(({name}) => name === this.selected[index].name).price;
-      this.selected[index].price = price;
+      const price = this.categories.find(({name}) => name === this.selected[index].category.name).price;
+      this.selected[index].category.price = price;
     },
-    selectedFile(e) {
+    selectedFile(e, index) {
       // 選択された File の情報を保存しておく
-      e.preventDefault();
-      let files = e.target.files;
-      this.uploadFile = files[0];
+      const files = Array.from(e.target.files);
+      if (this.selected[index]) {
+      this.selected[index].uploadFiles = files;
+      } else {
+      console.error('Selected index is out of range or not initialized:', index);
+    }
     },
     next() {
       this.$emit('change-page', {
@@ -156,7 +166,6 @@ export default {
           items: this.selected,
           shipping: this.selected_shipping,
           totalprice: this.totalPrice,
-          uploadFile: this.uploadFile,
         }
       });
     },
