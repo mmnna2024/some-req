@@ -43,6 +43,7 @@ class OrderForm
         @order = Order.create!(note: order_note, customer_id: customer.id, shipping_id: shipping_id, ordered_on: Time.current, status: status, channel: channel)
         total_order_price = 0
         if category_ids.present?
+          binding.irb
           category_ids.each do |category_id|
             category = Category.find_by_id(category_id)
             if category

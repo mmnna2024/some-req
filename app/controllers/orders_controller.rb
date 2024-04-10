@@ -11,7 +11,9 @@ class OrdersController < ApplicationController
   end
 
   def create
+    binding
     @order = OrderForm.new(order_params)
+    binding
     if @order.save
       render json: @order, status: :created
     else
@@ -43,8 +45,18 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_form).permit(
-      :ordered_on, :status, :channel, :price, :order_note, :customer_id, :shipping_id,
-      { items: [] }, :image, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
+      :ordered_on, 
+      :status, :channel, 
+      :price, :order_note, 
+      :customer_id, 
+      :shipping_id,
+      :customer_name, 
+      :customer_email, 
+      :customer_phonenumber, 
+      :customer_address, 
+      :customer_age, 
+      :customer_sex,
+      category_ids: [:category_id, images: {}]
     )
   end
 
