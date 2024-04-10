@@ -1,4 +1,22 @@
 <%= form_with model: order_form, url: order_form.url, scope: :order_form, method: http_method, local: true do |f| %>
+  <% if order_form.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% order_form.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if flash[:error].present? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% flash[:error].each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <h4>依頼品情報</h4>
     <% if current_page?(new_admin_order_path) %>
@@ -9,39 +27,44 @@
     <% end %>
 
     <%= f.fields_for :items do |item_form| %>
-      <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "選択して下さい" }, { name: "order_form[category_ids][]", class: "category-select" } %>
+      <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "この依頼品を削除する" }, { name: "order_form[category_ids][]", class: "category-select" } %>
       <%= item_form.number_field :price %>
     <% end %>
 
     <div class="my-3">
-      <%= f.label :order_note, " 備考" %>
-      <%= f.text_area :order_note %>
+      <%= f.label :note, " 備考" %>
+      <%= f.text_area :note %>
     </div>
 
   <h4>お客様情報</h4>
     <div class="my-3">
-      <%= f.label :customer_name, "名前" %>
-      <%= f.text_field :customer_name %>
+      <%= f.label :name, "名前" %>
+      <%= f.text_field :name %>
     </div>
 
     <div class="my-3">
-      <%= f.label :customer_phonenumber, "電話番号" %>
-      <%= f.telephone_field :customer_phonenumber %>
+      <%= f.label :phonenumber, "電話番号" %>
+      <%= f.telephone_field :phonenumber %>
     </div>
 
     <div class="my-3">
-      <%= f.label :customer_address, "住所" %>
-      <%= f.text_field :customer_address %>
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.text_field :email %>
     </div>
 
     <div class="my-3">
-      <%= f.label :customer_age, "年齢" %>
-      <%= f.number_field :customer_age %>
+      <%= f.label :address, "住所" %>
+      <%= f.text_field :address %>
     </div>
 
     <div class="my-3">
-      <%= f.label :customer_sex, "性別" %>
-      <%= f.select :customer_sex, Customer.sexes.keys, include_blank: "登録しない" %>
+      <%= f.label :age, "年齢" %>
+      <%= f.number_field :age %>
+    </div>
+
+    <div class="my-3">
+      <%= f.label :sex, "性別" %>
+      <%= f.select :sex, Customer.sexes.keys, include_blank: "登録しない" %>
     </div>
 
     <div class="my-3">
