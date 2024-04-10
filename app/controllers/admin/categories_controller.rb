@@ -1,5 +1,6 @@
 class Admin::CategoriesController < ApplicationController
   before_action :authenticate_admin!
+
   def index
     @categories = Category.all
   end
@@ -29,8 +30,11 @@ class Admin::CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy
-    redirect_to admin_categories_path
+    if @category.destroy
+      redirect_to admin_categories_path
+    else
+      redirect_to admin_categories_path, flash: { error: "依頼品に紐づいているため削除できません" }
+    end
   end
 
   private
