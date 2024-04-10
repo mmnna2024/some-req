@@ -21,7 +21,6 @@
             </td>
             <td>
               <input type="file" @change="selectedFile" id="inputGroupFile01" name="products[image]" accept="image/png, image/jpg" :value="imagefile">
-              {{ uploadFile }}
             </td>
             <td>
               <a>{{ selected[v_index].price }}</a>
