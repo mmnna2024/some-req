@@ -2,16 +2,32 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :edit, :destroy]
 
   def unchecked_index
-    @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_with_ordered_on
+    if params[:sort_update]
+      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_latest
+    else
+      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_oldest
+    end
+
+    @unchecked_orders = @unchecked_orders.page(params[:page]).per(10)
   end
 
   def checked_index
-    @checked_orders = Order.includes(items: :category).where(status: 1).sort_with_ordered_on
+    if params[:sort_update]
+      @checked_orders = Order.includes(items: :category).where(status: 1).sort_oldest
+    else
+      @checked_orders = Order.includes(items: :category).where(status: 1).sort_latest
+    end
+
+    @checked_orders = @checked_orders.page(params[:page]).per(10)
   end
 
   def new
     order = Order.new
-    @order_form = OrderForm.new(order: order)
+    if flash[:form_data]
+      @order_form = OrderForm.new(flash[:form_data], order: order)
+    else
+      @order_form = OrderForm.new(order: order)
+    end
     @order_form.set_url(admin_orders_path)
   end
 
@@ -20,7 +36,8 @@ class Admin::OrdersController < ApplicationController
     if @order_form.save
       redirect_to unchecked_index_admin_orders_path
     else
-      render :new
+      flash[:form_data] = params[:order_form]
+      redirect_to new_admin_order_path, flash: { error: @order_form.errors.full_messages }
     end
   end
 
@@ -37,7 +54,8 @@ class Admin::OrdersController < ApplicationController
     if @order_form.save
       redirect_to unchecked_index_admin_orders_path
     else
-      render :edit
+      @order_form.set_url(admin_order_path(order))
+      redirect_to edit_admin_order_path, flash: { error: @order_form.errors.full_messages }
     end
   end
 
@@ -51,10 +69,9 @@ class Admin::OrdersController < ApplicationController
 
   def order_params
     params.require(:order_form).permit(
-      :customer_name, :customer_phonenumber, :customer_address, :customer_age, :customer_sex,
+      :name, :phonenumber, :email, :address, :age, :sex,
       :shipping_id,
-      :order_note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id],
-      category_ids: [],
+      :note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id], category_ids: []
     )
   end
 end
