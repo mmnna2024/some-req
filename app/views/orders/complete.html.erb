@@ -1,2 +1,5 @@
 <h1>complete!</h1>
-<p>おめでとう！</p>
+<p>image test</p>
+<% @items.images.each do |image| %>
+  <%= image_tag(image.variant(resize_to_limit: [100, 100])) if @items.images.present? %>
+<% end %>

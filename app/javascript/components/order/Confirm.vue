@@ -16,7 +16,7 @@
       <h4>注文内容</h4>
       <ul>
         <li v-for="(item, index) in items" :key="index">
-          id:{{ item.id }} {{ item.name }} - 単価: {{ item.price }}円
+          名前:{{ item.name }} - 単価: {{ item.price }}円
         </li>
         <li>
           送料: {{shipping.price}}円
@@ -56,16 +56,23 @@ export default {
     async submit(){
       const FormData = require('form-data');
       const form = new FormData();
-      form.append('order_form[customer_name]', this.customer.name);
-      form.append('order_form[customer_email]', this.customer.email);
-      form.append('order_form[customer_phonenumber]', this.customer.phonenumber);
-      form.append('order_form[customer_address]', this.customer.address);
-      if(this.customer.age !== undefined) form.append('order_form[customer_age]', this.customer.age);
-      if(this.customer.sex !== undefined) form.append('order_form[customer_sex]', this.customer.sex);
+      form.append('order_form[name]', this.customer.name);
+      form.append('order_form[email]', this.customer.email);
+      form.append('order_form[phonenumber]', this.customer.phonenumber);
+      form.append('order_form[address]', this.customer.address);
+      if(this.customer.age !== undefined) form.append('order_form[age]', this.customer.age);
+      if(this.customer.sex !== undefined) form.append('order_form[sex]', this.customer.sex);
       form.append('order_form[channel]', 'online');
-      form.append('order_form[order_note]', this.order.note);
+      form.append('order_form[note]', this.order.note);
       form.append('order_form[status]', 'unchecked_order');
       form.append('order_form[shipping_id]', this.shipping.id);
+      this.items.forEach((item, index) => {
+        form.append(`order_form[order_items][${index}][category_id]`, item.id);
+        item.uploadFiles.forEach((uploadFile, fileindex) => {
+          form.append(`order_form[order_items][${index}][images][${fileindex}]`, uploadFile);
+        });
+      });
+      // バリデーションではじかれるので便宜上送信。
       this.items.forEach((item) => {
         form.append('order_form[category_ids][]', item.id);
       })
@@ -81,7 +88,9 @@ export default {
         // リクエストが成功したら、完了ページへリダイレクト
         window.location.href = '/orders/complete';
       } catch (error) {
-        console.error('Order submission failed:', error);
+        if (error.response.data && error.response.data.errors) {
+                this.errors = error.response.data.errors;
+        }
       }
     }
   }
