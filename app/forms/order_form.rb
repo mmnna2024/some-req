@@ -81,7 +81,6 @@ class OrderForm
         if @order.channel == 'online'
           if order_items.present?
             order_items.values.each do |item|
-              binding.irb
               category = Category.find_by_id(item.fetch(:category_id))
               if category
                 item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, images: item.fetch(:images).values)
