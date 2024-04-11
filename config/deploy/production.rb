@@ -56,7 +56,7 @@ server "54.238.146.94",
     # user: "ec2-user", # overrides user setting above
     # keys: %w(/Users/naomu/.ssh/id_rsa),
     # keys: %w(/Users/naomu/workspace/dpro/task/aws_deploy_task.pem),
-    forward_agent: true,
+    forward_agent: false,
     # auth_methods: %w(publickey password)
 #     # password: "please use keys"
   }
