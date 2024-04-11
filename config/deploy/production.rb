@@ -51,7 +51,7 @@
 # ------------------------------------
 server "54.238.146.94",
   user: "somereq_sample",
-  roles: %w{web app db},
+  roles: %w{web db app},
   ssh_options: {
     # user: "ec2-user", # overrides user setting above
     # keys: %w(/Users/naomu/.ssh/id_rsa),
