@@ -51,6 +51,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'letter_opener_web'
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.6", require: false
+  gem 'capistrano-safe-deploy-to'
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :test do
