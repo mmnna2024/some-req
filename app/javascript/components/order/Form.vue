@@ -12,9 +12,7 @@
           </tr>
           <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
             <td>
-              <select v-model="selected[v_index]"
-                      @change="() => setContent(v_index)"
-              >
+              <select v-model="selected[v_index]" @change="() => setContent(v_index)" >
                 <option disabled value="">依頼する衣類を一つずつお選びください</option>
                 <option v-for="(category, index) in categories" :key="index" :value="category">
                   {{ category.name }}
@@ -22,7 +20,7 @@
               </select>
             </td>
             <td>
-              <input type="file" id="inputGroupFile01" accept="image/png, image/jpeg">
+              <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
             </td>
             <td>
               <a>{{ selected[v_index].price }}</a>
@@ -105,7 +103,7 @@ export default {
     shippings: {
       type: Array,
       default: () => []
-    }
+    },
   },
   data() {
     return {
@@ -113,24 +111,33 @@ export default {
       alert: null,
       selected: [
         {
+          category: {
           id: NaN,
           name: "",
           price: 0,
+        },
+        uploadFiles: [],
+        imagefile: null
         },
       ],
       selected_shipping: {
         id: NaN,
         name: "",
         price: 0,
-      }
+      },
+
     };
   },
   methods: {
     increment() {
       this.selected.push({
-        id: NaN,
-        name: "",
-        price: 0
+        category: {
+          id: NaN,
+          name: "",
+          price: 0,
+        },
+        uploadFiles: [],
+        imagefile: null
       });
     },
     decrement() {
@@ -139,8 +146,17 @@ export default {
     },
     setContent(index) {
       // 選択された商品の料金を取得
-      const price = this.categories.find(({name}) => name === this.selected[index].name).price;
-      this.selected[index].price = price;
+      const price = this.categories.find(({name}) => name === this.selected[index].category.name).price;
+      this.selected[index].category.price = price;
+    },
+    selectedFile(e, index) {
+      // 選択された File の情報を保存しておく
+      const files = Array.from(e.target.files);
+      if (this.selected[index]) {
+      this.selected[index].uploadFiles = files;
+      } else {
+      console.error('Selected index is out of range or not initialized:', index);
+    }
     },
     next() {
       this.$emit('change-page', {
@@ -149,7 +165,7 @@ export default {
           customer: this.customer,
           items: this.selected,
           shipping: this.selected_shipping,
-          totalprice: this.totalPrice
+          totalprice: this.totalPrice,
         }
       });
     },
@@ -174,3 +190,4 @@ export default {
   border: 1px solid gray;
   }
 </style>
+
