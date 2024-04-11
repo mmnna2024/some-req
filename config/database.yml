@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: some_req_production
-  username: some_req
+  username: somereq_sample
   password: <%= ENV['SOME_REQ_DATABASE_PASSWORD'] %>
