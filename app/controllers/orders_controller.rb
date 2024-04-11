@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def new
+    @order = Order.new
     @categories = Category.where(display: true).map do |category|
       {
         id: category.id,
@@ -15,11 +16,13 @@ class OrdersController < ApplicationController
     if @order.save
       render json: @order, status: :created
     else
-      render json: { errors: 'error message' }, status: :unprocessable_entity
+      puts @order.errors.full_messages
+      render json: { error: @order.errors.full_messages }, status: :unprocessable_entity
     end
   end
     
   def complete
+    @items = Item.last
   end
 
   def destroy
@@ -42,8 +45,19 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_form).permit(
-      :ordered_on, :status, :channel, :price, :order_note, :customer_id, :shipping_id,
-      { category_ids: [] }, :customer_name, :customer_email, :customer_phonenumber, :customer_address, :customer_age, :customer_sex
+      :ordered_on, 
+      :status, :channel, 
+      :price, :note, 
+      :customer_id, 
+      :shipping_id,
+      :name, 
+      :email, 
+      :phonenumber, 
+      :address, 
+      :age, 
+      :sex,
+      category_ids: [],
+      order_items: [:category_id, images: {}]
     )
   end
 
