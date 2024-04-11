@@ -6,6 +6,9 @@ set :repo_url, "git@github.com:mmnna2024/some-req.git"
 set :bundle_without, %w{test}.join(':')
 
 set :rbenv_version, '3.0.1' 
+set :branch, "main"
+
+append :linked_files, 'config/secrets.yml'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
