@@ -1,5 +1,5 @@
 <h1>complete!</h1>
 <p>image test</p>
-<% @items.image.each do |image| %>
-  <%= image_tag(image.variant(resize_to_limit: [100, 100])) if @items.image.present? %>
+<% @items.images.each do |image| %>
+  <%= image_tag(image.variant(resize_to_limit: [100, 100])) if @items.images.present? %>
 <% end %>

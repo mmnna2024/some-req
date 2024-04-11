@@ -38,14 +38,16 @@ function handlePageChange(data) {
 
 <template>
   <div class="mx-auto" style="width: 800px;">
-    <keep-alive>
-      <component :is="Pages[currentPageIndex]" 
-        :categories="initialData.categories"
-        :shippings="initialData.shippings" 
-        @change-page="handlePageChange" 
-        @files-selected="handleFilesSelected"
-        v-bind="formData" />
-    </keep-alive>
+    <div>
+      <keep-alive>
+        <component :is="Pages[currentPageIndex]" 
+          :categories="initialData.categories"
+          :shippings="initialData.shippings" 
+          @change-page="handlePageChange" 
+          @files-selected="handleFilesSelected"
+          v-bind="formData" />
+      </keep-alive>
+    </div>
   </div>
 </template>
 

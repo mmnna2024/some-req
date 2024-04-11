@@ -2,8 +2,7 @@ class OrderForm
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
   attr_accessor :id, :category_ids, :name, :email, :phonenumber, :address, :age, :sex,
-                :shipping_id, :note, :status, :channel, :ordered_on, :items, :url
-
+                :shipping_id, :note, :status, :channel, :ordered_on, :items, :url, :order_items
   with_options presence: true do
     validates :category_ids
     validates :name, length: { maximum: 20 }
@@ -79,13 +78,25 @@ class OrderForm
       else
         @order = Order.create!(note: note, customer_id: customer.id, shipping_id: shipping_id, ordered_on: Time.current, status: status, channel: channel)
         total_order_price = 0
-        if category_ids.present?
-          binding.irb
-          category_ids.each do |category_id|
-            category = Category.find_by_id(category_id)
-            if category
-              item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, image: image)
-              total_order_price += item.price
+        if @order.channel == 'online'
+          if order_items.present?
+            order_items.values.each do |item|
+              binding.irb
+              category = Category.find_by_id(item.fetch(:category_id))
+              if category
+                item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, images: item.fetch(:images).values)
+                total_order_price += item.price
+              end
+            end
+          end
+        else
+          if category_ids.present?
+            category_ids.each do |category_id|
+              category = Category.find_by_id(category_id)
+              if category
+                item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, images: images)
+                total_order_price += item.price
+              end
             end
           end
         end
@@ -118,7 +129,7 @@ class OrderForm
       channel: @order.channel,
       category_ids: @order.items.pluck(:category_id),
       items: @order.items,
-      id: @order.id,
+      id: @order.id
     }
   end
 end
