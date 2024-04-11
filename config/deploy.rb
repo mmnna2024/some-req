@@ -5,6 +5,7 @@ set :application, "some-req"
 set :repo_url, "git@github.com:mmnna2024/some-req.git"
 set :bundle_without, %w{test}.join(':')
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}   # 5
+set :linked_files, %w{.env}
 set :keep_releases, 2   # 6
 set :rbenv_version, '3.0.1' 
 set :branch, ENV['BRANCH'] || 'main'
