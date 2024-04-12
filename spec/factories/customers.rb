@@ -25,4 +25,13 @@ FactoryBot.define do
     sex { 0 }
     age { 24 }
   end
+
+  factory :customer4, class: Customer do
+    name { "cutomer4" }
+    email { "customer4@test.com" }
+    phonenumber { "777-666-5555" }
+    address { "栃木県宇都宮市" }
+    sex { 0 }
+    age { 41 }
+  end
 end
