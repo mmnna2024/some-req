@@ -233,6 +233,9 @@ export default {
       if (this.crearValidation(this.validation) ==  true) {
         return this.valid = true
       }
+      else{
+        return this.valid = false
+      }
     },
     
     nameValidate(name) {
@@ -262,12 +265,12 @@ export default {
     selectedValidate(selected) {
       let validationResult = true;
       selected.forEach((select) => {
-        if(Number.isNaN(select.id)) {
-          validationResult = '衣類の選択をしてください。';
-        }
-      });
-      return validationResult;
-    },
+    if (select.category && select.category.id !== undefined && Number.isNaN(select.category.id)) {
+      validationResult = '衣類の選択をしてください。'; // エラーメッセージを設定
+    }
+  });
+  return validationResult; // 結果を返す
+},
 
     shippingValidate(shipping) {
       if(Number.isNaN(shipping.id)) {
