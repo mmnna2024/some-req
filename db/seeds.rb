@@ -67,8 +67,6 @@ categories = Category.all
       price: categories.sample.price,
       order_id: order.id,
     )
-    item.images.attach(io: File.open(Rails.root.join('app/assets/images/blue-denim.webp')),
-                  filename: 'blue-denim.webp')
     total_order_price += item.price
   end
   order.update!(price: total_order_price)
