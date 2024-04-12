@@ -29,6 +29,15 @@
     <%= f.fields_for :items do |item_form| %>
       <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "この依頼品を削除する" }, { name: "order_form[category_ids][]", class: "category-select" } %>
       <%= item_form.number_field :price %>
+      <% order_form.items.each do |item| %>
+        <% if item.images.attached? %>
+          <% item.images.each do |image| %>
+            <%= link_to rails_blob_path(image), target: "_blank" do %>
+              <%= image_tag image.variant(resize: "150x150") %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
     <% end %>
 
     <div class="my-3">
