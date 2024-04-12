@@ -1,5 +1,5 @@
 class Admin::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :edit, :destroy]
+  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :new, :create, :edit, :update, :destroy]
 
   def unchecked_index
     if params[:sort_update]
