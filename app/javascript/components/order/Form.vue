@@ -27,6 +27,10 @@
             </td>
           </tr>
         </table>
+        <!--エラーメッセージ-->
+        <div class="error-message">
+          <p class="error-message">{{ validation.selectedResult }}</p>
+        </div>  
       </div>
       <button @click="increment" class="btn btn-outline-primary">+</button>
       <button @click="decrement" class="btn btn-outline-primary">-</button>
@@ -38,6 +42,10 @@
             {{ shipping.name }}
           </option>
         </select>
+        <!--エラーメッセージ-->
+        <div class="error-message">
+          <p class="error-message">{{ validation.shippingResult }}</p>
+        </div>  
       </div>
       <div>
         依頼品合計{{ totalPrice }}円: 送料{{selected_shipping.price}}円: 合計{{ totalPrice + selected_shipping.price }}円 <br>
@@ -49,24 +57,31 @@
           <div class="form-group">
             <label for="order-name">氏名</label>
             <input type="text" v-model="customer.name" id="order-name" class="form-control">
+            <!--エラーメッセージ-->
+            <div class="error-message">
+              <p class="error-message">{{ validation.nameResult }}</p>
+            </div>  
           </div>
           <div class="form-group">
             <label for="order-email">メールアドレス</label>
             <input v-model="customer.email" id="order-email" class="form-control">
           </div>
-          <!-- <div class="form-group">
-            <label for="entry-body">メールアドレス（確認）</label>
-            <textarea v-model="entry.body" id="entry-body" cols="80" rows="15"
-          class="form-control" required maxlength="40000">
-            </textarea>
-          </div> -->
           <div class="form-group">
             <label for="order-phonenumber">電話番号</label>
             <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control">
+            <!--エラーメッセージ-->
+            <div class="error-message">
+              <p class="error-message">{{ validation.phonenumberResult }}</p>
+            </div>  
           </div>
+          
           <div class="form-group">
             <label for="order-address">住所</label>
             <input v-model="customer.address" id="order-address" class="form-control">
+            <!--エラーメッセージ-->
+            <div class="error-message">
+              <p class="error-message">{{ validation.addressResult }}</p>
+            </div>  
           </div>
           <div class="form-group">
             <label for="order-sex">性別</label>
@@ -125,7 +140,14 @@ export default {
         name: "",
         price: 0,
       },
-
+      validation: {
+        nameResultameResult: '',
+        phonenumberResult: '',
+        addressResult: '',
+        selectedResult: '',
+        shippingResult: ''
+      },
+      valid: false
     };
   },
   methods: {
@@ -159,16 +181,104 @@ export default {
     }
     },
     next() {
-      this.$emit('change-page', {
-        step: 1, // 1ページ進む
-        formData: {
-          customer: this.customer,
-          items: this.selected,
-          shipping: this.selected_shipping,
-          totalprice: this.totalPrice,
+      this.checkValidate()
+      if (this.valid === true){
+        this.$emit('change-page', {
+          step: 1, // 1ページ進む
+          formData: {
+            customer: this.customer,
+            items: this.selected,
+            shipping: this.selected_shipping,
+            totalprice: this.totalPrice,
+          }
+        });
+      }
+    },    
+      checkValidate() {
+      const name_error_message = this.nameValidate(this.customer.name)
+      if(name_error_message === true) {
+        this.validation.nameResult = '';
+      } else {
+        this.validation.nameResult = name_error_message;
+      }
+
+      const phonenumber_error_message = this.phonenumberValidate(this.customer.phonenumber)
+      if(phonenumber_error_message === true) {
+        this.validation.phonenumberResult = '';
+      } else {
+        this.validation.phonenumberResult = phonenumber_error_message;
+      }
+
+      const address_error_message = this.addressValidate(this.customer.address)
+      if(address_error_message === true) {
+        this.validation.addressResult = '';
+      } else {
+        this.validation.addressResult = address_error_message;
+      }
+
+      const selected_error_message = this.selectedValidate(this.selected)
+      if(selected_error_message === true) {
+        this.validation.selectedResult = '';
+      } else {
+        this.validation.selectedResult = selected_error_message;
+      }
+
+      const shipping_error_message = this.shippingValidate(this.selected_shipping)
+      if(shipping_error_message === true) {
+        this.validation.shippingResult = '';
+      } else {
+        this.validation.shippingResult = shipping_error_message;
+      }
+
+      if (this.crearValidation(this.validation) ==  true) {
+        return this.valid = true
+      }
+    },
+    
+    nameValidate(name) {
+      if(!name) {
+        return '名前は入力必須項目です。';
+      }
+      return true;
+    },
+
+    phonenumberValidate(phonenumber) {
+      if(!phonenumber) {
+        return '電話番号は入力必須項目です。';
+      }
+      if(!phonenumber.match(/[0-9]+/g)) {
+        return '整数で入力してください';
+      }
+      return true;
+    },
+
+    addressValidate(address) {
+      if(!address) {
+        return '住所は入力必須項目です。';
+      }
+      return true;
+    },
+
+    selectedValidate(selected) {
+      let validationResult = true;
+      selected.forEach((select) => {
+        if(Number.isNaN(select.id)) {
+          validationResult = '衣類の選択をしてください。';
         }
       });
+      return validationResult;
     },
+
+    shippingValidate(shipping) {
+      if(Number.isNaN(shipping.id)) {
+        return '送付先の選択をしてください。';
+      }
+      return true;
+    },
+
+    crearValidation(msg) {
+      return Object.values(msg).every(value => value === '');
+    }
   },
   computed: {
     totalPrice() {
@@ -189,5 +299,6 @@ export default {
   .categories-table td {
   border: 1px solid gray;
   }
-</style>
 
+  
+</style>
