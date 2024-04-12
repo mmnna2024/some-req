@@ -23,21 +23,23 @@ class Admin::OrdersController < ApplicationController
 
   def new
     order = Order.new
-    if flash[:form_data]
-      @order_form = OrderForm.new(flash[:form_data], order: order)
-    else
-      @order_form = OrderForm.new(order: order)
+    @categories = Category.where(display: true).map do |category|
+      {
+        id: category.id,
+        name: category.name,
+        price: category.price,
+      }
     end
-    @order_form.set_url(admin_orders_path)
+    @shippings = Shipping.all
   end
 
   def create
-    @order_form = OrderForm.new(order_params)
-    if @order_form.save
-      redirect_to unchecked_index_admin_orders_path
+    @order = OrderForm.new(order_params)
+    if @order.save
+      render json: @order, status: :created
     else
-      flash[:form_data] = params[:order_form]
-      redirect_to new_admin_order_path, flash: { error: @order_form.errors.full_messages }
+      puts @order.errors.full_messages
+      render json: { error: @order.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

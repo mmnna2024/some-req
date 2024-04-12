@@ -88,10 +88,19 @@ export default {
         // リクエストが成功したら、完了ページへリダイレクト
         window.location.href = '/orders/complete';
       } catch (error) {
-        if (error.response.data && error.response.data.errors) {
-                this.errors = error.response.data.errors;
-        }
-      }
+  console.error('Order submission failed:', error);
+  if (error.response) {
+    console.error('Error status:', error.response.status);
+    console.error('Error data:', error.response.data);
+    if (error.response.data && error.response.data.errors) {
+      this.errors = error.response.data.errors;
+    }
+  } else if (error.request) {
+    console.error('The request was made but no response was received', error.request);
+  } else {
+    console.error('Something happened in setting up the request that triggered an Error', error.message);
+  }
+}
     }
   }
 }
