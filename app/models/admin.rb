@@ -3,6 +3,8 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :rememberable, :validatable, :authentication_keys => [:user_id]
 
+  validates :user_id, uniqueness: true
+
   def email_required?
     false
   end

@@ -3,7 +3,8 @@ class Category < ApplicationRecord
   before_destroy :cannot_destroy_if_relation_with_orders
 
   validates :name, :price, presence: true
-
+  validates :name, uniqueness: true
+  
   private
 
   def cannot_destroy_if_relation_with_orders
