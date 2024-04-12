@@ -1,3 +1,5 @@
+Admin.create!(user_id: "admin", password: "aaaaaa")
+
 # カテゴリの作成
 categories = [
   ["Tシャツ", 2750],
