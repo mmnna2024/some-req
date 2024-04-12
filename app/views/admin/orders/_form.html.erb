@@ -19,26 +19,22 @@
   <% end %>
 
   <h4>依頼品情報</h4>
-    <% if current_page?(new_admin_order_path) %>
-      <div class="my-3">
-        <%= f.label :category_ids, "衣類カテゴリー" %>
-        <%= collection_check_boxes :order_form, :category_ids, Category.all, :id, :name %>
-      </div>
-    <% end %>
-
-    <%= f.fields_for :items do |item_form| %>
+    <%= f.fields_for :items do |item_form| %><br>
+      <%= item_form.label :category_id, "依頼品" %>
       <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "この依頼品を削除する" }, { name: "order_form[category_ids][]", class: "category-select" } %>
+      <%= item_form.label :price, "料金" %>
       <%= item_form.number_field :price %>
-      <% order_form.items.each do |item| %>
-        <% if item.images.attached? %>
-          <% item.images.each do |image| %>
-            <%= link_to rails_blob_path(image), target: "_blank" do %>
-              <%= image_tag image.variant(resize: "150x150") %>
-            <% end %>
+      <% if item_form.object.images.attached? %>
+        <% item_form.object.images.each do |image| %>
+          <%= link_to rails_blob_path(image), target: "_blank" do %>
+            <%= image_tag image.variant(resize: "150x150") %>
           <% end %>
         <% end %>
+      <% else %>
+        <%= image_tag "no_image", size: "200x200" %>
       <% end %>
     <% end %>
+
 
     <div class="my-3">
       <%= f.label :note, " 備考" %>
@@ -97,6 +93,6 @@
     </div>
 
     <div class="my-3">
-      <%= f.submit %>
+      <%= f.submit "更新", id: 'update-order' %>
     </div>
 <% end %>
