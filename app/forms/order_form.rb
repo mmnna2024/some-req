@@ -93,7 +93,7 @@ class OrderForm
             category_ids.each do |category_id|
               category = Category.find_by_id(category_id)
               if category
-                item = Item.create!(order_id: order.id, category_id: category.id, price: category.price, images: images)
+                item = Item.create!(order_id: order.id, category_id: category.id, price: category.price)
                 total_order_price += item.price
               end
             end
