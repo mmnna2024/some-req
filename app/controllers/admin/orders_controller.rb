@@ -64,7 +64,12 @@ class Admin::OrdersController < ApplicationController
   def destroy
     @order = Order.find(params[:id])
     @order.destroy
-    redirect_to unchecked_index_admin_orders_path
+
+    if @order.status == "unchecked_order"
+      redirect_to unchecked_index_admin_orders_path
+    else
+      redirect_to checked_index_admin_orders_path
+    end
   end
 
   private
