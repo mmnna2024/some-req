@@ -1,4 +1,5 @@
 <template>
+  <div class="mx-auto" style="width: 800px;">
   <div class="form-container container">
   <b-row>
     <b-col :span="12">
@@ -7,20 +8,16 @@
         <table class="categories-table">
           <tr>
             <th>衣類選択</th>
-            <th>衣類タグ、全体写真アップロード</th>
             <th>単価</th>
           </tr>
           <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
             <td>
               <select v-model="selected[v_index]" @change="() => setContent(v_index)" >
                 <option disabled value="">依頼する衣類を一つずつお選びください</option>
-                <option v-for="(category, index) in categories" :key="index" :value="category">
+                <option v-for="(category, index) in initialData.categories" :key="index" :value="category">
                   {{ category.name }}
                 </option>
               </select>
-            </td>
-            <td>
-              <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
             </td>
             <td>
               <a>{{ selected[v_index].price }}</a>
@@ -38,7 +35,7 @@
         <h4>送料</h4>
         <select v-model="selected_shipping">
           <option disabled value="">地域区分を選択してください。</option>
-          <option v-for="(shipping, index) in shippings" :key="index" :value="shipping">
+          <option v-for="(shipping, index) in initialData.shippings" :key="index" :value="shipping">
             {{ shipping.name }}
           </option>
         </select>
@@ -92,33 +89,37 @@
           </div>
           <div class="form-group">
             <label for="order-age">年齢</label>
-            <input v-model="customer.age" id="order-address" class="form-control">
+            <input v-model="customer.age" id="order-age" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="order-chanel">受付</label>
+            <select v-model="customer.chanel" id="order-chanel" class="form-control">
+              <option  value="shop">店頭</option>
+              <option  value="phonecall">電話</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="order-note">備考</label>
+            <input v-model="customer.note" id="order-note" class="form-control">
           </div>
         </form>
-        <button @click="next" class="btn btn-outline-primary">次へ</button>
+        <button @click="submit" class="btn btn-outline-primary">登録する</button>
       </div>
     </b-col>
   </b-row>
 </div>
 
+  </div>
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   props: {
-    customer:{
+    initialData: {
       type: Object,
       default: () => {}
-    }, 
-    categories: {
-      type: Array,
-      default: () => []
-    },
-    shippings: {
-      type: Array,
-      default: () => []
-    },
+    }
   },
   data() {
     return {
@@ -130,16 +131,14 @@ export default {
           id: NaN,
           name: "",
           price: 0,
-        },
-        uploadFiles: [],
-        imagefile: null
+          },
         },
       ],
       selected_shipping: {
         id: NaN,
         name: "",
         price: 0,
-      },
+      }, 
       validation: {
         nameResultameResult: '',
         phonenumberResult: '',
@@ -149,6 +148,12 @@ export default {
       },
       valid: false
     };
+  },
+  computed: {
+    totalPrice() {
+      // 選択された商品の合計金額を計算
+      return this.selected.reduce((acc, cur) => acc + cur.price, 0);
+    },
   },
   methods: {
     increment() {
@@ -168,32 +173,46 @@ export default {
     },
     setContent(index) {
       // 選択された商品の料金を取得
-      const price = this.categories.find(({name}) => name === this.selected[index].category.name).price;
+      const price = initialData.categories.find(({name}) => name === this.selected[index].category.name).price;
       this.selected[index].category.price = price;
     },
-    selectedFile(e, index) {
-      // 選択された File の情報を保存しておく
-      const files = Array.from(e.target.files);
-      if (this.selected[index]) {
-      this.selected[index].uploadFiles = files;
-      } else {
-      console.error('Selected index is out of range or not initialized:', index);
-    }
-    },
-    next() {
+
+    async submit(){ 
       this.checkValidate()
       if (this.valid === true){
-        this.$emit('change-page', {
-          step: 1, // 1ページ進む
-          formData: {
-            customer: this.customer,
-            items: this.selected,
-            shipping: this.selected_shipping,
-            totalprice: this.totalPrice,
+        const FormData = require('form-data');
+        const form = new FormData();
+        form.append('order_form[name]', this.customer.name);
+        form.append('order_form[email]', this.customer.email);
+        form.append('order_form[phonenumber]', this.customer.phonenumber);
+        form.append('order_form[address]', this.customer.address);
+        if(this.customer.age !== undefined) form.append('order_form[age]', this.customer.age);
+        if(this.customer.sex !== undefined) form.append('order_form[sex]', this.customer.sex);
+        form.append('order_form[channel]', this.customer.chanel);
+        form.append('order_form[note]', this.customer.note);
+        form.append('order_form[status]', 'unchecked_order');
+        form.append('order_form[shipping_id]', this.selected_shipping.id);
+        this.selected.forEach((select) => {
+          form.append('order_form[category_ids][]', select.id);
+        })
+        
+        try {
+          const res = await axios({
+            method: 'post',
+            url: '/admin/orders',
+            data: form,
+            headers: {'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')},
+          });
+
+          // リクエストが成功したら、完了ページへリダイレクト
+          window.location.href = '/admin/orders/unchecked_index';
+        } catch (error) {
+          if (error.response.data && error.response.data.errors) {
+                  this.errors = error.response.data.errors;
           }
-        });
+        }
       }
-    },    
+    },
       checkValidate() {
       const name_error_message = this.nameValidate(this.customer.name)
       if(name_error_message === true) {
@@ -283,25 +302,19 @@ export default {
       return Object.values(msg).every(value => value === '');
     }
   },
-  computed: {
-    totalPrice() {
-      // 選択された商品の合計金額を計算
-      return this.selected.reduce((acc, cur) => acc + cur.price, 0);
-    },
-  },
 };
+
 </script>
 
 <style scoped>
-  .categories-table {
+.categories-table {
   border: 1px solid gray;
   margin: 10px;
-  }
+}
 
-  .categories-table th,
-  .categories-table td {
+.categories-table th,
+.categories-table td {
   border: 1px solid gray;
-  }
-
-  
+}
 </style>
+

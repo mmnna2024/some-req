@@ -1,3 +1,12 @@
 <h1>新規受注登録</h1>
-
-<%= render  partial: 'form', locals: { order_form: @order_form, http_method: :post } %>
+<p id="notice"><%= notice %></p>
+<%= javascript_pack_tag 'admin/order_new.js' %>
+<%= content_tag :div,
+  id: "adminNew",
+  data: {
+    order: @order,
+    categories: @categories,
+    customer: @customer,
+    shippings: @shippings
+  }.to_json do %>
+<% end %>
