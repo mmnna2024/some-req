@@ -14,7 +14,6 @@ class OrderForm
   def valid?
     if @items
       default_valid = super
-      # valid_items = @items.map { |v| v.valid? }.all?
       valid_items = @items.map do |v|
         result = v.valid?
         if !result

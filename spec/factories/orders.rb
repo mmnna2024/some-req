@@ -5,8 +5,7 @@ FactoryBot.define do
     status { 0 }
     channel { 0 }
     note { "綿98%ですが黒染めできますか？" }
-    customer
-    shipping
+    association :customer
   end
 
   factory :order2, class: Order do
@@ -15,8 +14,7 @@ FactoryBot.define do
     status { 0 }
     channel { 0 }
     note { "綿98%ですが黒染めできますか？" }
-    customer
-    shipping
+    association :customer
   end
 
   factory :order3, class: Order do
@@ -25,7 +23,6 @@ FactoryBot.define do
     status { 0 }
     channel { 0 }
     note { "綿98%ですが黒染めできますか？" }
-    customer
-    shipping
+    association :customer
   end
 end

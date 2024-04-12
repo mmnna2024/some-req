@@ -5,21 +5,10 @@ RSpec.describe Category, type: :model do
   let!(:category2) { FactoryBot.create(:category2) }
   let!(:category3) { FactoryBot.create(:category3) }
   let!(:category4) { FactoryBot.create(:category4) }
-  # let!(:customer1) { FactoryBot.create(:customer1) }
-  # let!(:customer2) { FactoryBot.create(:customer2) }
-  # let!(:customer3) { FactoryBot.create(:customer3) }
-  # let!(:shipping1) { FactoryBot.create(:shipping1) }
-  # let!(:shipping2) { FactoryBot.create(:shipping2) }
-  # let!(:shipping3) { FactoryBot.create(:shipping3) }
-  # let!(:order1) { FactoryBot.create(:order1, customer: customer1, shipping: shipping1) }
-  # let!(:order2) { FactoryBot.create(:order2, customer: customer2, shipping: shipping2) }
-  # let!(:order3) { FactoryBot.create(:order3, customer: customer3, shipping: shipping3) }
-  # let!(:item1) { FactoryBot.create(:item1, category: category1) }
-  # let!(:item2) { FactoryBot.create(:item2, category: category2, order: order1) }
-  # let!(:item3) { FactoryBot.create(:item3, category: category1, order: order2) }
-  # let!(:item4) { FactoryBot.create(:item4, category: category3, order: order2) }
-  # let!(:item5) { FactoryBot.create(:item5, category: category2, order: order3) }
-  # let!(:item6) { FactoryBot.create(:item6, category: category3, order: order3) }
+  let!(:customer) { FactoryBot.create(:customer1) }
+  let!(:shipping) { FactoryBot.create(:shipping1) }
+  let!(:order) { FactoryBot.create(:order1, customer: customer, shipping: shipping) }
+  let!(:item) { FactoryBot.create(:item1, category: category1, order: order)}
 
   describe "バリデーションのテスト" do
     it "カテゴリー名が空欄の場合、バリデーションに失敗する" do
@@ -38,6 +27,18 @@ RSpec.describe Category, type: :model do
       category1.update(name: "ワンピース")
       expect(category1).to be_invalid
       expect(category1.errors.full_messages).to eq ["Name has already been taken"]
+    end
+  end
+
+  describe "コールバックのテスト" do
+    it "カテゴリーが1つ以上の依頼品との関連がある場合、削除できない" do
+      expect(category1.destroy).to be(false)
+      expect(Category.exists?(category1.id)).to be(true)
+    end
+
+    it "カテゴリーが依頼品との関連がない場合、削除できる" do
+      category2.destroy
+      expect(Category.exists?(category2.id)).to be(false)
     end
   end
 end
