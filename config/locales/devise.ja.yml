@@ -1,0 +1,22 @@
+# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
+
+ja:
+  activerecord:
+    models:
+      admin: 管理者
+    attributes:
+      admin:
+        user_id: ユーザーID
+        password: パスワード
+        remember_me: ログインを記憶する
+  devise:
+    failure:
+      already_authenticated: "すでにログインしています。"
+      invalid: "%{authentication_keys}またはパスワードが違います。"
+      not_found_in_database: "%{authentication_keys}またはパスワードが違います。"
+      timeout: "セッションがタイムアウトしました。もう一度ログインしてください。"
+      unauthenticated: "ログインもしくはアカウント登録してください。"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"

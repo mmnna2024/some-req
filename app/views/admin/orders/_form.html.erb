@@ -8,21 +8,12 @@
       </ul>
     </div>
   <% end %>
-  <% if flash[:error].present? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
-        <% flash[:error].each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <h4>依頼品情報</h4>
     <%= f.fields_for :items do |item_form| %><br>
-      <%= item_form.label :category_id, "依頼品" %>
+      <%= item_form.label :category_id %>
       <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "この依頼品を削除する" }, { name: "order_form[category_ids][]", class: "category-select" } %>
-      <%= item_form.label :price, "料金" %>
+      <%= item_form.label :price %>
       <%= item_form.number_field :price %>
       <% if item_form.object.images.attached? %>
         <% item_form.object.images.each do |image| %>
@@ -31,68 +22,63 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= image_tag "no_image", size: "200x200" %>
+        <%= image_tag "no_image", size: "150x150" %>
       <% end %>
     <% end %>
 
 
     <div class="my-3">
-      <%= f.label :note, " 備考" %>
+      <%= f.label :note %>
       <%= f.text_area :note %>
     </div>
 
   <h4>お客様情報</h4>
     <div class="my-3">
-      <%= f.label :name, "名前" %>
+      <%= f.label :name %>
       <%= f.text_field :name %>
     </div>
 
     <div class="my-3">
-      <%= f.label :phonenumber, "電話番号" %>
+      <%= f.label :phonenumber %>
       <%= f.telephone_field :phonenumber %>
     </div>
 
     <div class="my-3">
-      <%= f.label :email, "メールアドレス" %>
+      <%= f.label :email %>
       <%= f.text_field :email %>
     </div>
 
     <div class="my-3">
-      <%= f.label :address, "住所" %>
+      <%= f.label :address %>
       <%= f.text_field :address %>
     </div>
 
     <div class="my-3">
-      <%= f.label :age, "年齢" %>
+      <%= f.label :age %>
       <%= f.number_field :age %>
     </div>
 
     <div class="my-3">
-      <%= f.label :sex, "性別" %>
-      <%= f.select :sex, Customer.sexes.keys, include_blank: "登録しない" %>
+      <%= f.label :sex %>
+      <%= f.select :sex, Customer.sexes_i18n.invert, include_blank: "登録しない" %>
     </div>
 
     <div class="my-3">
-      <%= f.label :shipping_id, "地域区分" %>
+      <%= f.label :shipping_id %>
       <%= f.collection_select :shipping_id, Shipping.all, :id, :name, include_blank: "選択して下さい" %>
     </div>
 
     <div class="my-3">
-      <%= f.label :channel_shop, "店頭受付" %>
-      <%= f.radio_button :channel, :shop %>
+      <%= f.label :channel %>
+      <%= f.select :channel, Order.channels_i18n.invert %>
     </div>
 
     <div class="my-3">
-      <%= f.label :channel_phonecall, "電話受付" %>
-      <%= f.radio_button :channel, :phonecall %>
+      <%= f.label :status %>
+      <%= f.select :status, Order.statuses_i18n.invert %>
     </div>
 
     <div class="my-3">
-      <%= f.label :status, "受注ステータス" %>
-      <%= f.select :status, Order.statuses.keys %>
-    </div>
-
-    <div class="my-3">
-      <%= f.submit "更新", id: 'update-order' %>
+      <%= f.submit "更新する", id: 'update-order' %>
     </div>
 <% end %>

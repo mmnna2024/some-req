@@ -1,19 +1,19 @@
-<h2>仮受注一覧</h2>
+<h2><%= t('admin.order_forms.index.unchecked_title') %></h2>
 
 <div class="table-responsive">
 <table class="table">
   <thead class="table-light">
     <tr>
-      <th scope="col"><nobr>ステータス</nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.status') %></nobr></th>
       <th scope="col"><nobr>
-        <%= sort_link(@q, :ordered_on, "受注日時", default_order: :desc) %></nobr></th>
-      <th scope="col"><nobr>依頼品内容</nobr></th>
-      <th scope="col"><nobr>依頼品数</nobr></th>
-      <th scope="col"><nobr>仮見積料金</nobr></th>
-      <th scope="col"><nobr>氏名</nobr></th>
-      <th scope="col"><nobr>電話番号</nobr></th>
-      <th scope="col"><nobr>メールアドレス</nobr></th>
-      <th scope="col"><nobr>住所</nobr></th>
+        <%= sort_link(@q, :ordered_on, t('admin.order_forms.index.ordered_on'), default_order: :desc) %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.items') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.items_count') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.unchecked_price') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.name') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.phonenumber') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.email') %></nobr></th>
+      <th scope="col"><nobr><%= t('admin.order_forms.index.address') %></nobr></th>
       <th colspan="3" scope="col"></th>
     </tr>
   </thead>
@@ -21,8 +21,8 @@
   <tbody>
     <% @unchecked_orders.each do |order| %>
       <tr class="unchecked_order_list">
-        <td><nobr><%= order.status %></nobr></td>
-        <td><%= order.ordered_on.strftime('%Y/%m/%d %H:%M') %></td>
+        <td><nobr><%= order.status_i18n %></nobr></td>
+        <td><%= l order.ordered_on %></td>
         <td>
           <% order.items.each do |item| %>
             <nobr><%= item.category.name %></nobr>

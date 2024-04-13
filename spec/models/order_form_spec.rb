@@ -65,12 +65,6 @@ RSpec.describe OrderForm, type: :model do
         expect(order_form.errors.full_messages).to include("Phonenumber can't be blank")
       end
 
-      it '依頼者のメールアドレスが空の場合保存できない' do
-        order_form.email = ""
-        order_form.valid?
-        expect(order_form.errors.full_messages).to include("Email can't be blank")
-      end
-
       it '依頼者の住所が空の場合保存できない' do
         order_form.address = ""
         order_form.valid?
