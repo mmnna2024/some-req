@@ -45,9 +45,9 @@ class Admin::OrdersController < ApplicationController
 
     if @order_form.save
       if @order_form.status == "unchecked_order"
-        redirect_to unchecked_index_admin_orders_path
+        redirect_to unchecked_index_admin_orders_path, flash: { notice: "更新しました" }
       else
-        redirect_to checked_index_admin_orders_path
+        redirect_to checked_index_admin_orders_path, flash: { notice: "更新しました" }
       end
     else
       @order_form.set_url(admin_order_path(order))
@@ -60,9 +60,9 @@ class Admin::OrdersController < ApplicationController
     @order.destroy
 
     if @order.status == "unchecked_order"
-      redirect_to unchecked_index_admin_orders_path
+      redirect_to unchecked_index_admin_orders_path, flash: { notice: "削除しました" }
     else
-      redirect_to checked_index_admin_orders_path
+      redirect_to checked_index_admin_orders_path, flash: { notice: "削除しました" }
     end
   end
 
