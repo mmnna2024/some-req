@@ -7,7 +7,6 @@ class OrderForm
     validates :category_ids
     validates :name, length: { maximum: 20 }
     validates :phonenumber
-    validates :email
     validates :address
   end
 
