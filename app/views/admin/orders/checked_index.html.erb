@@ -5,7 +5,8 @@
   <thead class="table-light">
     <tr>
     <th scope="col"><nobr>ステータス</nobr></th>
-    <th scope="col"><%= link_to "受注日時", checked_index_admin_orders_path(sort_update: "true") , { class: "text-decoration-none"} %></nobr></th>
+    <th scope="col">
+      <%= sort_link(@q, :ordered_on, "受注日時", default_order: :asc) %></nobr></th>
     <th scope="col"><nobr>依頼品内容</nobr></th>
     <th scope="col"><nobr>依頼品数</nobr></th>
     <th scope="col"><nobr>見積料金</nobr></th>

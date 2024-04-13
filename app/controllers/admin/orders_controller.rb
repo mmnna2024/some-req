@@ -2,22 +2,14 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :new, :create, :edit, :update, :destroy]
 
   def unchecked_index
-    if params[:sort_update]
-      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_latest
-    else
-      @unchecked_orders = Order.includes(items: :category).where(status: 0).sort_oldest
-    end
-
+    @q = Order.includes(items: :category).where(status: 0).sort_oldest.ransack(params[:q])
+    @unchecked_orders = @q.result(distinct: true)
     @unchecked_orders = @unchecked_orders.page(params[:page]).per(10)
   end
 
   def checked_index
-    if params[:sort_update]
-      @checked_orders = Order.includes(items: :category).where(status: 1).sort_oldest
-    else
-      @checked_orders = Order.includes(items: :category).where(status: 1).sort_latest
-    end
-
+    @q = Order.includes(items: :category).where(status: 1).sort_latest.ransack(params[:q])
+    @checked_orders = @q.result(distinct: true)
     @checked_orders = @checked_orders.page(params[:page]).per(10)
   end
 
@@ -78,7 +70,7 @@ class Admin::OrdersController < ApplicationController
     params.require(:order_form).permit(
       :name, :phonenumber, :email, :address, :age, :sex,
       :shipping_id,
-      :note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id], category_ids: []
+      :note, :status, :channel, :ordered_on, items_attributes: [:id, :name, :price, :category_id], category_ids: [],
     )
   end
 end

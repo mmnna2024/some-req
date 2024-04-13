@@ -21,6 +21,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'rexml'#Ruby3系でdeviceを使うために必要
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
+gem 'ransack'
 
 gem 'unicorn'
 # Use Redis adapter to run Action Cable in production

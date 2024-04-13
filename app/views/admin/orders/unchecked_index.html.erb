@@ -6,7 +6,7 @@
     <tr>
       <th scope="col"><nobr>ステータス</nobr></th>
       <th scope="col"><nobr>
-      <%= link_to "受注日時", unchecked_index_admin_orders_path(sort_update: "true") , { class: "text-decoration-none"} %></nobr></th>
+        <%= sort_link(@q, :ordered_on, "受注日時", default_order: :desc) %></nobr></th>
       <th scope="col"><nobr>依頼品内容</nobr></th>
       <th scope="col"><nobr>依頼品数</nobr></th>
       <th scope="col"><nobr>仮見積料金</nobr></th>
