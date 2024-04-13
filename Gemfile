@@ -19,10 +19,13 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
+gem 'rails-i18n'
+gem 'devise-i18n-views'
 gem 'rexml'#Ruby3系でdeviceを使うために必要
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 gem 'ransack'
+gem 'enum_help'
 
 gem 'unicorn'
 # Use Redis adapter to run Action Cable in production
