@@ -1,6 +1,7 @@
 <h1>オンライン注文フォーム</h1>
 <p id="notice"><%= notice %></p>
-<%= javascript_pack_tag 'order/new.js' %>
+<meta name="turbolinks-visit-control" content="reload">
+<%= javascript_pack_tag 'order/new.js', 'data-turbolinks-track': "reload" %>
 <%= content_tag :div,
   id: "orderNew",
   data: {
