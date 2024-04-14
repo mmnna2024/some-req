@@ -31,18 +31,18 @@ class ShowPdf < Prawn::Document
     # 住所と電話番号
     move_down 20
     if @record.customer.address.present?
-      text_box "住所: #{@record.customer.address}", at: [230, 630], size: 12
+      text_box "住所: #{@record.customer.address}", at: [150, 630], size: 12
     else
-      text_box "住所:", at: [230, 630], size: 12
+      text_box "住所:", at: [150, 630], size: 12
     end
-    stroke_horizontal_line 230, 480, at: 615
+    stroke_horizontal_line 150, 480, at: 615
     move_down 10
     if @record.customer.address.present?
-      text_box "電話番号: #{@record.customer.phonenumber}", at: [230, 600], size: 12
+      text_box "電話番号: #{@record.customer.phonenumber}", at: [280, 600], size: 12
     else
-      text_box "電話番号:", at: [230, 600], size: 12
+      text_box "電話番号:", at: [280, 600], size: 12
     end
-    stroke_horizontal_line 230, 480, at: 585
+    stroke_horizontal_line 280, 480, at: 585
 
     # 商品欄
     move_down 60
