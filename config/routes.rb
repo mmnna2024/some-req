@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       end
     end
     resources :orders do
+      resources :show_pdf, only: :index
       collection do
         get :unchecked_index
         get :checked_index

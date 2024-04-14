@@ -1,5 +1,4 @@
 <h2>仮受注一覧</h2>
-
 <div class="table-responsive">
 <table class="table">
   <thead class="table-light">
@@ -36,6 +35,7 @@
         <td><nobr><%= order.customer.address %></nobr></td>
         <td><nobr><%= link_to '詳細', edit_admin_order_path(order) %></nobr></td>
         <td><nobr><%= link_to "削除", admin_order_path(order), method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
+        <td><nobr><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf") %></nobr></td>
       </tr>
     <% end %>
   </tbody>
