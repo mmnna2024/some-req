@@ -9,6 +9,8 @@ class OrderForm
     validates :phonenumber
     validates :address
   end
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, format: { with: VALID_EMAIL_REGEX }
 
   def valid?
     if @items
