@@ -36,7 +36,7 @@
         <td><nobr><%= order.customer.address %></nobr></td>
         <td><nobr><%= link_to '詳細', edit_admin_order_path(order) %></nobr></td>
         <td><nobr><%= link_to "削除", admin_order_path(order), method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
-        <td><nobr><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf") %></nobr></td>
+        <td><nobr><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank" %></nobr></td>
       </tr>
     <% end %>
   </tbody>
