@@ -23,6 +23,8 @@ gem 'rails-i18n'
 gem 'devise-i18n-views'
 gem 'rexml'#Ruby3系でdeviceを使うために必要
 gem 'kaminari'
+gem 'prawn'
+gem 'prawn-table'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 gem 'ransack'
 gem 'enum_help'
