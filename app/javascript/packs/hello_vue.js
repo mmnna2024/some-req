@@ -7,5 +7,5 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = createApp(App);
-  +    app.mount("#vue-app");
+  app.mount("#vue-app");
 });
