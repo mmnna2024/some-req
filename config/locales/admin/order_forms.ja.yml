@@ -40,7 +40,7 @@ ja:
     order:
       status:
         unchecked_order: 仮受注
-        checked_order: 受注済み
+        checked_order: 受注済
       channel:
         online: オンライン受付
         shop: 店頭受付
@@ -56,10 +56,10 @@ ja:
     order_forms:
       index:
         unchecked_title: 仮受注一覧
-        checked_title: 受注済み一覧
+        checked_title: 受注済一覧
         status: ステータス
         ordered_on: 受注日時
-        items: 依頼品内容
+        items: 依頼品
         items_count: 依頼品数
         unchecked_price: 仮見積料金
         checked_price: 見積料金

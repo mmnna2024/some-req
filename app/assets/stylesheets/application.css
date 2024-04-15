@@ -13,3 +13,65 @@
  *= require_tree .
  *= require_self
  */
+
+/* ページネーション用CSS */
+.pagination .page-link {
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+}
+
+.pagination .page-link:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.pagination .active .page-link {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+/* 受注一覧のリンク用 */
+a.primary-link {
+  color: #b0b0b0;
+}
+
+a.primary-link:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+a.danger-link {
+  color: #ffaaaa;
+}
+
+a.danger-link:hover {
+  color: #ff0000;
+  text-decoration: underline;
+}
+
+
+.bg-dark-custom {
+  background-color: #333; 
+  color: white;
+}
+
+.form-control, .form-select {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+.btn-outline-custom {
+  color: black !important;
+  background-color: white !important;
+  border-color: black !important;
+}
+
+.btn-outline-custom:hover {
+  color: white !important;
+  background-color: black !important;
+  border-color: black !important;
+}
