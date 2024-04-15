@@ -13,7 +13,7 @@ set :log_level, :info
 
 append :linked_files, 'config/secrets.yml'
 
-# after 'deploy:published', 'deploy:seed'
+after 'deploy:published', 'deploy:seed'
 after 'deploy:finished', 'deploy:restart'
 
 namespace :deploy do
