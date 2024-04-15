@@ -45,7 +45,7 @@ customers = Customer.all
 shippings = Shipping.all
 categories = Category.all
 
-15.times do |i|
+30.times do |i|
   random_date = Time.new(2022).beginning_of_year + rand((Time.new(2025).beginning_of_year - Time.new(2022).beginning_of_year).to_i)
 
   order = Order.create!(
