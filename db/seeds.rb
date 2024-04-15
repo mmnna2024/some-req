@@ -29,7 +29,7 @@ shippings.each do |name, price|
 end
 
 # 顧客の作成
-5.times do |i|
+50.times do |i|
   Customer.create!(
     name: "Customer #{i + 1}",
     email: "customer#{i}@example.com",
@@ -45,7 +45,7 @@ customers = Customer.all
 shippings = Shipping.all
 categories = Category.all
 
-30.times do |i|
+300.times do |i|
   random_date = Time.new(2022).beginning_of_year + rand((Time.new(2025).beginning_of_year - Time.new(2022).beginning_of_year).to_i)
 
   order = Order.create!(
