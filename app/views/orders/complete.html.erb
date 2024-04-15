@@ -1,5 +1,36 @@
-<h1>complete!</h1>
-<p>image test</p>
-<% @items.images.each do |image| %>
-  <%= image_tag(image.variant(resize_to_limit: [100, 100])) if @items.images.present? %>
-<% end %>
+<head>
+  <title>注文完了</title>
+  <style>
+    body {
+      color: #333;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      max-width: 600px; /* コンテナの最大幅を設定 */
+      margin: auto; /* 中央揃え */
+      padding: 20px;
+      border: 1px solid #ccc; /* 薄い境界線 */
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* 軽い影を追加 */
+      border-radius: 10px;
+    }
+    h1 {
+      color: #black
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #F8C900
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ご注文ありがとうございます！</h1>
+    <p>ご注文が正常に完了しました。注文内容の詳細については、登録メールアドレスに送信された確認メールをご確認ください。</p>
+    <p>トップページに戻る場合は、<a href="/">こちら</a></p>
+  </div>
+</body>

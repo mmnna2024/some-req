@@ -48,23 +48,23 @@
           </div>
           <h4>送料</h4>
           <div class="row justify-content-between align-items-center px-3">
-          <div class="col-sm">
-            <select v-model="selected_shipping" class="custom-select">
-              <option disabled value="">地域区分を選択してください。</option>
-              <option v-for="(shipping, index) in shippings" :key="index" :value="shipping">
-                {{ shipping.name }}
-              </option>
-            </select>
+            <div class="col-sm">
+              <select v-model="selected_shipping" class="custom-select">
+                <option disabled value="">地域区分を選択してください。</option>
+                <option v-for="(shipping, index) in shippings" :key="index" :value="shipping">
+                  {{ shipping.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-4">
+              <table class="table categories-table" width="200">
+                <tr>
+                  <td scope="col" style="width: 50%">送料</td>
+                  <td scope="col" style="width: 50%">{{selected_shipping.price}}円</td>
+                </tr>
+              </table>
+            </div>
           </div>
-          <div class="col-4">
-            <table class="table categories-table" width="200">
-              <tr>
-                <td scope="col" style="width: 50%">送料</td>
-                <td scope="col" style="width: 50%">{{selected_shipping.price}}円</td>
-              </tr>
-            </table>
-          </div>
-        </div>
         <!--エラーメッセージ-->
         <div class="px-3">
           <p class="error-message">{{ validation.shippingResult }}</p>
@@ -142,10 +142,6 @@
 
 export default {
   props: {
-    customer:{
-      type: Object,
-      default: () => {}
-    }, 
     categories: {
       type: Array,
       default: () => []
@@ -153,10 +149,6 @@ export default {
     shippings: {
       type: Array,
       default: () => []
-    },
-    totalPrice:{
-      type: Number,
-      default: 0
     }
   },
   data() {
