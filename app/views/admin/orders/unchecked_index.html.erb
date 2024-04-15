@@ -1,5 +1,17 @@
 <h2><%= t('admin.order_forms.index.unchecked_title') %></h2>
 
+<%= search_form_for @q, url: search_admin_orders_path do |f| %>
+  <%= f.label :customer_name_cont, '名前' %>
+  <%= f.search_field :customer_name_cont %>
+  <br>
+  <%= f.label :ordered_on, "期間" %>
+  <%= f.date_field :ordered_on_gteq %>
+  <span>~</span>
+  <%= f.date_field :ordered_on_lteq %>
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
+
 <div class="table-responsive">
 <table class="table">
   <thead class="table-light">
