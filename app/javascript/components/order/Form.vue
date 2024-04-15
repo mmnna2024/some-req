@@ -4,12 +4,14 @@
     <b-col :span="12">
       <div>
         <h4>ご依頼内容</h4>
-        <table class="categories-table">
+        <table class="table categories-table">
+          <thead>
           <tr>
-            <th>衣類選択</th>
-            <th>衣類タグ、全体写真アップロード</th>
-            <th>単価</th>
+            <th scope="col" style="width: 40%">衣類選択</th>
+            <th scope="col" style="width: 20%">衣類タグ、全体写真アップロード</th>
+            <th scope="col" style="width: 40%">単価</th>
           </tr>
+          </thead>
           <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
             <td>
               <select v-model="selected[v_index]" @change="() => setContent(v_index)" >
@@ -52,13 +54,13 @@
       </div>
       <div>
         <h4>お客様情報</h4>
-        <form>
+        <form class="was-validated">
           <div v-if="alert" class="alert alert-danger">{{alert}}</div>
           <div class="form-group">
             <label for="order-name">氏名</label>
-            <input type="text" v-model="customer.name" id="order-name" class="form-control">
+            <input type="text" v-model="customer.name" id="order-name" class="form-control is-invalid" required>
             <!--エラーメッセージ-->
-            <div class="error-message">
+            <div class="invalid-feedback">
               <p class="error-message">{{ validation.nameResult }}</p>
             </div>  
           </div>
@@ -68,18 +70,18 @@
           </div>
           <div class="form-group">
             <label for="order-phonenumber">電話番号</label>
-            <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control">
+            <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control" required>
             <!--エラーメッセージ-->
-            <div class="error-message">
+            <div class="invalid-feedback">
               <p class="error-message">{{ validation.phonenumberResult }}</p>
             </div>  
           </div>
           
           <div class="form-group">
             <label for="order-address">住所</label>
-            <input v-model="customer.address" id="order-address" class="form-control">
+            <input v-model="customer.address" id="order-address" class="form-control" required>
             <!--エラーメッセージ-->
-            <div class="error-message">
+            <div class="invalid-feedback">
               <p class="error-message">{{ validation.addressResult }}</p>
             </div>  
           </div>
