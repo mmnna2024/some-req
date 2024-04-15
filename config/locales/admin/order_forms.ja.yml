@@ -1,0 +1,71 @@
+ja:
+  activemodel:
+    attributes:
+      order_form:
+        name: 名前
+        items: 依頼品
+        note: 備考
+        phonenumber: 電話番号
+        email: メールアドレス
+        address: 住所
+        age: 年齢
+        sex: 性別
+        shipping_id: 地域区分
+        channel: 受付窓口
+        status: 受注ステータス
+  activerecord:
+    models:
+      order:
+      item:
+      customer:
+    attributes:
+      order:
+        note: 備考
+        name: 名前
+        phonenumber: 電話番号
+        email: メールアドレス
+        address: 住所
+        age: 年齢
+        sex: 性別
+        shipping_id: 地域区分
+        channel: 受付窓口
+        status: 受注ステータス
+        item: 依頼品
+      item:
+        category_id: 依頼品
+        price: 料金
+      customer:
+        sex: 性別
+  enums:
+    order:
+      status:
+        unchecked_order: 仮受注
+        checked_order: 受注済み
+      channel:
+        online: オンライン受付
+        shop: 店頭受付
+        phonecall: 電話受付
+    customer:
+      sex:
+        male: 男性
+        female: 女性
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
+  admin:
+    order_forms:
+      index:
+        unchecked_title: 仮受注一覧
+        checked_title: 受注済み一覧
+        status: ステータス
+        ordered_on: 受注日時
+        items: 依頼品内容
+        items_count: 依頼品数
+        unchecked_price: 仮見積料金
+        checked_price: 見積料金
+        name: 名前
+        phonenumber: 電話番号
+        email: メールアドレス
+        address: 住所
+      edit:
+        title: 受注詳細・編集

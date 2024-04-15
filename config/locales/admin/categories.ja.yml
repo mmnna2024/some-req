@@ -1,0 +1,31 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        category:
+          attributes:
+            name:
+              blank: "を入力してください。"
+              taken: "はすでに存在します。"
+            price:
+              blank: "を入力してください。"
+    models:
+      category: カテゴリー
+    attributes:
+      category:
+        name: カテゴリー名
+        price: 料金
+        display: 公開設定
+  time:
+    formats:
+      default: "%Y/%m/%d"
+  admin:
+    categories:
+      index:
+        title: カテゴリー管理
+        name: カテゴリー名
+        price: 料金
+        display: 公開設定
+        created_at: 作成日
+      new:
+        title: カテゴリー追加

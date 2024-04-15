@@ -24,4 +24,8 @@ class Order < ApplicationRecord
     self.price = total_price
     self.save
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["channel", "created_at", "customer_id", "id", "note", "ordered_on", "price", "shipping_id", "status", "updated_at"]
+  end
 end

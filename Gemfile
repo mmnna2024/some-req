@@ -19,8 +19,15 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'devise'
+gem 'rails-i18n'
+gem 'devise-i18n-views'
 gem 'rexml'#Ruby3系でdeviceを使うために必要
 gem 'kaminari'
+gem 'prawn'
+gem 'prawn-table'
+gem 'bootstrap5-kaminari-views', '~> 0.0.1'
+gem 'ransack'
+gem 'enum_help'
 
 gem 'unicorn'
 # Use Redis adapter to run Action Cable in production
@@ -68,7 +75,6 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

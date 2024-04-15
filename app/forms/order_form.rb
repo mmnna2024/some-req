@@ -7,14 +7,14 @@ class OrderForm
     validates :category_ids
     validates :name, length: { maximum: 20 }
     validates :phonenumber
-    validates :email
     validates :address
   end
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, format: { with: VALID_EMAIL_REGEX }
 
   def valid?
     if @items
       default_valid = super
-      # valid_items = @items.map { |v| v.valid? }.all?
       valid_items = @items.map do |v|
         result = v.valid?
         if !result
