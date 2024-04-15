@@ -1,45 +1,47 @@
-<h2><%= t('admin.order_forms.index.unchecked_title') %></h2>
+<h2 class="my-4 text-white bg-dark p-3"><%= t("admin.order_forms.index.unchecked_title") %></h2>
 
 <div class="table-responsive">
-<table class="table">
-  <thead class="table-light">
-    <tr>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.status') %></nobr></th>
-      <th scope="col"><nobr>
-        <%= sort_link(@q, :ordered_on, t('admin.order_forms.index.ordered_on'), default_order: :desc) %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.items') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.items_count') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.unchecked_price') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.name') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.phonenumber') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.email') %></nobr></th>
-      <th scope="col"><nobr><%= t('admin.order_forms.index.address') %></nobr></th>
-      <th colspan="3" scope="col"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @unchecked_orders.each do |order| %>
-      <tr class="unchecked_order_list">
-        <td><nobr><%= order.status_i18n %></nobr></td>
-        <td><%= l order.ordered_on %></td>
-        <td>
-          <% order.items.each do |item| %>
-            <nobr><%= item.category.name %></nobr>
-          <% end %>
-        </td>
-        <td><nobr><%= order.items.length %></nobr></td>
-        <td><nobr><%= order.price %>円</nobr></td>
-        <td><nobr><%= order.customer.name %></nobr></td>
-        <td><nobr><%= order.customer.phonenumber %></nobr></td>
-        <td><nobr><%= order.customer.email %></nobr></td>
-        <td><nobr><%= order.customer.address %></nobr></td>
-        <td><nobr><%= link_to '詳細', edit_admin_order_path(order) %></nobr></td>
-        <td><nobr><%= link_to "削除", admin_order_path(order), method: :delete, data: {confirm: "本当に削除しますか？"} %></nobr></td>
-        <td><nobr><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank" %></nobr></td>
+  <table class="table text-nowrap">
+    <thead class="table-dark text-white">
+      <tr>
+        <th colspan="1" scope="col">注文書</th>
+        <th colspan="1" scope="col">受注詳細</th>
+        <th scope="col"><%= t("admin.order_forms.index.status") %></th>
+        <th scope="col">
+          <%= sort_link(@q, :ordered_on, t("admin.order_forms.index.ordered_on"), default_order: :desc, class: "text-white link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover") %>
+        </th>
+        <th scope="col"><%= t("admin.order_forms.index.items") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.items_count") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.unchecked_price") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.name") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.phonenumber") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.email") %></th>
+        <th scope="col"><%= t("admin.order_forms.index.address") %></th>
+        <th colspan="2" scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @unchecked_orders.each do |order| %>
+        <tr class="<%= cycle("table-light", "bg-white") %>">
+          <td><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank", class: "primary-link" %></td>
+          <td><%= link_to "詳細", edit_admin_order_path(order), class: "primary-link" %></td>
+          <td><%= order.status_i18n %></td>
+          <td><%= l order.ordered_on %></td>
+          <td>
+            <% order.items.each do |item| %>
+              <%= item.category.name %>
+            <% end %>
+          </td>
+          <td><%= order.items.length %></td>
+          <td><%= order.price %>円</td>
+          <td><%= order.customer.name %></td>
+          <td><%= order.customer.phonenumber %></td>
+          <td><%= order.customer.email %></td>
+          <td><%= order.customer.address %></td>
+          <td><%= link_to "削除", admin_order_path(order), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "danger-link" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-<%= paginate @unchecked_orders %>
+<%= paginate @unchecked_orders, theme: "bootstrap-5" %>
