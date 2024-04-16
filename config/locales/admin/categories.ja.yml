@@ -22,10 +22,10 @@ ja:
   admin:
     categories:
       index:
-        title: カテゴリー管理
-        name: カテゴリー名
+        title: メニュー管理
+        name: メニュー名
         price: 料金
         display: 公開設定
         created_at: 作成日
       new:
-        title: カテゴリー追加
+        title: メニュー追加
