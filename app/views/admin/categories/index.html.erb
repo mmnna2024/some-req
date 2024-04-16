@@ -1,9 +1,8 @@
-<h2 class="my-4"><%= t('admin.categories.index.title') %></h2>
+<h2 class="mt-4 mb-2 text-white bg-dark p-3"><%= t('admin.categories.index.title') %></h2>
 
-<%= link_to 'カテゴリーを追加する', new_admin_category_path, id: "new_category_link" %>
 <%= form_with url: display_update_admin_categories_path, method: :patch, local: true do |form| %>
-<table class="table">
-  <thead class="table-light">
+<table class="table text-nowrap table-striped">
+  <thead class="table-dark text-white">
     <tr>
       <th scope="col"><%= t('admin.categories.index.name') %></th>
       <th scope="col"><%= t('admin.categories.index.price') %></th>
@@ -20,14 +19,16 @@
         <td><%= category.name %></td>
         <td><%= category.price %></td>
         <td>
-        <%= check_box_tag "category_ids[]", category.id, category.display %>
+          <%= check_box_tag "category_ids[]", category.id, category.display %>
         </td>
         <td><%= l category.created_at %></td>
-        <td><%= link_to "削除", admin_category_path(category), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+        <td><%= link_to "削除", admin_category_path(category), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "danger-link" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= submit_tag "更新する", id: "update-categories" %>
+<div class="col-auto">
+  <%= submit_tag "更新する", id: "update-categories", class: "btn btn-outline-custom-opposite" %>
+</div>
 <% end %>
