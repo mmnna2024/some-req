@@ -20,7 +20,7 @@
             <%= item_form.label :category_id, class: "form-label" %>
             <%= item_form.collection_select :category_id, Category.all, :id, :name, { include_blank: "この依頼品を削除する" }, { name: "order_form[category_ids][]", class: "form-select" } %>
           </div>
-          <div class="col-6  text-center">
+          <div class="col-6 text-center">
             <% if item_form.object.images.attached? %>
               <% item_form.object.images.each do |image| %>
                 <%= link_to rails_blob_path(image), target: "_blank" do %>
