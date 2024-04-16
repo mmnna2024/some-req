@@ -1,24 +1,36 @@
-<h2 id="login-title">ログインページ</h2>
+<h2 class="mt-4 mb-2 text-white bg-dark p-3" id="login-title"><%= t('devise.sessions.title') %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="mb-4 col-4">
-    <%= f.label :user_id, class: "form-label" %><br />
-    <%= f.text_field :user_id, autofocus: true, autocomplete: "user_id", class: "form-control form-control-lg" %>
-  </div>
+  <div class="container bg-dark-custom">
+    <div class="row py-5">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="row">
+          <div class="col-6">
+            <%= f.label :user_id, class: "form-label" %><br />
+            <%= f.text_field :user_id, autofocus: true, autocomplete: "user_id", class: "form-control form-control-lg" %>
+          </div>
 
-  <div class="mb-4 col-4">
-    <%= f.label :password, class: "form-label" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
-  </div>
+          <div class="col-6">
+            <%= f.label :password, class: "form-label" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
+          </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="mb-3 form-check">
-      <%= f.check_box :remember_me, class: "form-check-input" %>
-      <%= f.label :remember_me, class: "form-check-label" %>
+          <% if devise_mapping.rememberable? %>
+          <div class="row py-5">
+            <div class="my-3 form-check col-auto">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label :remember_me, class: "form-check-label" %>
+            </div>
+          </div>
+          <% end %>
+
+          <div class="actions my-3 d-grid gap-2 col-4 mx-auto">
+            <%= f.submit "ログイン", class: "btn btn-outline-custom btn-lg", id: "login" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン", class: "btn btn-primary", id: "login" %>
   </div>
 <% end %>

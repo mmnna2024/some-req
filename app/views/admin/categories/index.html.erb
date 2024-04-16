@@ -19,7 +19,7 @@
         <td><%= category.name %></td>
         <td><%= category.price %></td>
         <td>
-          <%= check_box_tag "category_ids[]", category.id, category.display %>
+          <%= check_box_tag "category_ids[]", category.id, category.display, class: "form-check-input" %>
         </td>
         <td><%= l category.created_at %></td>
         <td><%= link_to "削除", admin_category_path(category), method: :delete, data: {confirm: "本当に削除しますか？"}, class: "danger-link" %>
