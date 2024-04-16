@@ -2,6 +2,7 @@ ja:
   activemodel:
     attributes:
       order_form:
+        category_ids: 依頼品
         name: 名前
         items: 依頼品
         note: 備考

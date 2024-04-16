@@ -13,7 +13,7 @@ ja:
       category: カテゴリー
     attributes:
       category:
-        name: カテゴリー名
+        name: メニュー名
         price: 料金
         display: 公開設定
   time:
@@ -22,7 +22,7 @@ ja:
   admin:
     categories:
       index:
-        title: メニュー管理
+        title: メニュー一覧
         name: メニュー名
         price: 料金
         display: 公開設定
