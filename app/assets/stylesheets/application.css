@@ -52,7 +52,7 @@ a.danger-link:hover {
   text-decoration: underline;
 }
 
-
+/* 管理者画面フォーム用 */
 .bg-dark-custom {
   background-color: #333; 
   color: white;
@@ -73,5 +73,17 @@ a.danger-link:hover {
 .btn-outline-custom:hover {
   color: white !important;
   background-color: black !important;
+  border-color: black !important;
+}
+
+.btn-outline-custom-opposite {
+  color: white !important;
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: black !important;
+  background-color: white !important;
   border-color: black !important;
 }

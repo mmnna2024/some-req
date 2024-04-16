@@ -1,7 +1,9 @@
+<h2 class="mt-4 mb-2 text-white bg-dark p-3"><%= t('admin.categories.new.title') %></h2>
+
 <%= form_with(model: @category, url: admin_categories_path, local: true) do |form| %>
   <% if @category.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <ul>
+    <div id="error_explanation" class="alert alert-danger mb-2">
+      <ul class="mb-0">
         <% @category.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -9,30 +11,35 @@
     </div>
   <% end %>
 
-<h2 class="my-4"><%= t('admin.categories.new.title') %></h2>
+  <div class="container bg-dark-custom">
+    <div class="row py-5">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="row">
+          <div class="col-6">
+          <%= form.label :name, class: "form-label" %>
+          <%= form.text_field :name, class: "form-control" %>
+          </div>
 
-  <div class="mb-3">
-    <div class="col-5">
-    <%= form.label :name, class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
+
+          <div class="col-6">
+          <%= form.label :price, class: "form-label" %>
+          <%= form.number_field :price, class: "form-control" %>
+          </div>
+        <div>
+
+        <div class="row py-5">
+          <div class="col-auto">
+            <%= form.check_box :display, { class: "form-check-input" }, true, false %>
+            <%= form.label :display, class: "form-check-label" %>
+          </div>
+        </div>
+
+        <div class="my-3 d-grid gap-2 col-4 mx-auto">
+          <%= form.submit '追加する', id: "add-category", class: "btn btn-outline-custom btn-lg" %>
+        </div>
+      </div>
+      <div class="col-2"></div>
     </div>
   </div>
-
-  <div class="mb-3">
-    <div class="col-5">
-    <%= form.label :price, class: "form-label" %>
-    <%= form.number_field :price, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="mb-3">
-  <%= form.label :display, class: "form-check-label" %>
-  <%= form.check_box :display,{}, true, false %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.submit '追加する', id: "add-category" %>
-  </div>
-
-<% end %>
-<%= link_to '戻る', admin_categories_path, id: "categories_link" %>
+  <% end %>

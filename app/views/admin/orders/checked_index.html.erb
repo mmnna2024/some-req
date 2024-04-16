@@ -1,19 +1,45 @@
-<h2 class="my-4 text-white bg-dark p-3"><%= t("admin.order_forms.index.checked_title") %></h2>
+<h2 class="mt-4 mb-1 text-white bg-dark p-3"><%= t("admin.order_forms.index.checked_title") %></h2>
 
 <%= search_form_for @q, url: search_admin_orders_path do |f| %>
-  <%= f.label :customer_name_cont, '名前' %>
-  <%= f.search_field :customer_name_cont %>
-  <br>
-  <%= f.label :ordered_on, "期間" %>
-  <%= f.date_field :ordered_on_gteq %>
-  <span>~</span>
-  <%= f.date_field :ordered_on_lteq %>
-  <br>
-  <%= f.submit '検索' %>
+  <div class="d-flex justify-content-end my-1">
+    <div class="row align-items-center p-2">
+      <div class="col-auto p-2">
+        <%= f.label :customer_name_cont, '名前', class: "form-label mb-0" %>
+      </div>
+      <div class="col-auto p-1">
+        <%= f.search_field :customer_name_cont, class: "form-control form-control-sm" %>
+      </div>
+    </div>
+    <div class="row align-items-center p-2">
+      <div class="col-auto p-2">
+        <%= f.label :customer_phonenumber_cont, '電話番号', class: "form-label mb-0" %>
+      </div>
+      <div class="col-auto p-1">
+        <%= f.search_field :customer_phonenumber_cont, class: "form-control form-control-sm" %>
+      </div>
+    </div>
+    <div class="row align-items-center p-2">
+      <div class="col-auto p-2">
+        <%= f.label :ordered_on, "期間", class: "form-label mb-0" %>
+      </div>
+      <div class="col-auto p-1">
+        <%= f.date_field :ordered_on_gteq, class: "form-control form-control-sm" %>
+      </div>
+      <div class="col-auto">
+        <span>〜</span>
+      </div>
+      <div class="col-auto p-1">
+        <%= f.date_field :ordered_on_lteq, class: "form-control form-control-sm" %>
+      </div>
+      <div class="col-1">
+        <%= f.submit '検索', class: "btn btn-outline-custom-opposite" %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <div class="table-responsive">
-<table class="table text-nowrap">
+<table class="table text-nowrap table-striped">
   <thead class="table-dark text-white">
     <tr>
       <th colspan="1" scope="col">注文書</th>
@@ -34,7 +60,7 @@
 
   <tbody>
     <% @checked_orders.each do |order| %>
-      <tr class="checked_order_list">
+      <tr>
         <td><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank", class: "primary-link" %></td>
         <td><%= link_to "詳細", edit_admin_order_path(order), class: "primary-link" %></td>
         <td><%= order.status_i18n %></td>
