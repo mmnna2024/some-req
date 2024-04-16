@@ -135,3 +135,7 @@ a.danger-link:hover {
   background-color: white !important;
   border-color: black !important;
 }
+
+.btn:hover {
+  color: #F8C900 !important;
+}
