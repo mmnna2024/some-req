@@ -75,3 +75,15 @@ a.danger-link:hover {
   background-color: black !important;
   border-color: black !important;
 }
+
+.btn-outline-custom-opposite {
+  color: white !important;
+  background-color: black !important;
+  border-color: black !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: black !important;
+  background-color: white !important;
+  border-color: black !important;
+}
