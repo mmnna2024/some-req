@@ -211,8 +211,9 @@ export default {
     }
     },
     next() {
-      this.checkValidate()
-      if (this.valid === true){
+      // 作成のためバリデーション削除
+      // this.checkValidate()
+      // if (this.valid === true){
         this.$emit('change-page', {
           step: 1, // 1ページ進む
           formData: {
@@ -222,7 +223,7 @@ export default {
             totalprice: this.totalPrice,
           }
         });
-      }
+      // }
     },    
       checkValidate() {
       const name_error_message = this.nameValidate(this.customer.name)

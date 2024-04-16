@@ -7,19 +7,20 @@
     <div class="checklist">
         <li>自然乾燥のため、天候の影響により納品日をご相談させていただく場合がございます。<br>
           <div class ="d-flex justify-content-center">
-            <input type="checkbox" id="checkbox1" v-model="checkboxes.option1">
-            <label for="checkbox1">了解</label>
+            <label class="label" for="checkbox1">
+              <input type="checkbox" id="checkbox1" v-model="checkboxes.option1">了解
+            </label>
           </div>
         </li>
       <li>サンプル染色（1点から可）のご依頼は、別途お見積りをご提示させていただきます。ご希望のお客様は、お問い合わせ時にお申し付けください。<br>
       <input type="checkbox" id="checkbox2" v-model="checkboxes.option2">
-            <label for="checkbox1">了解</label></li>
+            <label for="checkbox2" class="label">了解</label></li>
       <li>ボタンやファスナーは、染色・加工時劣化する恐れがございます。ご心配な場合には、事前に取り外してくださいますようお願いいたします。<br>
       <input type="checkbox" id="checkbox3" v-model="checkboxes.option3">
-            <label for="checkbox1">了解</label></li>
+            <label for="checkbox3">了解</label></li>
       <li>裏生地の付いている衣類は、縮率の違いにより型崩れが発生する可能性がございます。<br>
       <input type="checkbox" id="checkbox4" v-model="checkboxes.option4">
-            <label for="checkbox1">了解</label></li>
+            <label for="checkbox4">了解</label></li>
       <li>生地に撥水などの特別な加工がしてある場合、部分的に染ムラが出る場合がございます。<br>
       <input type="checkbox" id="checkbox5" v-model="checkboxes.option5">
             <label for="checkbox1">了解</label></li>
@@ -55,7 +56,7 @@
       <label for="order-note">上記をご了承の上、事前に確認したい内容があれば記載してください。</label>
       <input v-model="order.note" id="order-note" class="form-control">
     </div>
-    <p v-if="!allChecked">全ての項目にチェックする必要があります。</p>
+    <p class="error-message" v-if="!allChecked">全ての項目にチェックする必要があります。</p>
     <div>
       <button :disabled="!allChecked" @click="next" class="btn btn-outline-primary">次へ</button>
       <button @click="previous" class="btn btn-outline-primary">前へ</button>
@@ -113,3 +114,32 @@ export default {
   }
 }
 </script>
+
+<style>
+  .error-message {
+    color: #dc3545 !important;
+    font-size: 80%;
+  }
+
+  input[type="checkbox"]:checked + label {
+    background: #31A9EE;/* マウス選択時の背景色を指定する */ 
+    color: #ffffff; /* マウス選択時のフォント色を指定する */ 
+    }
+
+  .label:hover { background-color: #E2EDF9; /* マウスオーバー時の背景色を指定する */ }
+  
+  .label { 
+    display: block; /* ブロックレベル要素化する */ 
+    float: left; /* 要素の左寄せ・回り込を指定する */ 
+    margin: 5px; /* ラベル外側の余白を指定する */ 
+    width: 100px; /* ラベルの横幅を指定する */ 
+    height: 45px; /* ラベルの高さを指定する */
+     text-align: center; /* テキストのセンタリングを指定する */ 
+     line-height: 45px; /* 行の高さを指定する */ 
+     padding-left: 5px; /* ラベル内左側の余白を指定する */ 
+     padding-right: 5px; /* ラベル内右側の余白を指定する */ 
+     cursor: pointer; /* マウスカーソルの形（リンクカーソル）を指定する */ 
+     color: #b20000; /* フォントの色を指定 */ 
+     border: 2px solid #006DD9;/*ラベルの境界線を実線で指定する */ 
+     border-radius: 5px; /* 角丸を指定する */ }
+</style>
