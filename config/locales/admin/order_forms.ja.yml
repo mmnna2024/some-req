@@ -69,3 +69,5 @@ ja:
         address: 住所
       edit:
         title: 受注詳細・編集
+      new:
+        title: 新規受注登録
