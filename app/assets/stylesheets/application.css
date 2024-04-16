@@ -52,7 +52,7 @@ a.danger-link:hover {
   text-decoration: underline;
 }
 
-
+/* 管理者画面フォーム用 */
 .bg-dark-custom {
   background-color: #333; 
   color: white;

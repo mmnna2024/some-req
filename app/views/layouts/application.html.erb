@@ -16,7 +16,7 @@
     <% if admin_signed_in? %>
       <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Some-Req</a>
+          <a class="navbar-brand mx-3" href="#">Some-Req</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -35,9 +35,9 @@
                   <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     メニュー管理
                   </a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to "メニュー一覧", admin_categories_path, class: "dropdown-item text-white" %></li>
-                    <li><%= link_to "メニュー追加", new_admin_category_path, class: "dropdown-item text-white" %></li>
+                  <ul class="dropdown-menu bg-dark">
+                    <li><%= link_to "メニュー一覧", admin_categories_path, class: "dropdown-item text-white bg-dark" %></li>
+                    <li><%= link_to "メニュー追加", new_admin_category_path, class: "dropdown-item text-white bg-dark" %></li>
                   </ul>
                 </li>
                 <li class="nav-item">
