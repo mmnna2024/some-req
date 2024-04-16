@@ -30,7 +30,10 @@ class ShowPdf < Prawn::Document
 
     # 住所と電話番号
     move_down 20
-    if @record.customer.address.present?
+    if @record.customer.address.present? && @record.customer.address.length > 25
+      text_box "住所: #{@record.customer.address}", at: [40, 630], size: 12
+      stroke_horizontal_line 40, 480, at: 615
+    elsif @record.customer.address.present?
       text_box "住所: #{@record.customer.address}", at: [150, 630], size: 12
     else
       text_box "住所:", at: [150, 630], size: 12

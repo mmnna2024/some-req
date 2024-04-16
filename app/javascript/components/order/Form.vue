@@ -13,7 +13,7 @@
             </thead>
             <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
               <td>
-                <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="" >
+                <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="form-select" >
                   <option disabled value="">依頼する衣類を一つずつお選びください</option>
                   <option v-for="(category, index) in categories" :key="index" :value="category">
                     {{ category.name }}
@@ -119,7 +119,7 @@
               </div>
               <div class="form-group col-5">
                 <label for="order-sex">性別</label>
-                <select v-model="customer.sex" id="order-sex"  class="custom-select">
+                <select v-model="customer.sex" id="order-sex"  class="form-select">
                   <option  value="male">男性</option>
                   <option  value="female">女性</option>
                 </select>
@@ -211,6 +211,7 @@ export default {
     }
     },
     next() {
+      // 作成のためバリデーション削除
       this.checkValidate()
       if (this.valid === true){
         this.$emit('change-page', {

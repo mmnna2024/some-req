@@ -52,7 +52,7 @@ a.danger-link:hover {
   text-decoration: underline;
 }
 
-
+/* 管理者画面フォーム用 */
 .bg-dark-custom {
   background-color: #333; 
   color: white;
@@ -101,4 +101,37 @@ a.danger-link:hover {
 .dropdown-menu .dropdown-item:hover {
   background-color: #333;
   color: #F8C900 !important;
+}
+
+.btn-outline-custom-opposite {
+  color: white !important;
+  background-color: #333 !important;
+  border-color: #333 !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: #F8C900 !important;
+  background-color: white !important;
+  border-color: #333 !important;
+}
+/* bootstrapのテーブルヘッダーcss上書き */
+.table-dark {
+  --bs-table-bg: #333 !important;
+  --bs-table-border-color: #333 !important;
+}
+/* ナビバーにホバー追加 */
+.navbar-nav .nav-link:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: #F8C900 !important;
+  background-color: white !important;
+  border-color: black !important;
 }
