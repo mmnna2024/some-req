@@ -14,7 +14,7 @@
 
   <body>
     <% if admin_signed_in? %>
-      <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
+      <nav class="navbar navbar-expand-lg bg-dark-custom border-bottom border-bottom-dark" data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Some-Req</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,8 +31,14 @@
                 <li class="nav-item">
                     <%= link_to "新規登録", new_admin_order_path, class: "nav-link text-white" %>
                 </li>
-                <li class="nav-item">
-                    <%= link_to "メニュー管理", admin_categories_path, class: "nav-link text-white" %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    メニュー管理
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "メニュー一覧", admin_categories_path, class: "dropdown-item text-white" %></li>
+                    <li><%= link_to "メニュー追加", new_admin_category_path, class: "dropdown-item text-white" %></li>
+                  </ul>
                 </li>
                 <li class="nav-item">
                     <%= link_to "ログアウト", destroy_admin_session_path, data: { confirm: "本当にログアウトしますか？" }, class: "nav-link text-white" %>
