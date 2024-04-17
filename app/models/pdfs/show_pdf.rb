@@ -1,7 +1,7 @@
 class ShowPdf < Prawn::Document
   def initialize(record) # ←ここでインスタンス(@records)の値を受け取る
     super(page_size: "A4") #A4サイズのPDFを新規作成
-    stroke_axis # 座標を表示
+    # stroke_axis # 座標を表示
     @record = record # ←受け取った値をインスタンス変数として定義する。
 
     font_families.update("JP" => {
