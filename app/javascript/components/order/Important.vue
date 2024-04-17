@@ -19,7 +19,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox2" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox2" v-model="checkboxes.option2">承諾します：</div>            
               <div class="col-9">サンプル染色（1点から可）のご依頼は、別途お見積りをご提示させていただきます。ご希望のお客様は、お問い合わせ時にお申し付けください。</div>
@@ -27,7 +27,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox3" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox3" v-model="checkboxes.option3">承諾します：</div>
               <div class="col-9">ボタンやファスナーは、染色・加工時劣化する恐れがございます。ご心配な場合には、事前に取り外してくださいますようお願いいたします。</div>
@@ -35,7 +35,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox4" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox4" v-model="checkboxes.option4">承諾します：</div>
               <div class="col-9">裏生地の付いている衣類は、縮率の違いにより型崩れが発生する可能性がございます。</div>
@@ -43,7 +43,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox5" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox5" v-model="checkboxes.option5">承諾します：</div>
               <div class="col-9">生地に撥水などの特別な加工がしてある場合、部分的に染ムラが出る場合がございます。</div>
@@ -51,7 +51,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox6" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox6" v-model="checkboxes.option6">承諾します：</div>
               <div class="col-9">皮は極端に縮みます。ご依頼物に皮が付属していないかなど、事前によくご確認ください。</div>
@@ -59,7 +59,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox7" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox7" v-model="checkboxes.option7">承諾します：</div>
               <div class="col-9">縫い糸にポリエステルが使用されている場合がございます。混合のポリエステルは染まりませんのでご注意ください。</div>
@@ -67,23 +67,23 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
-            <label for="checkbox8" class="label d-flex w-100 align-items-center">
+          <div class ="form-check d-flex pb-2">
+            <label for="checkbox8" class="label d-flex w-100 y-60 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox8" v-model="checkboxes.option8">承諾します：</div>
               <div class="col-9">染められるものは、紺色か黒色のみとなっており、単色染めに限らせていただきます。</div>
             </label>
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
-            <label for="checkbox9" class="label d-flex w-100 align-items-center">
+          <div class ="form-check d-flex pb-2">
+            <label for="checkbox9" class="label d-flex w-100 y-60 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox9" v-model="checkboxes.option9">承諾します：</div>
               <div class="col-9">糸の加工や生地の性質により、製品が縮む場合がございます。</div>
             </label>
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox10" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox10" v-model="checkboxes.option10">承諾します：</div>
               <div class="col-9">特にウール製品は極端に収縮率が高いです。依頼する場合はご注意ください。</div>
@@ -91,7 +91,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox11" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox11" v-model="checkboxes.option11">承諾します：</div>
               <div class="col-9">丹念に洗濯をしてから、黒染め加工を行っておりますが、油染みが残っている染めムラが出てしまう場合がございます。</div>
@@ -99,7 +99,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox12" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox12" v-model="checkboxes.option12">承諾します：</div>
               <div class="col-9">素材が集まり次第、加工を行うので、納期が伸びる場合がございます。ご了承ください。</div>
@@ -107,7 +107,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox13" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox13" v-model="checkboxes.option13">承諾します：</div>
               <div class="col-9">品質表示タグが付いていない製品はお断りする場合がございます。</div>
@@ -115,7 +115,7 @@
           </div>
         </li>
         <li>
-          <div class ="form-check d-flex">
+          <div class ="form-check d-flex pb-2">
             <label for="checkbox14" class="label d-flex w-100 align-items-center">
               <div class="col-3"><input type="checkbox" id="checkbox14" v-model="checkboxes.option14">承諾します：</div>
               <div class="col-9">劣化や損傷が激しい製品はお断りする場合がございます。</div>
@@ -189,33 +189,24 @@ export default {
 </script>
 
 <style>
-  .error-message {
-    color: #dc3545 !important;
-    font-size: 80%;
-  }
-
-  .label:hover { background-color: #F8C900; /* マウスオーバー時の背景色を指定する */ }
+  .label:hover { background-color: #F8C900;}
   
   .label { 
-    display: block; /* ブロックレベル要素化する */ 
-    float: left; /* 要素の左寄せ・回り込を指定する */ 
-    text-align: center; /* テキストのセンタリングを指定する */ 
-    line-height: 30px; /* 行の高さを指定する */ 
-    padding-left: 5px; /* ラベル内左側の余白を指定する */ 
-    padding-right: 5px; /* ラベル内右側の余白を指定する */ 
-    cursor: pointer; /* マウスカーソルの形（リンクカーソル）を指定する */
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
     margin-right: 10px; 
   }
   ul{
-  padding-left:0;
+    padding-left:0;
   }
 
   li{
     list-style:none;
-  }
-
-  .btn-outline-dark:hover {
-  color: #F8C900;
   }
 
   </style>
