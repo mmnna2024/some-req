@@ -19,7 +19,7 @@
       </div>
       <div class="row justify-content-center w-100 p-3">
         <div class="col-4 p-2 bg-dark text-white">
-          <h5>見積り合計金額:</h5>
+          <h5>見積り合計金額</h5>
         </div>
         <div class="col-8 py-1 px-2 border border-dark align-middle">
           {{totalprice + shipping.price}} 円
@@ -125,9 +125,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-  .btn-outline-dark:hover {
-  color: #F8C900;
-  }
-</style>

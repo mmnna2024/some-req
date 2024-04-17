@@ -9,7 +9,6 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.4",
     "axios": "^1.6.8",
-    "bootstrap-vue": "^2.23.1",
     "jquery": "^3.7.1",
     "turbolinks": "^5.2.0",
     "vue": "^3.4.21",

@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .categories-table {
   border: 1px solid gray;
   margin: 10px;
@@ -89,6 +89,35 @@ export default {
 .categories-table th,
 .categories-table td {
   border: 1px solid gray;
+  padding: 10px
 }
+
+.total-table {
+  border: 5px solid gray;
+  margin: 10px;
+}
+
+.total-table th,
+.total-table td {
+  border: 1px solid rgb(204, 204, 204);
+  color: #ff0019;
+  font-size: 20px;
+  padding: 10px
+}
+
+.error-message {
+  color: #dc3545 !important;
+  font-size: 80%;
+}
+
+.btn-outline-dark:hover {
+  color: #F8C900;
+}
+
+.link-dark:hover {
+  color: #F8C900;
+  cursor: pointer;
+}
+
 </style>
 

@@ -5,7 +5,7 @@
         <div class="py-3">
           <h4>ご依頼内容</h4>
           <table class="table categories-table">
-            <thead class="thead-dark">
+            <thead class="table-dark">
             <tr>
               <th scope="col" style="width: 40%">衣類選択</th>
               <th scope="col" style="width: 30%">単価</th>
@@ -31,8 +31,8 @@
           </div>
           <div class="row justify-content-between px-3">
             <div class="col-4">
-              <a @click="increment" class="link link-dark mr-3" style="text-decoration:underline">衣類を追加する</a>
-              <a @click="decrement" class="link link-dark" style="text-decoration:underline">１つ削除する</a>
+              <a @click="increment" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover p-1">衣類を追加する</a>
+              <a @click="decrement" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">１つ削除する</a>
             </div>
             <div class="col-4">
               <table class="table categories-table" width="200">
@@ -46,7 +46,7 @@
             <h4>送料</h4>
             <div class="row justify-content-between align-items-center px-3">
               <div class="col-sm">
-                <select v-model="selected_shipping" class="custom-select">
+                <select v-model="selected_shipping" class="form-select">
                   <option disabled value="">地域区分を選択してください。</option>
                   <option v-for="(shipping, index) in initialData.shippings" :key="index" :value="shipping">
                     {{ shipping.name }}
@@ -82,8 +82,8 @@
             <div class="p-3">
               <h4>お客様情報</h4>
               <form>
-                <div class="form-row">
-                  <div class="form-group col-10">
+                <div class="row g-3">
+                  <div class="col-10">
                     <label for="order-name">氏名[必須]</label>
                     <input type="text" v-model="customer.name" id="order-name" class="form-control">
                     <!--エラーメッセージ-->
@@ -91,11 +91,11 @@
                       <p class="error-message">{{ validation.nameResult }}</p>
                     </div>
                   </div>  
-                  <div class="form-group col-10">
+                  <div class="col-10">
                     <label for="order-email">メールアドレス</label>
                     <input v-model="customer.email" id="order-email" class="form-control">
                   </div>
-                  <div class="form-group col-10">
+                  <div class="col-10">
                     <label for="order-phonenumber">電話番号[必須]</label>
                     <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control">
                     <!--エラーメッセージ-->
@@ -103,8 +103,7 @@
                       <p class="error-message">{{ validation.phonenumberResult }}</p>
                     </div>
                   </div>
-              
-                  <div class="form-group col-10">
+                  <div class="col-10">
                     <label for="order-address">住所[必須]</label>
                     <input v-model="customer.address" id="order-address" class="form-control">
                     <!--エラーメッセージ-->
@@ -112,36 +111,38 @@
                       <p class="error-message">{{ validation.addressResult }}</p>
                     </div>  
                   </div>
-                  <div class="form-group col-5">
+                  <div class="col-5">
                     <label for="order-sex">性別</label>
                     <select v-model="customer.sex" id="order-sex" class="form-control">
                       <option  value="male">男性</option>
                       <option  value="female">女性</option>
                     </select>
                   </div>
-                  <div class="form-group col-5">
+                  <div class="col-5">
                     <label for="order-age">年齢</label>
                     <input v-model="customer.age" id="order-age" class="form-control">
                   </div>
-                  <div class="form-group col-5">
+                  <div class="col-5">
                     <label for="order-chanel">受付</label>
                     <select v-model="customer.chanel" id="order-chanel" class="form-control">
                       <option  value="shop">店頭</option>
                       <option  value="phonecall">電話</option>
                     </select>
                   </div>
-                  <div class="form-group col-10">
+                  <div class="col-10">
                     <label for="order-note">備考</label>
-                    <input v-model="customer.note" id="order-note" class="form-control">
+                    <textarea v-model="customer.note" id="order-note" class="form-control" />
                   </div>
                 </div>
               </form>
-            <button @click="submit" class="btn btn-outline-dark">登録する</button>
+              <div class="py-3">
+                <button @click="submit" class="btn btn-outline-dark">登録する</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -347,31 +348,35 @@ export default {
 .categories-table th,
 .categories-table td {
   border: 1px solid gray;
+  padding: 10px
 }
 
-  .total-table {
+.total-table {
   border: 5px solid gray;
   margin: 10px;
-  }
+}
 
-  .total-table th,
-  .total-table td {
+.total-table th,
+.total-table td {
   border: 1px solid rgb(204, 204, 204);
   color: #ff0019;
   font-size: 20px;
-  }
+  padding: 10px
+}
 
-  .link:hover {
-  color: #F8C900;
-  }
+.error-message {
+  color: #dc3545 !important;
+  font-size: 80%;
+}
 
-  .error-message {
-    color: #dc3545 !important;
-    font-size: 80%;
-  }
-  
-  .btn-outline-dark:hover {
+.btn-outline-dark:hover {
   color: #F8C900;
-  }
+}
+
+.link-dark:hover {
+  color: #F8C900;
+  cursor: pointer;
+}
+
 </style>
 
