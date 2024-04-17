@@ -1,58 +1,56 @@
 <<template>
-  <div class="container">
-    <div class="row py-3">
-      <h2>受付内容の確認</h2>
-      <div class="row justify-content-center w-100 p-3">
-        <div class="col-4 p-2 bg-dark text-white">
-          <h5>注文内容</h5>
-        </div>
-        <div class="col-8 py-1 px-2 border border-dark align-middle">
-          <ul>
-            <li v-for="(item, index) in items" :key="index">
-              依頼品種別:{{ item.name }} - 単価: {{ item.price }}円
-            </li>
-            <li>
-              送料: {{shipping.price}}円
-            </li>
-          </ul>
-        </div>
+  <div class="row py-3">
+    <h4>受付内容の確認</h4>
+    <div class="row justify-content-center w-100 p-3">
+      <div class="col-sm-4 p-2 bg-dark text-white">
+        <h5>注文内容</h5>
       </div>
-      <div class="row justify-content-center w-100 p-3">
-        <div class="col-4 p-2 bg-dark text-white">
-          <h5>見積り合計金額</h5>
-        </div>
-        <div class="col-8 py-1 px-2 border border-dark align-middle">
-          {{totalprice + shipping.price}} 円
-        </div>
+      <div class="col-sm-8 py-1 px-2 border border-dark align-middle">
+        <ul>
+          <li v-for="(item, index) in items" :key="index">
+            依頼品種別:{{ item.name }} - 単価: {{ item.price }}円
+          </li>
+          <li>
+            送料: {{shipping.price}}円
+          </li>
+        </ul>
       </div>
-      <div class="row justify-content-center w-100 p-3">
-        <div class="col-4 p-2 bg-dark text-white">
-          <h5>お客様情報</h5>
-        </div>
-        <div class="col-8 py-1 px-2 border border-dark align-middle">
-          <p>名前：{{customer.name}}</p>
-          <p>メールアドレス: {{ customer.email }}</p>
-          <p>電話番号: {{ customer.phonenumber }}</p>
-          <p>住所: {{ customer.address }}</p>
-          <p>年齢: {{ customer.age }}</p>
-          <p>性別: {{ customer.sex }}</p>
-        </div>
+    </div>
+    <div class="row justify-content-center w-100 p-3">
+      <div class="col-sm-4 p-2 bg-dark text-white">
+        <h5>見積り金額合計</h5>
       </div>
-      <div class="row justify-content-center w-100 p-3">
-        <div class="col-4 p-2 bg-dark text-white">
-          <h5>事前に確認したい内容</h5>
-        </div>
-        <div class="col-8 py-1 px-2 border border-dark align-middle">
-          <p>{{order.note}}</p>
-        </div>
+      <div class="col-sm-8 py-1 px-2 border border-dark align-middle">
+        {{totalprice + shipping.price}} 円
       </div>
-      <div class="py-3">
-        <div class="pb-1">
-          <button @click="submit" class="btn btn-outline-dark">内容を確定して仮見積を送信する</button>
-        </div>
-        <div>
-          <button @click="previous" class="btn btn-outline-dark">前へ</button>
-        </div>
+    </div>
+    <div class="row justify-content-center w-100 p-3">
+      <div class="col-sm-4 p-2 bg-dark text-white">
+        <h5>お客様情報</h5>
+      </div>
+      <div class="col-sm-8 py-1 px-2 border border-dark align-middle">
+        <p>名前：{{customer.name}}</p>
+        <p>メールアドレス: {{ customer.email }}</p>
+        <p>電話番号: {{ customer.phonenumber }}</p>
+        <p>住所: {{ customer.address }}</p>
+        <p>年齢: {{ customer.age }}</p>
+        <p>性別: {{ customer.sex }}</p>
+      </div>
+    </div>
+    <div class="row justify-content-center w-100 p-3">
+      <div class="col-sm-4 p-2 bg-dark text-white">
+        <h5>事前に確認したい内容</h5>
+      </div>
+      <div class="col-sm-8 py-1 px-2 border border-dark align-middle">
+        <p>{{order.note}}</p>
+      </div>
+    </div>
+    <div class="py-3">
+      <div class="pb-1">
+        <button @click="submit" class="btn btn-outline-dark">内容を確定して仮見積を送信する</button>
+      </div>
+      <div>
+        <button @click="previous" class="btn btn-outline-dark">前へ</button>
       </div>
     </div>
   </div>

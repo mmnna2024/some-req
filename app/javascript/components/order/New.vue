@@ -37,16 +37,18 @@ function handlePageChange(data) {
 </script>
 
 <template>
-  <div class="mx-auto" style="width: 800px;">
-    <div>
-      <keep-alive>
-        <component :is="Pages[currentPageIndex]" 
-          :categories="initialData.categories"
-          :shippings="initialData.shippings" 
-          @change-page="handlePageChange" 
-          @files-selected="handleFilesSelected"
-          v-bind="formData" />
-      </keep-alive>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <keep-alive>
+          <component :is="Pages[currentPageIndex]" 
+            :categories="initialData.categories"
+            :shippings="initialData.shippings" 
+            @change-page="handlePageChange" 
+            @files-selected="handleFilesSelected"
+            v-bind="formData" />
+        </keep-alive>
+      </div>
     </div>
   </div>
 </template>
@@ -83,26 +85,31 @@ export default {
 <style>
 .categories-table {
   border: 1px solid gray;
-  margin: 10px;
+}
+
+.order-table-top {
+  border: 1px solid gray;
+  padding: 10px;
+  color: white;
+  background-color: #333;
+  font-weight: bold;
+}
+
+.order-table {
+  border: 1px solid gray;
+  padding: 10px;
 }
 
 .categories-table th,
 .categories-table td {
   border: 1px solid gray;
-  padding: 10px
+  
 }
 
 .total-table {
   border: 5px solid gray;
-  margin: 10px;
-}
-
-.total-table th,
-.total-table td {
-  border: 1px solid rgb(204, 204, 204);
   color: #ff0019;
   font-size: 20px;
-  padding: 10px
 }
 
 .error-message {
