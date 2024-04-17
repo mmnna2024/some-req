@@ -11,22 +11,24 @@
               <th scope="col" style="width: 30%">単価</th>
             </tr>
             </thead>
-            <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
-              <td>
-                <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="form-select" >
-                  <option disabled value="">依頼する衣類を一つずつお選びください</option>
-                  <option v-for="(category, index) in categories" :key="index" :value="category">
-                    {{ category.name }}
-                  </option>
-                </select>
-              </td>
-              <td>
-                <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
-              </td>
-              <td class="align-middle">
-                <a>{{ selected[v_index].price }}</a>
-              </td>
-            </tr>
+            <transition-group  name="transit">
+              <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
+                <td>
+                  <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="form-select" >
+                    <option disabled value="">依頼する衣類を一つずつお選びください</option>
+                    <option v-for="(category, index) in categories" :key="index" :value="category">
+                      {{ category.name }}
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
+                </td>
+                <td class="align-middle">
+                  <a>{{ selected[v_index].price }}</a>
+                </td>
+              </tr>
+            </transition-group>
           </table>
           <!--エラーメッセージ-->
           <div class="px-3">
@@ -322,4 +324,36 @@ export default {
     },
   },
 };
+
 </script>
+
+<style>
+.trans {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-size: 20pt;
+}
+
+.transit-enter-active {
+  transition: opacity 1s;
+}
+.transit-leave-active {
+  transition: opacity 300ms;
+}
+.transit-enter {
+  opacity: 0;
+}
+t .transit-enter-from {
+  opacity: 0;
+}
+.transit-enter-to {
+  opacity: 1;
+}
+.transit-leave {
+  opacity: 1;
+}
+.transit-leave-to {
+  opacity: 0;
+}
+</style>
