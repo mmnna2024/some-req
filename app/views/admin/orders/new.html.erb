@@ -1,6 +1,6 @@
 <h2 class="mt-4 mb-2 text-white bg-dark-custom p-3"><%= t("admin.order_forms.new.title") %></h2>
 <%= javascript_pack_tag 'admin/order_new', 'data-turbolinks-track': "reload" %>
-<%= stylesheet_pack_tag 'admin/order_new' %>
+<%= stylesheet_pack_tag 'admin/order_new', media: "all"  %>
 <%= content_tag :div,
   id: "adminNew",
   data: {
