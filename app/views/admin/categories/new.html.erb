@@ -1,4 +1,4 @@
-<h2 class="mt-4 mb-2 text-white bg-dark p-3"><%= t('admin.categories.new.title') %></h2>
+<h2 class="mt-4 mb-2 text-white bg-dark-custom p-3"><%= t('admin.categories.new.title') %></h2>
 
 <%= form_with(model: @category, url: admin_categories_path, local: true) do |form| %>
   <% if @category.errors.any? %>

@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories do
-      collection do#display_updateメソッドは一括でcategoriesを更新するためcollectionでルーティングを指定している
-        patch :display_update
+      member do
+        put :display_update
       end
     end
     resources :orders do
