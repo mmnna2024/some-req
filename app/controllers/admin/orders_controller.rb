@@ -1,9 +1,8 @@
-class Admin::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :new, :create, :edit, :update, :destroy]
-
+class Admin::OrdersController < AdminController
+  
   def unchecked_index
-    @q = Order.ransack(params[:q])
-    @unchecked_orders = @q.result(distinct: true).includes(:customer, items: :category).where(status: 0).sort_oldest.page(params[:page])
+    @q = Order.where(status: 0).ransack(params[:q])
+    @unchecked_orders = @q.result(distinct: true).includes(:customer, items: :category).sort_oldest.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -12,8 +11,8 @@ class Admin::OrdersController < ApplicationController
   end
 
   def checked_index
-    @q = Order.ransack(params[:q])
-    @checked_orders = @q.result(distinct: true).includes(items: :category).where(status: 1).sort_latest.page(params[:page])
+    @q = Order.where(status: 1).ransack(params[:q])
+    @checked_orders = @q.result(distinct: true).includes(items: :category).sort_latest.page(params[:page])
 
     respond_to do |format|
       format.html

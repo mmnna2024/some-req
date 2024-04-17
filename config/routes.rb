@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, {
+    path: 'admin',
+  }
   root 'hello_vue#index'
   get 'hello_vue/index'
   get 'orders/new'
@@ -22,8 +24,8 @@ Rails.application.routes.draw do
         get :unchecked_index
         get :checked_index
         get :complete
-        get 'search' => 'orders#unchecked_index'
-        get 'search' => 'orders#checked_index'
+        get 'unchecked_search' => 'orders#unchecked_index'
+        get 'checked_search' => 'orders#checked_index'
       end
     end
   end

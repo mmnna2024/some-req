@@ -20,5 +20,6 @@ FactoryBot.define do
   factory :category4, class: Category do
     name { "パーカー" }
     price { 3300 }
+    display { false }
   end
 end
