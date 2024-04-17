@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 document.addEventListener("DOMContentLoaded", () => {
-    const node = document.getElementById("adminNew");
-    const initialData = JSON.parse(node.getAttribute("data"));
-    const app = createApp(New, { initialData: initialData })
-    app.mount("#adminNew");
+  const node = document.getElementById("adminNew");
+  const initialData = JSON.parse(node.getAttribute("data"));
+  const app = createApp(New, { initialData })
+  app.mount("#adminNew");
 });

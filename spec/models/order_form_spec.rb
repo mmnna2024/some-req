@@ -50,25 +50,25 @@ RSpec.describe OrderForm, type: :model do
       it '依頼品の金額が空の場合保存できない' do
         item.price = nil
         order_form.valid?
-        expect(order_form.errors.full_messages).to include("Items Price can't be blank")
+        expect(order_form.errors.full_messages).to include("依頼品料金を入力してください")
       end
 
       it '依頼者の名前が空の場合保存できない' do
         order_form.name = ""
         order_form.valid?
-        expect(order_form.errors.full_messages).to include("Name can't be blank")
+        expect(order_form.errors.full_messages).to include("名前を入力してください")
       end
 
       it '依頼者の電話番号が空の場合保存できない' do
         order_form.phonenumber = ""
         order_form.valid?
-        expect(order_form.errors.full_messages).to include("Phonenumber can't be blank")
+        expect(order_form.errors.full_messages).to include("電話番号を入力してください")
       end
 
       it '依頼者の住所が空の場合保存できない' do
         order_form.address = ""
         order_form.valid?
-        expect(order_form.errors.full_messages).to include("Address can't be blank")
+        expect(order_form.errors.full_messages).to include("住所を入力してください")
       end
     end
   end

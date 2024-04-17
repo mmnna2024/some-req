@@ -18,9 +18,6 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  def update
-  end
-
   def display_update
     checked_ids = params[:category_ids]
     Category.where(id: checked_ids).update_all(display: true)

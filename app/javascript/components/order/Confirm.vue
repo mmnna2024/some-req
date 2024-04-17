@@ -1,4 +1,4 @@
-<<template>
+<template>
   <div class="container">
     <div class="row py-3">
       <h2>受付内容の確認</h2>

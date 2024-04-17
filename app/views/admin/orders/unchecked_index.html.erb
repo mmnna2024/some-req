@@ -1,4 +1,6 @@
-<h2 class="mt-4 mb-1 text-white bg-dark p-3"><%= t("admin.order_forms.index.unchecked_title") %></h2>
+<h2 class="mt-4 mb-1 text-white bg-dark p-3">
+  <%= t("admin.order_forms.index.unchecked_title") %>
+</h2>
 
 <%= search_form_for @q, url: search_admin_orders_path do |f| %>
   <div class="d-flex justify-content-end my-1">
@@ -10,6 +12,7 @@
         <%= f.search_field :customer_name_cont, class: "form-control form-control-sm" %>
       </div>
     </div>
+
     <div class="row align-items-center p-2">
       <div class="col-auto p-2">
         <%= f.label :customer_phonenumber_cont, '電話番号', class: "form-label mb-0" %>
@@ -18,6 +21,7 @@
         <%= f.search_field :customer_phonenumber_cont, class: "form-control form-control-sm" %>
       </div>
     </div>
+
     <div class="row align-items-center p-2">
       <div class="col-auto p-2">
         <%= f.label :ordered_on, "期間", class: "form-label mb-0" %>

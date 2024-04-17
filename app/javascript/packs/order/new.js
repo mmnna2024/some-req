@@ -6,6 +6,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 document.addEventListener("DOMContentLoaded", () => {
     const node = document.getElementById("orderNew");
     const initialData = JSON.parse(node.getAttribute("data"));
-    const app = createApp(New, { initialData: initialData })
+    const app = createApp(New, { initialData })
     app.mount("#orderNew");
 });

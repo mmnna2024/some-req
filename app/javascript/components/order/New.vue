@@ -1,11 +1,15 @@
 <script setup>
+import { ref, reactive } from 'vue'
 import Form from './Form.vue'
 import Important from './Important.vue'
 import Confirm from './Confirm.vue'
-import { ref, reactive } from 'vue'
 
 const currentPageIndex = ref(0)
-const Pages = [Form, Important, Confirm]
+const Pages = [
+  Form,
+  Important,
+  Confirm
+]
 const formData = reactive({
   customer: {
     name: '',
@@ -40,10 +44,11 @@ function handlePageChange(data) {
   <div class="mx-auto" style="width: 800px;">
     <div>
       <keep-alive>
-        <component :is="Pages[currentPageIndex]" 
+        <component
+          :is="Pages[currentPageIndex]"
           :categories="initialData.categories"
-          :shippings="initialData.shippings" 
-          @change-page="handlePageChange" 
+          :shippings="initialData.shippings"
+          @change-page="handlePageChange"
           @files-selected="handleFilesSelected"
           v-bind="formData" />
       </keep-alive>

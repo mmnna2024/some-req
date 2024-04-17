@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
       render json: { error: @order.errors.full_messages }, status: :unprocessable_entity
     end
   end
-    
+
   def complete
     @items = Item.last
   end
@@ -44,17 +44,20 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_form).permit(
-      :ordered_on, 
-      :status, :channel, 
-      :price, :note, 
-      :customer_id, 
+    params.require(:order_form)
+    .permit(
+      :ordered_on,
+      :status,
+      :channel,
+      :price,
+      :note,
+      :customer_id,
       :shipping_id,
-      :name, 
-      :email, 
-      :phonenumber, 
-      :address, 
-      :age, 
+      :name,
+      :email,
+      :phonenumber,
+      :address,
+      :age,
       :sex,
       category_ids: [],
       order_items: [:category_id, images: {}]

@@ -1,18 +1,24 @@
 class Admin::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   def unchecked_index
     @q = Order.ransack(params[:q])
-    @unchecked_orders = @q.result(distinct: true).includes(:customer, items: :category).where(status: 0).sort_oldest.page(params[:page])
+    @unchecked_orders = @q.result(distinct: true)
+                          .includes(:customer, items: :category)
+                          .unchecked_order
+                          .sort_oldest.page(params[:page])
   end
 
   def checked_index
     @q = Order.ransack(params[:q])
-    @checked_orders = @q.result(distinct: true).includes(items: :category).where(status: 1).sort_latest.page(params[:page])
+    @checked_orders = @q.result(distinct: true)
+                        .includes(items: :category)
+                        .checked_order
+                        .sort_latest
+                        .page(params[:page])
   end
 
   def new
-    order = Order.new
     @categories = Category.where(display: true).map do |category|
       {
         id: category.id,

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, {
+    path: 'admin',
+  }
   root 'hello_vue#index'
   get 'hello_vue/index'
   get 'orders/new'
@@ -12,10 +14,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :categories do
-      collection do#display_updateメソッドは一括でcategoriesを更新するためcollectionでルーティングを指定している
+      collection do #display_updateメソッドは一括でcategoriesを更新するためcollectionでルーティングを指定している
         patch :display_update
       end
+
     end
+
     resources :orders do
       resources :show_pdf, only: :index
       collection do
@@ -26,10 +30,12 @@ Rails.application.routes.draw do
         get 'search' => 'orders#checked_index'
       end
     end
+
   end
-  
+
   #letter_openerを使用するためのルーティング
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+
 end
