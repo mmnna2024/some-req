@@ -1,6 +1,5 @@
-class Admin::OrdersController < ApplicationController
-  before_action :authenticate_admin!, only: [:unchecked_index, :checked_index, :new, :create, :edit, :update, :destroy]
-
+class Admin::OrdersController < AdminController
+  
   def unchecked_index
     @q = Order.ransack(params[:q])
     @unchecked_orders = @q.result(distinct: true).includes(:customer, items: :category).where(status: 0).sort_oldest.page(params[:page])

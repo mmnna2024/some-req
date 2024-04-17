@@ -15,9 +15,9 @@ ja:
       invalid: "%{authentication_keys}またはパスワードが違います。"
       not_found_in_database: "%{authentication_keys}またはパスワードが違います。"
       timeout: "セッションがタイムアウトしました。もう一度ログインしてください。"
-      unauthenticated: "ログインもしくはアカウント登録してください。"
+      unauthenticated: "ログインしてください。"
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
-      already_signed_out: "すでにログアウトしています。"
+      already_signed_out: "ログアウトしました。"
       title: ログインページ

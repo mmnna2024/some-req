@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admins, {
+    path: 'admin',
+  }
   root 'hello_vue#index'
   get 'hello_vue/index'
   get 'orders/new'

@@ -1,4 +1,5 @@
-class Admin::ShowPdfController < ApplicationController
+class Admin::ShowPdfController < AdminController
+  
   def index
     @record = Order.find(params[:order_id])
     respond_to do |format|

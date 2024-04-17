@@ -1,6 +1,5 @@
-class Admin::CategoriesController < ApplicationController
-  before_action :authenticate_admin!
-
+class Admin::CategoriesController < AdminController
+  
   def index
     @categories = Category.all.sort_by_true_latest.page(params[:page]).per(10)
 
