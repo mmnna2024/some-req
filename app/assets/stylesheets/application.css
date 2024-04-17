@@ -16,21 +16,21 @@
 
 /* ページネーション用CSS */
 .pagination .page-link {
-  background-color: black;
+  background-color: #333;
   color: white;
-  border: 1px solid black;
+  border: 1px solid #333;
 }
 
 .pagination .page-link:hover {
   background-color: white;
-  color: black;
-  border: 1px solid black;
+  color: #F8C900;
+  border: 1px solid #333;
 }
 
 .pagination .active .page-link {
   background-color: white;
-  color: black;
-  border: 1px solid black;
+  color: #333;
+  border: 1px solid #333;
 }
 
 /* 受注一覧のリンク用 */
@@ -39,7 +39,7 @@ a.primary-link {
 }
 
 a.primary-link:hover {
-  color: black;
+  color: #F8C900;
   text-decoration: underline;
 }
 
@@ -65,27 +65,80 @@ a.danger-link:hover {
 }
 
 .btn-outline-custom {
-  color: black !important;
+  color: #333 !important;
   background-color: white !important;
-  border-color: black !important;
+  border-color: #333 !important;
 }
 
 .btn-outline-custom:hover {
-  color: white !important;
-  background-color: black !important;
-  border-color: black !important;
+  color: #F8C900 !important;
+  background-color: #333 !important;
+  border-color: white !important;
 }
 
 .btn-outline-custom-opposite {
   color: white !important;
-  background-color: black !important;
-  border-color: black !important;
+  background-color: #333 !important;
+  border-color: #333 !important;
 }
 
 .btn-outline-custom-opposite:hover {
-  color: black !important;
+  color: #F8C900 !important;
+  background-color: white !important;
+  border-color: #333 !important;
+}
+/* bootstrapのテーブルヘッダーcss上書き */
+.table-dark {
+  --bs-table-bg: #333 !important;
+  --bs-table-border-color: #333 !important;
+}
+/* ナビバーにホバー追加 */
+.navbar-nav .nav-link:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.btn-outline-custom-opposite {
+  color: white !important;
+  background-color: #333 !important;
+  border-color: #333 !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: #F8C900 !important;
+  background-color: white !important;
+  border-color: #333 !important;
+}
+/* bootstrapのテーブルヘッダーcss上書き */
+.table-dark {
+  --bs-table-bg: #333 !important;
+  --bs-table-border-color: #333 !important;
+}
+/* ナビバーにホバー追加 */
+.navbar-nav .nav-link:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #333;
+  color: #F8C900 !important;
+}
+
+.btn-outline-custom-opposite:hover {
+  color: #F8C900 !important;
   background-color: white !important;
   border-color: black !important;
 }
 
 /* オンライン注文フォーム用 */
+
+
+.btn:hover {
+  color: #F8C900 !important;
+}

@@ -4,11 +4,21 @@ class Admin::OrdersController < ApplicationController
   def unchecked_index
     @q = Order.ransack(params[:q])
     @unchecked_orders = @q.result(distinct: true).includes(:customer, items: :category).where(status: 0).sort_oldest.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def checked_index
     @q = Order.ransack(params[:q])
     @checked_orders = @q.result(distinct: true).includes(items: :category).where(status: 1).sort_latest.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

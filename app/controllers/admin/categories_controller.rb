@@ -2,7 +2,12 @@ class Admin::CategoriesController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @categories = Category.all
+    @categories = Category.all.sort_by_true_latest.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -18,14 +23,10 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  def update
-  end
-
   def display_update
-    checked_ids = params[:category_ids]
-    Category.where(id: checked_ids).update_all(display: true)
-    Category.where.not(id: checked_ids).update_all(display: false)
-    redirect_to admin_categories_path, flash: { notice: "更新しました" }
+    category = Category.find(params[:id])
+    category.update(display: !category.display)
+    redirect_to admin_categories_path
   end
 
   def destroy
