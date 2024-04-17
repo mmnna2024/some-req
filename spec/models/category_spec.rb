@@ -14,19 +14,19 @@ RSpec.describe Category, type: :model do
     it "カテゴリー名が空欄の場合、バリデーションに失敗する" do
       category1.update(name: nil)
       expect(category1).to be_invalid
-      expect(category1.errors.full_messages).to eq ["Name can't be blank"]
+      expect(category1.errors.full_messages).to eq ["メニュー名を入力してください。"]
     end
 
     it "料金が空欄の場合、バリデーションに失敗する" do
       category1.update(price: nil)
       expect(category1).to be_invalid
-      expect(category1.errors.full_messages).to eq ["Price can't be blank"]
+      expect(category1.errors.full_messages).to eq ["料金を入力してください。"]
     end
 
     it "カテゴリー名が同じ場合、バリデーションに失敗する" do
       category1.update(name: "ワンピース")
       expect(category1).to be_invalid
-      expect(category1.errors.full_messages).to eq ["Name has already been taken"]
+      expect(category1.errors.full_messages).to eq ["メニュー名はすでに存在します。"]
     end
   end
 
