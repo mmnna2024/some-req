@@ -2,11 +2,18 @@
   <div>
     <div class="py-3">
       <h4>ご依頼内容</h4>
-      <div class="px-3">
+        <div class="card">
+          <div class="card-body">
+            ご依頼したい衣類種目を選択し、全体写真、衣類タグ写真をアップロードしてください。<br>
+            衣類のカテゴリーは
+            <a class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/">こちら</a>
+          </div>
+        </div>
+      <div class="px-3 pt-3">
         <div class="row order-table-top justify-content-between pt-1">
-          <div class="col-5 d-none d-md-block d-xl-block d-xxl-block">衣類選択</div>
-          <div class="col-4 d-none d-md-block d-xl-block d-xxl-block">衣類タグ、全体写真アップロード</div>
-          <div class="col-3 d-none d-md-block d-xl-block d-xxl-block">単価</div>
+          <div class="col-5 d-none d-md-block d-xl-block d-xxl-block text-center">衣類選択</div>
+          <div class="col-5 d-none d-md-block d-xl-block d-xxl-block text-center">全体写真、衣類タグアップロード</div>
+          <div class="col-2 d-none d-md-block d-xl-block d-xxl-block text-center">単価</div>
         </div>
         <transition-group  name="transit">
           <div class="row order-table justify-content-between" v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
@@ -18,10 +25,10 @@
                 </option>
               </select>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
               <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
             </div>
-            <div class="col-sm-3 align-middle">
+            <div class="col-sm-2 align-self-center d-flex justify-content-center">
               <a>{{ selected[v_index].price }}</a>
             </div>
           </div>
@@ -29,7 +36,7 @@
       </div>
       <!--エラーメッセージ-->
       <div class="px-3">
-        <p class="error-message">{{ validation.selectedResult }}</p>
+        <ErrorMessage :message="validation.selectedResult" />
       </div>
       <div class="row justify-content-between px-3 pb-3">
         <div class="col-sm-4 pb-1">
@@ -39,7 +46,7 @@
         <div class="col-sm-4">
           <div class="row">
             <div class="col-sm order-table">依頼品合計</div>
-            <div class="col-sm order-table">{{ totalPrice }}円</div>
+            <div class="col-sm order-table text-center">{{ totalPrice }}円</div>
           </div>
         </div>
       </div>
@@ -57,12 +64,12 @@
         <div class="col-sm-4">
           <div class="row">
             <div class="col-sm order-table">送料</div>
-            <div class="col-sm order-table">{{selected_shipping.price}}円</div>
+            <div class="col-sm order-table text-center">{{selected_shipping.price}}円</div>
           </div>
         </div>
         <!--エラーメッセージ-->
         <div class="px-3">
-          <p class="error-message">{{ validation.shippingResult }}</p>
+          <ErrorMessage :message="validation.shippingResult" />
         </div>
       </div>
 
@@ -73,7 +80,7 @@
         <div class="col-sm-4">
           <div class="row total-table">
             <div class="col-sm border p-1">合計</div>
-            <div class="col-sm p-1">{{ totalPrice + selected_shipping.price }}円</div>
+            <div class="col-sm p-1 text-center">{{ totalPrice + selected_shipping.price }}円</div>
           </div>
         </div>
       </div>
@@ -87,7 +94,7 @@
             <input type="text" v-model="customer.name" id="order-name" class="form-control" required>
             <!--エラーメッセージ-->
             <div>
-              <p class="error-message">{{ validation.nameResult }}</p>
+              <ErrorMessage :message="validation.nameResult" />
             </div>
           </div>
           <div class="col-sm-10">
@@ -99,7 +106,7 @@
             <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control" required>
             <!--エラーメッセージ-->
             <div>
-              <p class="error-message">{{ validation.phonenumberResult }}</p>
+              <ErrorMessage :message="validation.phonenumberResult" />
             </div>  
           </div>
           
@@ -108,7 +115,7 @@
             <input v-model="customer.address" id="order-address" class="form-control" required>
             <!--エラーメッセージ-->
             <div>
-              <p class="error-message">{{ validation.addressResult }}</p>
+              <ErrorMessage :message="validation.addressResult" />
             </div>  
           </div>
           <div class="col-sm-5">
@@ -132,8 +139,11 @@
 </template>
 
 <script>
-
+import ErrorMessage from './ErrorMessage.vue';
 export default {
+  components: {
+    ErrorMessage
+  },
   props: {
     categories: {
       type: Array,
