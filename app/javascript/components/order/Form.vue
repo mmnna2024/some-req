@@ -77,7 +77,7 @@
         </div>
         <div class="col-sm-4">
           <div class="row total-table">
-            <div class="col-sm border p-1">合計</div>
+            <div class="col-sm border p-1">見積り合計</div>
             <div class="col-sm p-1 text-center">{{ totalPrice + selected_shipping.price }}円</div>
           </div>
         </div>
@@ -138,6 +138,15 @@
 
 <script>
 import ErrorMessage from './ErrorMessage.vue';
+import {
+  nameValidate,
+  phonenumberValidate,
+  addressValidate,
+  selectedValidate,
+  shippingValidate,
+  crearValidation
+} from '../../packs/utils/validator.js';
+
 export default {
   components: {
     ErrorMessage
@@ -171,7 +180,7 @@ export default {
         price: 0,
       },
       validation: {
-        nameResultameResult: '',
+        nameResult: '',
         phonenumberResult: '',
         addressResult: '',
         selectedResult: '',
@@ -226,93 +235,23 @@ export default {
       }
     },    
       checkValidate() {
-      const name_error_message = this.nameValidate(this.customer.name)
-      if(name_error_message === true) {
-        this.validation.nameResult = '';
-      } else {
-        this.validation.nameResult = name_error_message;
-      }
-
-      const phonenumber_error_message = this.phonenumberValidate(this.customer.phonenumber)
-      if(phonenumber_error_message === true) {
-        this.validation.phonenumberResult = '';
-      } else {
-        this.validation.phonenumberResult = phonenumber_error_message;
-      }
-
-      const address_error_message = this.addressValidate(this.customer.address)
-      if(address_error_message === true) {
-        this.validation.addressResult = '';
-      } else {
-        this.validation.addressResult = address_error_message;
-      }
-
-      const selected_error_message = this.selectedValidate(this.selected)
-      if(selected_error_message === true) {
-        this.validation.selectedResult = '';
-      } else {
-        this.validation.selectedResult = selected_error_message;
-      }
-
-      const shipping_error_message = this.shippingValidate(this.selected_shipping)
-      if(shipping_error_message === true) {
-        this.validation.shippingResult = '';
-      } else {
-        this.validation.shippingResult = shipping_error_message;
-      }
-
-      if (this.crearValidation(this.validation) ==  true) {
+        // NOTE: validationの順番に依存しているため、順番を変えないように注意
+      [
+        nameValidate(this.customer.name),
+        phonenumberValidate(this.customer.phonenumber),
+        addressValidate(this.customer.address),
+        selectedValidate(this.selected),
+        shippingValidate(this.selected_shipping?.id)
+      ].forEach((result, index) => {
+        this.validation[Object.keys(this.validation)[index]] = result.message;
+      });
+      if (crearValidation(this.validation) ==  true) {
         return this.valid = true
       }
       else{
         return this.valid = false
       }
     },
-    
-    nameValidate(name) {
-      if(!name) {
-        return '名前は入力必須項目です。';
-      }
-      return true;
-    },
-
-    phonenumberValidate(phonenumber) {
-      if(!phonenumber) {
-        return '電話番号は入力必須項目です。';
-      }
-      if(!phonenumber.match(/[0-9]+/g)) {
-        return '整数で入力してください';
-      }
-      return true;
-    },
-
-    addressValidate(address) {
-      if(!address) {
-        return '住所は入力必須項目です。';
-      }
-      return true;
-    },
-
-    selectedValidate(selected) {
-      let validationResult = true;
-      selected.forEach((select) => {
-    if (select.category && select.category.id !== undefined && Number.isNaN(select.category.id)) {
-      validationResult = '衣類の選択をしてください。'; // エラーメッセージを設定
-    }
-  });
-  return validationResult; // 結果を返す
-},
-
-    shippingValidate(shipping) {
-      if(Number.isNaN(shipping.id)) {
-        return '送付先の選択をしてください。';
-      }
-      return true;
-    },
-
-    crearValidation(msg) {
-      return Object.values(msg).every(value => value === '');
-    }
   },
   computed: {
     totalPrice() {
