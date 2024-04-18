@@ -1,145 +1,134 @@
 <template>
-  <div class="container">
-    <div class="row">
-        <div class="py-3">
-          <h4>ご依頼内容</h4>
-          <table class="table categories-table">
-            <thead class="table-dark">
-            <tr>
-              <th scope="col" style="width: 40%">衣類選択</th>
-              <th scope="col" style="width: 30%">衣類タグ、全体写真アップロード</th>
-              <th scope="col" style="width: 30%">単価</th>
-            </tr>
-            </thead>
-            <transition-group  name="transit">
-              <tr v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
-                <td>
-                  <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="form-select" >
-                    <option disabled value="">依頼する衣類を一つずつお選びください</option>
-                    <option v-for="(category, index) in categories" :key="index" :value="category">
-                      {{ category.name }}
-                    </option>
-                  </select>
-                </td>
-                <td>
-                  <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
-                </td>
-                <td class="align-middle">
-                  <a>{{ selected[v_index].price }}</a>
-                </td>
-              </tr>
-            </transition-group>
-          </table>
-          <!--エラーメッセージ-->
-          <div class="px-3">
-            <p class="error-message">{{ validation.selectedResult }}</p>
-          </div>
-          <div class="row justify-content-between px-3">
-            <div class="col-4">
-              <a @click="increment" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover p-1">衣類を追加する</a>
-              <a @click="decrement" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">１つ削除する</a>
-            </div>
-            <div class="col-4">
-              <table class="table categories-table" width="200">
-                <tr>
-                  <td scope="col" style="width: 50%">依頼品合計</td>
-                  <td scope="col" style="width: 50%">{{ totalPrice }}円</td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <h4>送料</h4>
-          <div class="row justify-content-between align-items-center px-3">
-            <div class="col-sm">
-              <select v-model="selected_shipping" class="form-select">
-                <option disabled value="">地域区分を選択してください。</option>
-                <option v-for="(shipping, index) in shippings" :key="index" :value="shipping">
-                  {{ shipping.name }}
+  <div>
+    <div class="py-3">
+      <h4>ご依頼内容</h4>
+      <div class="px-3">
+        <div class="row order-table-top justify-content-between pt-1">
+          <div class="col-5 d-none d-md-block d-xl-block d-xxl-block">衣類選択</div>
+          <div class="col-4 d-none d-md-block d-xl-block d-xxl-block">衣類タグ、全体写真アップロード</div>
+          <div class="col-3 d-none d-md-block d-xl-block d-xxl-block">単価</div>
+        </div>
+        <transition-group  name="transit">
+          <div class="row order-table justify-content-between" v-for="(v, v_index) in selected.length" :key="`selected_${v_index}`">
+            <div class="col-sm-5">
+              <select v-model="selected[v_index]" @change="() => setContent(v_index)"  class="form-select" >
+                <option disabled value="">依頼する衣類を一つずつお選びください</option>
+                <option v-for="(category, index) in categories" :key="index" :value="category">
+                  {{ category.name }}
                 </option>
               </select>
             </div>
-            <div class="col-4">
-              <table class="table categories-table" width="200">
-                <tr>
-                  <td scope="col" style="width: 50%">送料</td>
-                  <td scope="col" style="width: 50%">{{selected_shipping.price}}円</td>
-                </tr>
-              </table>
+            <div class="col-sm-4">
+              <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
+            </div>
+            <div class="col-sm-3 align-middle">
+              <a>{{ selected[v_index].price }}</a>
             </div>
           </div>
+        </transition-group>
+      </div>
+      <!--エラーメッセージ-->
+      <div class="px-3">
+        <p class="error-message">{{ validation.selectedResult }}</p>
+      </div>
+      <div class="row justify-content-between px-3 pb-3">
+        <div class="col-sm-4 pb-1">
+          <a @click="increment" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover p-1">衣類を追加する</a>
+          <a @click="decrement" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">１つ削除する</a>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm order-table">依頼品合計</div>
+            <div class="col-sm order-table">{{ totalPrice }}円</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-between px-3 pt-3">
+        <h4>送料</h4>
+        <div class="col-sm-8 pb-2">
+          <select v-model="selected_shipping" class="form-select">
+            <option disabled value="">地域区分を選択してください。</option>
+            <option v-for="(shipping, index) in shippings" :key="index" :value="shipping">
+              {{ shipping.name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-sm order-table">送料</div>
+            <div class="col-sm order-table">{{selected_shipping.price}}円</div>
+          </div>
+        </div>
         <!--エラーメッセージ-->
         <div class="px-3">
           <p class="error-message">{{ validation.shippingResult }}</p>
         </div>
+      </div>
 
-        <div class="row justify-content-between px-3">
-          <div class="col-sm">
-            <p>※着払いのため送料は参考価格です。</p>
-          </div>
-          <div class="col-4">
-            <table class="table total-table" width="100">
-                <tr>
-                  <td scope="col" style="width: 50%">合計</td>
-                  <td scope="col" style="width: 50%">{{ totalPrice + selected_shipping.price }}円</td>
-                </tr>
-              </table>
-          </div>
+      <div class="row justify-content-between px-3">
+        <div class="col-sm">
+          <p>※着払いのため送料は参考価格です。</p>
         </div>
-
-        <div class="p-3">
-          <h4>お客様情報</h4>
-          <form>
-            <div class="row g-3">
-              <div class="col-10">
-                <label for="order-name">氏名[必須]</label>
-                <input type="text" v-model="customer.name" id="order-name" class="form-control" required>
-                <!--エラーメッセージ-->
-                <div>
-                  <p class="error-message">{{ validation.nameResult }}</p>
-                </div>
-              </div>
-              <div class="col-10">
-                <label for="order-email">メールアドレス</label>
-                <input v-model="customer.email" id="order-email" class="form-control">
-              </div>
-              <div class="col-10">
-                <label for="order-phonenumber">電話番号[必須]</label>
-                <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control" required>
-                <!--エラーメッセージ-->
-                <div>
-                  <p class="error-message">{{ validation.phonenumberResult }}</p>
-                </div>  
-              </div>
-              
-              <div class="col-10">
-                <label for="order-address">住所[必須]</label>
-                <input v-model="customer.address" id="order-address" class="form-control" required>
-                <!--エラーメッセージ-->
-                <div>
-                  <p class="error-message">{{ validation.addressResult }}</p>
-                </div>  
-              </div>
-              <div class="col-5">
-                <label for="order-sex">性別</label>
-                <select v-model="customer.sex" id="order-sex"  class="form-select">
-                  <option  value="male">男性</option>
-                  <option  value="female">女性</option>
-                </select>
-              </div>
-              <div class="col-5">
-                <label for="order-age">年齢</label>
-                <input v-model="customer.age" id="order-address" class="form-control">
-              </div>
-            </div>
-          </form>
-          <div class="py-3">
-            <button @click="next" class="btn btn-outline-dark">次へ</button>
+        <div class="col-sm-4">
+          <div class="row total-table">
+            <div class="col-sm border p-1">合計</div>
+            <div class="col-sm p-1">{{ totalPrice + selected_shipping.price }}円</div>
           </div>
         </div>
       </div>
     </div>
+    <div class="py-3">
+      <h4>お客様情報</h4>
+      <form>
+        <div class="row g-3">
+          <div class="col-sm-10">
+            <label for="order-name">氏名[必須]</label>
+            <input type="text" v-model="customer.name" id="order-name" class="form-control" required>
+            <!--エラーメッセージ-->
+            <div>
+              <p class="error-message">{{ validation.nameResult }}</p>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <label for="order-email">メールアドレス</label>
+            <input v-model="customer.email" id="order-email" class="form-control">
+          </div>
+          <div class="col-sm-10">
+            <label for="order-phonenumber">電話番号[必須]</label>
+            <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control" required>
+            <!--エラーメッセージ-->
+            <div>
+              <p class="error-message">{{ validation.phonenumberResult }}</p>
+            </div>  
+          </div>
+          
+          <div class="col-sm-10">
+            <label for="order-address">住所[必須]</label>
+            <input v-model="customer.address" id="order-address" class="form-control" required>
+            <!--エラーメッセージ-->
+            <div>
+              <p class="error-message">{{ validation.addressResult }}</p>
+            </div>  
+          </div>
+          <div class="col-sm-5">
+            <label for="order-sex">性別</label>
+            <select v-model="customer.sex" id="order-sex"  class="form-select">
+              <option  value="male">男性</option>
+              <option  value="female">女性</option>
+            </select>
+          </div>
+          <div class="col-sm-5">
+            <label for="order-age">年齢</label>
+            <input v-model="customer.age" id="order-age" class="form-control">
+          </div>
+        </div>
+      </form>
+      <div class="py-3">
+        <button @click="next" class="btn btn-outline-dark">次へ</button>
+      </div>
+    </div>
   </div>
-
 </template>
 
 <script>
