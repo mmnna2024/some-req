@@ -85,10 +85,6 @@ export default {
 </script>
 
 <style>
-.categories-table {
-  border: 1px solid gray;
-}
-
 .order-table-top {
   border: 1px solid gray;
   padding: 10px;
@@ -101,13 +97,6 @@ export default {
   border: 1px solid gray;
   padding: 10px;
 }
-
-.categories-table th,
-.categories-table td {
-  border: 1px solid gray;
-  
-}
-
 .total-table {
   border: 5px solid gray;
   color: #ff0019;
