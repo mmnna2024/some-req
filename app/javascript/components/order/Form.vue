@@ -28,9 +28,7 @@
             <div class="col-sm-5">
               <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
             </div>
-            <div class="col-sm-2 align-self-center d-flex justify-content-center">
-              <a>{{ selected[v_index].price }}</a>
-            </div>
+            <div class="col-sm-2 align-self-center d-flex justify-content-center">{{ selected[v_index].price }} </div>
           </div>
         </transition-group>
       </div>
