@@ -1,1 +1,1 @@
-$("#pagenate").html("<%= j render 'checked_index_page' %>");
+$("#pagenate").html("<%= j render partial: 'index', locals: { orders: @checked_orders } %>");

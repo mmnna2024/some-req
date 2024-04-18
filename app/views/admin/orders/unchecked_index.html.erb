@@ -1,4 +1,4 @@
 <h2 class="mt-4 mb-1 text-white bg-dark-custom p-3">
   <%= t("admin.order_forms.index.unchecked_title") %>
 </h2>
-<div id="pagenate"><%= render 'unchecked_index_page' %></div>
+<div id="pagenate"><%= render partial: 'index', locals: { orders: @unchecked_orders } %></div>
