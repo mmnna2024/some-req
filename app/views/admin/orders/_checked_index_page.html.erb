@@ -1,4 +1,4 @@
-<%= search_form_for @q, url: search_admin_orders_path do |f| %>
+<%= search_form_for @q, url: checked_search_admin_orders_path do |f| %>
   <div class="d-flex justify-content-end my-1">
     <div class="row align-items-center p-2">
       <div class="col-auto p-2">
@@ -44,7 +44,7 @@
       <th colspan="1" scope="col">受注詳細</th>
       <th scope="col"><%= t("admin.order_forms.index.status") %></th>
       <th scope="col">
-        <%= sort_link(@q, :ordered_on, t("admin.order_forms.index.ordered_on"), default_order: :asc, class: "text-white link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover") %></th>
+        <%= sort_link(@q, :ordered_on, t("admin.order_forms.index.ordered_on"), default_order: :asc, id: "sort_by_ordered_on", class: "text-white link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover") %></th>
       <th scope="col"><%= t("admin.order_forms.index.items") %></th>
       <th scope="col"><%= t("admin.order_forms.index.items_count") %></th>
       <th scope="col"><%= t("admin.order_forms.index.checked_price") %></th>

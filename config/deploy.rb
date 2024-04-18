@@ -13,19 +13,19 @@ set :log_level, :info
 
 append :linked_files, 'config/secrets.yml'
 
-after 'deploy:published', 'deploy:seed'
+# after 'deploy:published', 'deploy:seed'
 after 'deploy:finished', 'deploy:restart'
 
 namespace :deploy do
-  desc 'Run seed'
-  task :seed do
-    on roles(:db) do
-      with rails_env: fetch(:rails_env) do
-        within current_path do
-          execute :bundle, :exec, :rake, 'db:seed'
-        end
-      end
-    end
+  # desc 'Run seed'
+  # task :seed do
+  #   on roles(:db) do
+  #     with rails_env: fetch(:rails_env) do
+  #       within current_path do
+  #         execute :bundle, :exec, :rake, 'db:seed'
+  #       end
+  #     end
+  #   end
   end
   desc 'Restart application'
   task :restart do
