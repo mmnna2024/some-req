@@ -28,6 +28,7 @@ function handlePageChange(data) {
   const newIndex = currentPageIndex.value + data.step;
   if (newIndex >= 0 && newIndex < Pages.length) {
     currentPageIndex.value = newIndex;
+    window.scrollTo(0, 0);
   }
   // Form.vue から受け取ったデータで formData を更新する処理
   if (data.formData) {
@@ -77,16 +78,13 @@ export default {
         this.$set(this.items[index], 'uploadFiles', []);
       }
       this.items[index].uploadFiles = files;
-    }
+    },
+    
   }
 }
 </script>
 
 <style>
-.categories-table {
-  border: 1px solid gray;
-}
-
 .order-table-top {
   border: 1px solid gray;
   padding: 10px;
@@ -99,22 +97,10 @@ export default {
   border: 1px solid gray;
   padding: 10px;
 }
-
-.categories-table th,
-.categories-table td {
-  border: 1px solid gray;
-  
-}
-
 .total-table {
   border: 5px solid gray;
   color: #ff0019;
   font-size: 20px;
-}
-
-.error-message {
-  color: #dc3545 !important;
-  font-size: 80%;
 }
 
 .btn-outline-dark:hover {
