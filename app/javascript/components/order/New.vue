@@ -35,17 +35,6 @@ function handlePageChange(data) {
     Object.assign(formData, data.formData);
   }
 }
-function moveToTop() {
-      const duration = 1000;  // 移動速度（1秒で終了）
-      const interval = 25;    // 0.025秒ごとに移動
-      const step = -window.scrollY / Math.ceil(duration / interval); // 1回に移動する距離
-      const timer = setInterval(() => {
-          window.scrollBy(0, step);   // スクロール位置を移動
-          if(window.scrollY <= 0) {
-              clearInterval(timer);
-          }
-      }, interval);
-    }
 </script>
 
 <template>
