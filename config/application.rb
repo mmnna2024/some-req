@@ -15,7 +15,7 @@ module SomeReq
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     #Prawnで必要なpathの設定
-    config.paths.add 'app/models/pdfs', eager_load: true
+    config.paths.add 'app/models', eager_load: true
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

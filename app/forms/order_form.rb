@@ -101,7 +101,7 @@ class OrderForm
   end
 
   def update_order_flow(order, customer_data)
-    @order.customer.update!(customer_data)
+    order.customer.update!(customer_data)
     order.update!(
       note: note,
       shipping_id: shipping_id,
@@ -110,10 +110,10 @@ class OrderForm
     )
 
     items_to_remove = []
-    @order.items.each_with_index do |item, index|
+    order.items.each_with_index do |item, index|
       category_id = category_ids[index]
       if category_id.present?
-        price = @items[index].price
+        price = items[index].price
         item.update!(order_id: order.id, category_id: category_id, price: price)
       else
         items_to_remove << item
@@ -121,7 +121,7 @@ class OrderForm
     end
     items_to_remove.map(&:destroy)
 
-    @order.update!(price: @order.items.sum(:price))
+    order.update!(price: order.items.sum(:price))
   end
 
   def create_order_flow(order, customer_data)

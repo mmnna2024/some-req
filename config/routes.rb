@@ -23,9 +23,9 @@ Rails.application.routes.draw do
       collection do
         get :unchecked_index
         get :checked_index
-        get :complete
         get 'unchecked_search' => 'orders#unchecked_index'
         get 'checked_search' => 'orders#checked_index'
+        get :complete
       end
     end
   end

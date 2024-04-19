@@ -1,4 +1,5 @@
-<%= search_form_for @q, url: unchecked_search_admin_orders_path do |f| %>
+<% url = @unchecked_orders ? unchecked_search_admin_orders_path : checked_search_admin_orders_path %>
+<%= search_form_for @q, url: url do |f| %>
   <div class="d-flex justify-content-end my-1">
     <div class="row align-items-center p-2">
       <div class="col-auto p-2">
@@ -44,11 +45,18 @@
         <th colspan="1" scope="col">受注詳細</th>
         <th scope="col"><%= t("admin.order_forms.index.status") %></th>
         <th scope="col">
-          <%= sort_link(@q, :ordered_on, t("admin.order_forms.index.ordered_on"), default_order: :desc, id: "sort_by_ordered_on", class: "text-white link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover") %>
+          <%= sort_link(@q, :ordered_on, t("admin.order_forms.index.ordered_on"),
+          default_order: :desc,
+          id: "sort_by_ordered_on",
+          class: "text-white link-offset-2 link-offset-2-hover link-underline-light link-underline-opacity-0 link-underline-opacity-100-hover") %>
         </th>
         <th scope="col"><%= t("admin.order_forms.index.items") %></th>
         <th scope="col"><%= t("admin.order_forms.index.items_count") %></th>
-        <th scope="col"><%= t("admin.order_forms.index.unchecked_price") %></th>
+        <% if @unchecked_orders %>
+          <th scope="col"><%= t("admin.order_forms.index.unchecked_price") %></th>
+        <% else %>
+          <th scope="col"><%= t("admin.order_forms.index.checked_price") %></th>
+        <% end %>
         <th scope="col"><%= t("admin.order_forms.index.name") %></th>
         <th scope="col"><%= t("admin.order_forms.index.phonenumber") %></th>
         <th scope="col"><%= t("admin.order_forms.index.email") %></th>
@@ -57,7 +65,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @unchecked_orders.each do |order| %>
+      <% orders.each do |order| %>
         <tr>
           <td><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank", class: "primary-link" %></td>
           <td><%= link_to "詳細", edit_admin_order_path(order), class: "primary-link" %></td>
@@ -80,4 +88,4 @@
     </tbody>
   </table>
 </div>
-<%= paginate @unchecked_orders, remote: true, theme: "bootstrap-5" %>
+<%= paginate orders, remote: true, theme: "bootstrap-5" %>
