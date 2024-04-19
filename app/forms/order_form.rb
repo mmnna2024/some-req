@@ -145,7 +145,7 @@ class OrderForm
               order_id: order.id,
               category_id: category.id,
               price: category.price,
-              images: item.fetch(:images).values
+              images: item[:images]&.values || []
               )
             total_order_price += item.price
           end

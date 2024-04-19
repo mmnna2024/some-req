@@ -81,12 +81,12 @@ export default {
       if(this.customer.age !== undefined) form.append('order_form[age]', this.customer.age);
       if(this.customer.sex !== undefined) form.append('order_form[sex]', this.customer.sex);
       form.append('order_form[channel]', 'online');
-      form.append('order_form[note]', this.order.note);
+      if(this.order.note !== undefined) form.append('order_form[note]', this.order.note);
       form.append('order_form[status]', 'unchecked_order');
       form.append('order_form[shipping_id]', this.shipping.id);
       this.items.forEach((item, index) => {
         form.append(`order_form[order_items][${index}][category_id]`, item.id);
-        item.uploadFiles.forEach((uploadFile, fileindex) => {
+        if(item.uploadFiles !== undefined) item.uploadFiles.forEach((uploadFile, fileindex) => {
           form.append(`order_form[order_items][${index}][images][${fileindex}]`, uploadFile);
         });
       });
@@ -106,18 +106,18 @@ export default {
         // リクエストが成功したら、完了ページへリダイレクト
         window.location.href = '/orders/complete';
       } catch (error) {
-  console.error('Order submission failed:', error);
-  if (error.response) {
-    console.error('Error status:', error.response.status);
-    console.error('Error data:', error.response.data);
-    if (error.response.data && error.response.data.errors) {
-      this.errors = error.response.data.errors;
+    console.error('Order submission failed:', error);
+    if (error.response) {
+      console.error('Error status:', error.response.status);
+      console.error('Error data:', error.response.data);
+      if (error.response.data && error.response.data.errors) {
+        this.errors = error.response.data.errors;
+      }
+    } else if (error.request) {
+      console.error('The request was made but no response was received', error.request);
+    } else {
+      console.error('Something happened in setting up the request that triggered an Error', error.message);
     }
-  } else if (error.request) {
-    console.error('The request was made but no response was received', error.request);
-  } else {
-    console.error('Something happened in setting up the request that triggered an Error', error.message);
-  }
 }
     }
   }
