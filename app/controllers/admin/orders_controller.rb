@@ -1,11 +1,12 @@
 class Admin::OrdersController < AdminController
-  
+
   def unchecked_index
-    @q = Order.ransack(params[:q])
-    @unchecked_orders = @q.result(distinct: true)
-                        .includes(:customer, items: :category)
-                        .unchecked_order
-                        .sort_oldest.page(params[:page])
+  @q = Order.ransack(params[:q])
+  @unchecked_orders = @q.result(distinct: true)
+                      .includes(:customer, items: :category)
+                      .unchecked_order
+                      .sort_oldest
+                      .page(params[:page])
 
     respond_to do |format|
       format.html
@@ -17,7 +18,8 @@ class Admin::OrdersController < AdminController
     @q = Order.ransack(params[:q])
     @checked_orders = @q.result(distinct: true)
                       .includes(:customer, items: :category)
-                      .checked_order.sort_latest
+                      .checked_order
+                      .sort_latest
                       .page(params[:page])
 
     respond_to do |format|

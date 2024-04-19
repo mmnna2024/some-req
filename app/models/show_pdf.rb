@@ -3,16 +3,8 @@ class ShowPdf < Prawn::Document
     super(page_size: "A4") #A4サイズのPDFを新規作成
     # stroke_axis # 座標を表示
     @record = record # ←受け取った値をインスタンス変数として定義する。
+    font_setting
 
-    font_families.update("JP" => {
-                          normal: "app/assets/fonts/ipaexm.ttf",
-                          bold: "app/assets/fonts/ipaexg.ttf",
-                        })
-    font "JP"
-
-    font_size 12
-
-    stroke_color "000000"
     # タイトル
     move_down 30
     text "染め直し", align: :center, size: 20, style: :bold
@@ -39,6 +31,7 @@ class ShowPdf < Prawn::Document
       text_box "住所:", at: [150, 630], size: 12
     end
     stroke_horizontal_line 150, 480, at: 615
+
     move_down 10
     if @record.customer.address.present?
       text_box "電話番号: #{@record.customer.phonenumber}", at: [280, 600], size: 12
@@ -53,7 +46,6 @@ class ShowPdf < Prawn::Document
 
     total_price = 0
     @record.items.each do |item|
-      total_price
       data << [item.category.name, "", "#{item.price.to_s(:delimited)}円", ""]
       total_price = item.price + total_price
     end
@@ -83,5 +75,19 @@ class ShowPdf < Prawn::Document
     text "〒403-0001 山梨県富士吉田市上暮地2222-1", align: :center
     text "☎ 0555-23-5562", align: :center
     text "Email: contact@marukousangyou.co.jp", align: :center
+  end
+
+  private
+
+  def font_setting
+    font_families.update(
+      "JP" => {
+        normal: "app/assets/fonts/ipaexm.ttf",
+        bold: "app/assets/fonts/ipaexg.ttf",
+      }
+    )
+    font "JP"
+    font_size 12
+    stroke_color "000000"
   end
 end
