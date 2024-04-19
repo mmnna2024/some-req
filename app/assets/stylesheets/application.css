@@ -136,6 +136,11 @@ a.danger-link:hover {
   border-color: black !important;
 }
 
+.form-check-input {
+  width: 1.5em !important;
+  height: 1.5em !important;
+}
+
 /* オンライン注文フォーム用 */
 
 

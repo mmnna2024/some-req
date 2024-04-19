@@ -28,6 +28,20 @@ class Admin::OrdersController < AdminController
     end
   end
 
+  def done_index
+    @q = Order.ransack(params[:q])
+    @done_orders = @q.result(distinct: true)
+                      .includes(:customer, items: :category)
+                      .done
+                      .sort_latest
+                      .page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def new
     order = Order.new
     @categories = Category.where(display: true).map do |category|

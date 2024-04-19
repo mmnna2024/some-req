@@ -23,8 +23,10 @@ Rails.application.routes.draw do
       collection do
         get :unchecked_index
         get :checked_index
+        get :done_index
         get 'unchecked_search' => 'orders#unchecked_index'
         get 'checked_search' => 'orders#checked_index'
+        get 'done_search' => 'orders#done_index'
         get :complete
       end
     end
