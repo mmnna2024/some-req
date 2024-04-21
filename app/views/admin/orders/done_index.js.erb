@@ -1,1 +1,1 @@
-$("#pagenate").html("<%= j render partial: 'index', locals: { orders: @done_orders } %>");
+$("#pagenate").html("<%= j render partial: 'index', locals: { orders: @done_orders, url: done_search_admin_orders_path } %>");

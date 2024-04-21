@@ -1,4 +1,4 @@
 <h2 class="mt-4 mb-1 text-white bg-dark-custom p-3">
   <%= t("admin.order_forms.index.done_title") %>
 </h2>
-<div id="pagenate"><%= render partial: 'index', locals: { orders: @done_orders } %></div>
+<div id="pagenate"><%= render partial: 'index', locals: { orders: @done_orders, url: done_search_admin_orders_path } %></div>
