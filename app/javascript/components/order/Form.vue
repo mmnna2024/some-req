@@ -26,13 +26,12 @@
               </select>
             </div>
             <div class="col-sm-5">
-              <input type="file" @change="selectedFile($event, v_index)" id="inputGroupFile01" name="products[image][]" accept="image/png, image/jpg" multiple>
+              <input type="file" @change="selectedFile($event, v_index)" :id="`inputGroupFile_${v_index}`" :name="`image_${v_index}`" accept="image/png, image/jpeg" multiple>
             </div>
             <div class="col-sm-2 align-self-center d-flex justify-content-center">{{ selected[v_index].price }} </div>
           </div>
         </transition-group>
       </div>
-      <!--エラーメッセージ-->
       <div class="px-3">
         <ErrorMessage :message="validation.selectedResult" />
       </div>
@@ -65,7 +64,6 @@
             <div class="col-sm order-table text-center">{{selected_shipping.price}}円</div>
           </div>
         </div>
-        <!--エラーメッセージ-->
         <div class="px-3">
           <ErrorMessage :message="validation.shippingResult" />
         </div>
@@ -73,7 +71,9 @@
 
       <div class="row justify-content-between px-3">
         <div class="col-sm">
-          <p>※着払いのため送料は参考価格です。</p>
+          <p>※依頼品の送付はお客様元払い、着払いのため送料は参考価格です。<br>
+            ※染め上がり後、依頼品到着時の送料です。
+          </p>
         </div>
         <div class="col-sm-4">
           <div class="row total-table">
@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+
     <div class="py-3">
       <h4>お客様情報</h4>
       <form>
@@ -90,7 +91,6 @@
           <div class="col-sm-10">
             <label for="order-name">氏名[必須]</label>
             <input type="text" v-model="customer.name" id="order-name" class="form-control" required>
-            <!--エラーメッセージ-->
             <div>
               <ErrorMessage :message="validation.nameResult" />
             </div>
@@ -102,7 +102,6 @@
           <div class="col-sm-10">
             <label for="order-phonenumber">電話番号[必須]</label>
             <input v-model="customer.phonenumber" id="order-phonenumber" class="form-control" required>
-            <!--エラーメッセージ-->
             <div>
               <ErrorMessage :message="validation.phonenumberResult" />
             </div>  
@@ -111,7 +110,6 @@
           <div class="col-sm-10">
             <label for="order-address">住所[必須]</label>
             <input v-model="customer.address" id="order-address" class="form-control" required>
-            <!--エラーメッセージ-->
             <div>
               <ErrorMessage :message="validation.addressResult" />
             </div>  
@@ -163,6 +161,7 @@ export default {
   },
   data() {
     return {
+      view: true,
       customer: {},
       selected: [
         {
@@ -206,18 +205,14 @@ export default {
       this.selected.pop();
     },
     setContent(index) {
-      // 選択された商品の料金を取得
-      const price = this.categories.find(({name}) => name === this.selected[index].category.name).price;
-      this.selected[index].category.price = price;
+      // 選択が変更されるとfileをリセットする
+      const obj = document.getElementById(`inputGroupFile_${index}`);
+        obj.value = "";
     },
     selectedFile(e, index) {
       // 選択された File の情報を保存しておく
       const files = Array.from(e.target.files);
-      if (this.selected[index]) {
       this.selected[index].uploadFiles = files;
-      } else {
-      console.error('Selected index is out of range or not initialized:', index);
-    }
     },
     next() {
       // 作成のためバリデーション削除
