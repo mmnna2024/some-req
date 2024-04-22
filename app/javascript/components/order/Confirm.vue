@@ -87,7 +87,7 @@ export default {
       this.items.forEach((item, index) => {
         form.append(`order_form[order_items][${index}][category_id]`, item.id);
         if(item.uploadFiles !== undefined) item.uploadFiles.forEach((uploadFile, fileindex) => {
-          form.append(`order_form[order_items][${index}][images][${fileindex}]`, uploadFile, encodeURIComponent(`${uploadFile.files}`));
+          form.append(`order_form[order_items][${index}][images][${fileindex}]`, uploadFile, "image");
         });
       });
       // バリデーションではじかれるので便宜上送信。

@@ -71,7 +71,9 @@
 
       <div class="row justify-content-between px-3">
         <div class="col-sm">
-          <p>※着払いのため送料は参考価格です。</p>
+          <p>※依頼品の送付はお客様元払い、着払いのため送料は参考価格です。<br>
+            ※染め上がり後、依頼品到着時の送料です。
+          </p>
         </div>
         <div class="col-sm-4">
           <div class="row total-table">
