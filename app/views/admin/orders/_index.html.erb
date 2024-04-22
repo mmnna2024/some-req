@@ -1,4 +1,3 @@
-<% url = @unchecked_orders ? unchecked_search_admin_orders_path : checked_search_admin_orders_path %>
 <%= search_form_for @q, url: url do |f| %>
   <div class="d-flex justify-content-end my-1">
     <div class="row align-items-center p-2">
@@ -69,7 +68,7 @@
         <tr>
           <td><%= link_to "注文書", admin_order_show_pdf_index_path(order_id: order.id, format: "pdf"), target: "_blank", class: "primary-link" %></td>
           <td><%= link_to "詳細", edit_admin_order_path(order), class: "primary-link" %></td>
-          <td><%= order.status_i18n %></td>
+          <td><i><%= order.status_i18n %></i></td>
           <td><%= l order.ordered_on %></td>
           <td>
             <% order.items.each do |item| %>

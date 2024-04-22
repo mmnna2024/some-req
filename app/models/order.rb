@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :shipping, optional: true
   accepts_nested_attributes_for :items
 
-  enum status: [:unchecked_order, :checked_order]
+  enum status: [:unchecked_order, :checked_order, :done]
   enum channel: [:online, :shop, :phonecall]
 
   scope :sort_latest, -> {order(ordered_on: :desc)}

@@ -42,6 +42,7 @@ ja:
       status:
         unchecked_order: 仮受注
         checked_order: 受注済
+        done: 返送済
       channel:
         online: オンライン受付
         shop: 店頭受付
@@ -58,6 +59,7 @@ ja:
       index:
         unchecked_title: 仮受注一覧
         checked_title: 受注済一覧
+        done_title: 返送済一覧
         status: ステータス
         ordered_on: 受注日時
         items: 依頼品

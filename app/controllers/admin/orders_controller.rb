@@ -28,6 +28,20 @@ class Admin::OrdersController < AdminController
     end
   end
 
+  def done_index
+    @q = Order.ransack(params[:q])
+    @done_orders = @q.result(distinct: true)
+                      .includes(:customer, items: :category)
+                      .done
+                      .sort_latest
+                      .page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   def new
     order = Order.new
     @categories = Category.where(display: true).map do |category|
@@ -62,7 +76,10 @@ class Admin::OrdersController < AdminController
     @order_form = OrderForm.new(order_params, order: order)
 
     if @order_form.save
-      if @order_form.status == "unchecked_order"
+      if @order_form.status == "done"
+        OrderMailer.with(to: @order_form.email, name: @order_form.name).after_shipping.deliver_now
+        redirect_to done_index_admin_orders_path, flash: { notice: "更新しました" }
+      elsif @order_form.status == "unchecked_order"
         redirect_to unchecked_index_admin_orders_path, flash: { notice: "更新しました" }
       else
         redirect_to checked_index_admin_orders_path, flash: { notice: "更新しました" }
