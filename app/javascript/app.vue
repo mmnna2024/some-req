@@ -19,16 +19,15 @@
               <a href='/orders/new' class="btn btn-outline-primary" role="button">オンライン注文フォーム</a>
             </div>
           </div>
-          <div class="col-md-8">
-          <!-- 画像あとでいれる -->
-            <div id="formImageCarousel" class="carousel slide">
+          <div class="col-md-8 pt-3 pr-2">
+            <div id="formImageCarousel" class="carousel carousel-dark slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img src="../assets/images/formimage2.png" class="d-block w-100" alt="...">
                 </div>
-                <!-- <div class="carousel-item">
-                  <img src="..." class="d-block w-100" alt="...">
-                </div>　-->
+                <div class="carousel-item">
+                  <img src="../assets/images/formimage1.png" class="d-block w-100" alt="...">
+                </div>
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#formImageCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -63,9 +62,8 @@
               <p class="mt-2">※user名パスワードは職務経歴書に記載</p>
             </div>
           </div>
-          <div class="col-md-8">
-            <!-- 画像あとでいれる -->
-            <div id="adminImageCarousel" class="carousel slide">
+          <div class="col-md-8 pt-3 pr-2">
+            <div id="adminImageCarousel" class="carousel carousel-dark slide">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img src="../assets/images/adminimage1.png" class="d-block w-100" alt="...">
